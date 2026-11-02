@@ -52,6 +52,14 @@ def inventory(root: Path) -> dict:
                     for name in modules:
                         if name:edges.append({"from":fid,"to":"module:"+name,"kind":"imports","line":item.lineno,"resolution":"unresolved","source":"extracted"})
         else:
+            # Heuristic declarations for JS/TS. Source ranges are hints, not compiler semantics.
+            for line_no,line in enumerate(source.splitlines(),1):
+                m=re.match(r"^\\s*(?:export\\s+)?(?:default\\s+)?(?:async\\s+)?(?:function|class|interface|type|enum)\\s+([A-Za-z_$][\\w$]*)",line)
+                if not m:
+                    m=re.match(r"^\\s*(?:export\\s+)?(?:const|let)\\s+([A-Za-z_$][\\w$]*)\\s*=\\s*(?:async\\s*)?(?:\\([^)]*\\)|[A-Za-z_$][\\w$]*)\\s*=>",line)
+                if m:
+                    label="class" if re.search(r"\\bclass\\s+",line) else "symbol"
+                    nodes.append({"id":f"{fid}:{m.group(1)}:{line_no}","parent":fid,"name":m.group(1),"path":rel,"line":line_no,"kind":label,"source":"heuristic"})
             # Deliberately conservative: only ESM import/export-from paths at file level.
             for line_no,line in enumerate(source.splitlines(),1):
                 m=re.match(r'^\s*(?:import\s+(?:.*?\s+from\s+)?|export\s+.*?\s+from\s+)[\'"]([^\'"]+)[\'"]',line)
