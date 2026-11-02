@@ -146,6 +146,13 @@ $("reportFile").onchange=async e=>{
  }catch(error){alert(error.message);}
 };
 
+function assessedStatus(n){
+ const evidence=n.evidence||[];
+ if(evidence.some(e=>e.source==="test" && e.result==="fail"))return "blocked";
+ if(evidence.some(e=>e.source==="test" && e.result==="pass"))return (n.issues||[]).length?"in_progress":"verified";
+ if((n.issues||[]).length || n.status==="blocked" || n.status==="in_progress" || n.status==="implemented")return "in_progress";
+ return "unknown";
+}
 const STATUS_COLORS={verified:"#21996e",implemented:"#e2ac39",in_progress:"#e2ac39",blocked:"#db5560",unknown:"#9da5b3",planned:"#9da5b3",idea:"#9da5b3"};
 let graphMode=true;
 function showResearch(i){
@@ -165,8 +172,8 @@ function drawGraph(){
  const line=(a,b,dashed)=>{let e=document.createElementNS(ns,"line");for(let [key,val] of Object.entries({x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:"#a7b2c4","stroke-width":1.3}))e.setAttribute(key,val);if(dashed)e.setAttribute("stroke-dasharray","5 5");svg.append(e)};
  for(const n of nodes){if(n.parent&&xy.has(n.parent))line(xy.get(n.id),xy.get(n.parent),false);}
  for(const rel of conceptual.relations){if(xy.has(rel.from)&&xy.has(rel.to))line(xy.get(rel.from),xy.get(rel.to),true);}
- nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[n.status]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
- const open=()=>{editConcept(n.id);$("graphInspector").textContent=n.name+" · "+(n.description||"Nessuna descrizione")+" · Stato: "+n.status+" · Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length;};
+ nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[assessedStatus(n)]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
+ const open=()=>{editConcept(n.id);$("graphInspector").textContent=n.name+" · "+(n.description||"Nessuna descrizione")+" · Stato dichiarato: "+n.status+" · Stato basato su evidenze: "+assessedStatus(n)+" · Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length;};
  circle.addEventListener("click",open);circle.addEventListener("keydown",e=>{if(e.key==="Enter")open();});svg.append(circle);
  const label=document.createElementNS(ns,"text");label.setAttribute("x",p.x+16);label.setAttribute("y",p.y+5);label.setAttribute("font-size","11");label.textContent=n.name.slice(0,24);svg.append(label);
  });
