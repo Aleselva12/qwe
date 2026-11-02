@@ -19,8 +19,8 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </style>
 </head>
 <body>
-<header><h1>◈ CodeAtlas</h1><span class="pill">v0.3 · standalone</span><small>Evidence first · read only</small></header>
-<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
+<header><h1>◈ CodeAtlas</h1><span class="pill">v0.4 · preview</span><small>Evidence first · read only</small></header>
+<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
 let atlas=null, selected=null;
@@ -116,6 +116,27 @@ $("exportOverlay").onclick=()=>{try{checkOverlay(conceptual);const b=new Blob([J
 $("overlayFile").onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());checkOverlay(obj);conceptual=obj;renderConcept();}catch(err){alert(err.message)}};
 $("exampleLoad").onclick=async()=>{try{const r=await fetch("./examples/conceptual-map.json");if(!r.ok)throw Error("File esempio non disponibile");let obj=await r.json();checkOverlay(obj);conceptual=obj;renderConcept();}catch(e){alert(e.message)}};
 renderConcept();
-
+function renderComparison(data) {
+ const view=$("comparison");view.replaceChildren();
+ if(!data||!Array.isArray(data.results)){view.textContent="Nessun confronto disponibile";return;}
+ const summary=make("p",data.results.length+" componenti progettuali valutati");view.append(summary);
+ for(const item of data.results){
+  const box=make("div");box.style.padding="8px";box.style.borderBottom="1px solid #e4e7ed";
+  const strong=make("strong",item.name+" — "+item.classification);box.append(strong);
+  const p=make("p","Riferimenti trovati: "+item.found.length+" · Mancanti: "+item.missing.length);p.className="muted";box.append(p);
+  if(item.missing.length)box.append(make("p","Da verificare: "+item.missing.join(", ")));
+  view.append(box);
+ }
+}
+$("reportFile").onchange=async e=>{
+ try{
+  const file=e.target.files?.[0];if(!file)return;
+  const report=JSON.parse(await file.text());
+  if(!report.atlas||!report.comparison)throw Error("Serve un report con overlay (opzione --overlay).");
+  load(report.atlas);
+  if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
+  renderComparison(report.comparison);
+ }catch(error){alert(error.message);}
+};
 </script>
 </body></html>
