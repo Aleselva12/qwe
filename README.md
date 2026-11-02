@@ -120,3 +120,62 @@ The overlay references exact scanner node IDs such as `file:app/main.py`. A miss
 ### Before v1.0
 
 Confirm CI status, run the end-to-end report import in a browser, fix any findings, add automatic persistence instead of relying on manual export, and verify a multi-project project size/latency benchmark. Python/JS/TS support is **deliberately uneven**. Never treat `mapped` as verified correctness or `verified` manual status as a passing test.
+
+
+---
+
+## CodeAtlas 1.0 — local-first release (validation pending)
+
+CodeAtlas is a standalone **read-only codebase explorer** with a human-maintained conceptual map of roots (operating conditions), trunk (core architecture), and branches (features). The repo being inspected is never imported/executed or modified.
+
+### One-command launch (Python 3.10+)
+
+```bash
+git clone https://github.com/Aleselva12/qwe.git
+cd qwe
+python -m codeatlas.app /absolute/path/to/other/repository
+```
+
+The browser opens `http://127.0.0.1:8765/`; use Ctrl+C to stop. The web server binds **127.0.0.1 only**, not the LAN. No service account, API key, LLM, or package installation needed for the default scanner.
+
+To compare a manually authored architecture with source code:
+
+```bash
+python -m codeatlas.app /absolute/path/to/repository --overlay examples/conceptual-map.json --changed file:sample.py
+```
+
+Or use the JSON report generator with `python -m codeatlas.engine`; the browser can load a generated report or code inventory manually.
+
+### How to use it for research
+
+1. Clone a repository you are authorized to inspect. CodeAtlas reads its local working directory; it does not download arbitrary repos by itself.
+2. Launch the program, then inspect the extracted file tree and direct import relations.
+3. Load an overlay or build one manually: *roots* for hardware/network/runtime constraints, *trunk* for shared components and orchestration, *branches* for product features.
+4. Link a conceptual node to exact code IDs such as `file:package/module.py`. Export the JSON overlay to keep a durable, portable copy; local browser persistence is only a convenience.
+5. Run `--overlay ... --changed file:package/module.py` for a conservative reverse-dependency impact report.
+6. Keep all manually inferred intent separate from actually extracted source: linked/mapped does **not** mean working or tested.
+
+### Verification
+
+```bash
+python -m unittest discover -s tests -v
+python -m compileall -q codeatlas tests
+```
+
+GitHub Actions `.github/workflows/checks.yml` runs those checks on push and PR. Passing tests would validate these isolated operations, not full browser functionality or scan accuracy across real-world repos.
+
+### Real limitations and roadmap after 1.0
+
+- JS/TS parsing is only a conservative import-line heuristic, not AST, typing or symbol-level analysis.
+- Docker, YAML, infrastructure and hardware are not introspected automatically: infrastructure manifests are merely indexed; hardware is modeled as manual roots.
+- No package-manager dependency graph, runtime tracing, call graph or cross-repository graph.
+- Automatic code-to-architecture mapping is intentionally not attempted without user input.
+- Browser editor cannot edit every evidence/provenance field; relationships are only partially editable.
+- Browser localStorage is not a reliable collaborative/project-isolated database; keep exported overlays in version control.
+- Potential impact shows traversable known edges, not proven runtime failures; coverage and test execution still need external verification.
+- The Graphify/Backstage/LikeC4 concepts informed the design, but their source implementations were not copied, linked as mandatory dependencies, or embedded.
+- UI browser integration, large-repo performance and CI outcomes require independent verification before claiming production-grade reliability.
+
+### Versioning and security
+
+The intended v1.0 scope is a local, non-destructive Python/JS/TS code inventory with an editable conceptual overlay. This is a self-contained candidate implementation; public repository visibility does not grant permission to access private code or servers. Scanning untrusted repositories can consume resources; use an isolated machine when necessary.
