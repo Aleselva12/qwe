@@ -13,11 +13,14 @@ from functools import partial
 from .engine import inventory, compare, impact
 from .overlay import load
 from .intelligence import enrich
+from .concepts import suggest
 from .snapshots import diff_snapshots, read_snapshot, read_junit
 
 def build_report(root: Path, overlay_path=None, changed=None, previous=None, junit=None):
     atlas = inventory(root)
     report = {"atlas": atlas, "intelligence": enrich(root)}
+    report['project_key'] = str(root.resolve())
+    report['overlay'] = suggest(atlas, report['intelligence'])
     if overlay_path:
         overlay = load(overlay_path)
         report["overlay"] = overlay

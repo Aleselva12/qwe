@@ -53,21 +53,30 @@ def inventory(root: Path) -> dict:
             try: tree = ast.parse(source,filename=rel)
             except SyntaxError as exc:
                 errors.append({"file":rel,"message":str(exc)});continue
+            file_node = next(n for n in nodes if n['id'] == fid)
+            file_node['documentation'] = ast.get_docstring(tree) or ''
             for item in tree.body:
                 if isinstance(item,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
                     nodes.append({"id":f"{fid}:{item.name}:{item.lineno}","parent":fid,"name":item.name,"path":rel,"line":item.lineno,"kind":"class" if isinstance(item,ast.ClassDef) else "function","source":"extracted"})
                 if isinstance(item,(ast.Import,ast.ImportFrom)):
                     modules=[x.name for x in item.names] if isinstance(item,ast.Import) else [item.module or ""]
+                    if isinstance(item, ast.ImportFrom) and item.level:
+                        package = list(Path(rel).parent.parts)
+                        keep = len(package) - item.level + 1
+                        if keep >= 0:
+                            prefix = package[:keep]
+                            modules = ['.'.join(prefix + ([item.module] if item.module else [alias.name]))
+                                       for alias in (item.names[:1] if item.module else item.names)]
                     for name in modules:
                         if name:edges.append({"from":fid,"to":"module:"+name,"kind":"imports","line":item.lineno,"resolution":"unresolved","source":"extracted"})
         else:
             # Heuristic declarations for JS/TS. Source ranges are hints, not compiler semantics.
             for line_no,line in enumerate(source.splitlines(),1):
-                m=re.match(r"^\\s*(?:export\\s+)?(?:default\\s+)?(?:async\\s+)?(?:function|class|interface|type|enum)\\s+([A-Za-z_$][\\w$]*)",line)
+                m=re.match(r"^\s*(?:export\s+)?(?:default\s+)?(?:async\s+)?(?:function|class|interface|type|enum)\s+([A-Za-z_$][\w$]*)",line)
                 if not m:
-                    m=re.match(r"^\\s*(?:export\\s+)?(?:const|let)\\s+([A-Za-z_$][\\w$]*)\\s*=\\s*(?:async\\s*)?(?:\\([^)]*\\)|[A-Za-z_$][\\w$]*)\\s*=>",line)
+                    m=re.match(r"^\s*(?:export\s+)?(?:const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>",line)
                 if m:
-                    label="class" if re.search(r"\\bclass\\s+",line) else "symbol"
+                    label="class" if re.search(r"\bclass\s+",line) else "symbol"
                     nodes.append({"id":f"{fid}:{m.group(1)}:{line_no}","parent":fid,"name":m.group(1),"path":rel,"line":line_no,"kind":label,"source":"heuristic"})
             # Deliberately conservative: only ESM import/export-from paths at file level.
             for line_no,line in enumerate(source.splitlines(),1):

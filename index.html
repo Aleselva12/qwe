@@ -1,251 +1,34 @@
 <!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CodeAtlas · Repository map</title>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CodeAtlas · Costellazione</title>
 <style>
-:root{font:15px system-ui,sans-serif;color:#182437;background:#f5f7fb}*{box-sizing:border-box}
-header{display:flex;align-items:center;gap:20px;padding:18px 24px;background:#fff;border-bottom:1px solid #e4e7ed}
-h1{font-size:20px;margin:0}header small{color:#687389}.pill{background:#e8efff;color:#3656a8;padding:5px 10px;border-radius:30px}
-main{display:grid;grid-template-columns:minmax(250px,330px) 1fr;min-height:calc(100vh - 70px)}
-aside{border-right:1px solid #e3e7ee;background:white;padding:20px;overflow:auto}
-section{padding:24px;min-width:0}input[type=search]{width:100%;padding:11px;border:1px solid #d9e0e9;border-radius:10px;margin:12px 0}
-button{border:0;cursor:pointer;background:transparent;text-align:left;padding:8px;border-radius:7px;color:inherit}
-button:hover,button.active{background:#edf2ff}.item{display:block;width:100%;overflow-wrap:anywhere}
-.tree{padding-left:15px;border-left:1px solid #e9edf3}.card{background:white;border:1px solid #e4e7ed;border-radius:14px;padding:22px;margin-bottom:16px}
-h2{margin:0 0 10px}dl{display:grid;grid-template-columns:100px 1fr;gap:12px}dt{color:#788397}dd{margin:0;overflow-wrap:anywhere}
-code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.details{font-size:13px}
-@media(max-width:700px){main{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #e3e7ee}section{padding:12px}}
-</style>
-</head>
-<body>
-<header><h1>◈ CodeAtlas</h1><span class="pill">v1.1 · graph</span><small>Evidence first · read only</small></header>
-<main><aside><div style="padding:12px;background:#eef3ff;border-radius:12px;margin-bottom:15px"><strong>Apri un progetto</strong><p class="muted">Inserisci il percorso completo della cartella sul tuo computer.</p><input id="projectPath" type="text" placeholder="C:\\Users\\...\\progetto oppure /home/.../progetto" style="width:100%;padding:10px;margin:7px 0;border:1px solid #cad3df;border-radius:8px"><button id="openProject" style="background:#335cbb;color:white;width:100%;text-align:center">Analizza cartella</button><p id="openStatus" class="muted" role="status">Avvia CodeAtlas tramite il collegamento desktop per usare questa funzione.</p></div><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Grafo interattivo · struttura</h2><p class="muted">Clicca un punto per aprire la scheda testuale. I colori indicano lo stato dichiarato, non una verifica automatica.</p><button id="modeGraph">Grafo a punti</button><button id="modeText">Solo testo</button><div id="nodeGraph" style="overflow:auto;max-height:540px"></div><div id="graphInspector"></div></div><div class="card"><h2>Confronto versioni e test</h2><div id="versionDiff" class="muted">Aggiungi --previous per confrontare due snapshot.</div><div id="junitEvidence" class="muted">Aggiungi --junit per importare risultati di test già eseguiti.</div></div><div class="card"><h2>Storia, documenti, infrastruttura e test</h2><div id="researchPanel" class="muted">Apri una repository con CodeAtlas.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
+:root{color-scheme:dark;font:14px system-ui,sans-serif;background:#05070c;color:#e5eaf3;--muted:#929fb5;--line:#253047}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit;color:inherit;background:#111827;border:1px solid var(--line);border-radius:7px;padding:9px}button{cursor:pointer}button:hover,button.active{background:#233451;border-color:#769cd6}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a1c6ff;outline-offset:3px}header{min-height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:24px;padding:14px 24px}h1{font-size:20px;margin:0;letter-spacing:.03em}small,.muted{color:var(--muted)}header small{display:block;font-size:11px;margin-top:4px}#openForm{display:flex;gap:8px;flex:1;max-width:750px}#projectPath{flex:1;min-width:120px}.primary{background:#294978}main{display:grid;grid-template-columns:minmax(0,1fr) 370px;height:calc(100vh - 73px)}#workspace{display:flex;flex-direction:column;min-width:0;position:relative}#toolbar{padding:20px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}#project{font-size:18px;margin:0 auto 0 0}#search{width:180px}#legend{padding:0 24px 12px;display:flex;gap:20px;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px}#graph{flex:1;min-height:250px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#101c2a 0%,#05070c 68%)}svg{position:absolute;inset:0;width:100%;height:100%;display:block}svg text{fill:#b8c6db;font-size:15px}svg .node{cursor:pointer;outline:none}svg .node:focus circle{stroke:white;stroke-width:3}svg .node:hover text{fill:white}.edge{stroke-opacity:.5}#textView{flex:1;overflow:auto;padding:10px 24px}#textView button{display:block;margin:6px 0;width:100%;text-align:left}#empty{position:absolute;top:43%;left:15%;right:15%;text-align:center;pointer-events:none}#empty h2{font-size:28px;font-weight:500}#status{padding:12px 24px;margin:0;border-top:1px solid var(--line);color:var(--muted);font-size:12px;min-height:42px}aside{border-left:1px solid var(--line);background:#0c111c;overflow:auto;padding:25px}aside h2{font-size:23px;margin:10px 0}aside h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#97aac7;margin:25px 0 8px}aside p{line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.badge{font-size:11px;border:1px solid #3d5272;border-radius:20px;padding:4px 9px;display:inline-block;color:#b5c9e8}.sectionTitle{font-size:10px;letter-spacing:.18em;color:var(--muted)}details{border-top:1px solid var(--line);margin-top:20px;padding-top:15px}summary{cursor:pointer;color:#a8c4ed}label{display:block;font-size:12px;color:#abb9cf;margin:12px 0 5px}textarea,aside input,aside select{width:100%}textarea{min-height:70px;resize:vertical}.timeline{border-left:1px solid #3d5272;padding-left:14px;margin:12px 0;font-size:12px}.timeline small{display:block;margin-bottom:5px}#tools{padding:10px 24px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;font-size:12px}#tools input{max-width:200px;font-size:11px}#zoomInfo{margin-right:auto;color:var(--muted)}[hidden]{display:none!important}#technical{max-height:300px;overflow:auto;font-size:12px;white-space:pre-wrap}.error{color:#ffafa4!important}@media(max-width:850px){main{grid-template-columns:minmax(0,1fr) 310px}header{flex-wrap:wrap}#openForm{max-width:none}main{height:calc(100vh - 120px)}#toolbar{padding:12px}#search{width:130px}}@media(max-width:620px){main{display:flex;flex-direction:column;height:auto}#workspace{height:80vh;min-height:680px}#tools,#status,#toolbar,#legend{flex-shrink:0}aside{border-left:0;border-top:1px solid var(--line);overflow:visible}header{padding:14px}#legend{gap:10px}#tools{flex-wrap:wrap}}
+</style></head><body>
+<header><div><h1>◈ CodeAtlas</h1><small>LA MAPPA DEL TUO PROGRAMMA</small></div><form id="openForm"><input id="projectPath" aria-label="Percorso del progetto" placeholder="Percorso completo della cartella…" required><button id="openProject" class="primary">Apri progetto</button></form><span class="badge">Locale · sola lettura</span></header>
+<main><section id="workspace" aria-label="Mappa funzionale"><div id="toolbar"><h2 id="project">Costellazione</h2><input id="search" type="search" aria-label="Cerca nodi" placeholder="Cerca una funzione…"><button id="modeGraph" class="active">Costellazione</button><button id="modeText">Vista testuale</button></div><div id="legend"><span><i class="dot" style="background:#b495ff"></i>Radici</span><span><i class="dot" style="background:#63b4ff"></i>Tronco</span><span><i class="dot" style="background:#63e1bf"></i>Rami</span><span><i class="dot" style="background:#e6bd72"></i>Da confermare</span></div><div id="graph"></div><div id="textView" hidden></div><div id="empty"><h2>Ogni programma ha una forma.</h2><p class="muted">Apri una cartella per esplorare responsabilità e collegamenti.<br>Nessun file JSON necessario.</p></div><div id="tools"><span id="zoomInfo">Zoom con rotella · trascina · linee: gerarchia / dipendenze tratteggiate</span><button id="fit">Centra</button><button id="add">+ Nodo</button><button id="export">Esporta mappa</button><label style="margin:0">Importa <input id="import" type="file" accept=".json"></label></div><p id="status" role="status">Seleziona il percorso del progetto sul computer che esegue CodeAtlas.</p></section><aside id="inspector" aria-label="Dettaglio del nodo"><span class="sectionTitle">DETTAGLIO DEL NODO</span><h2>Esplora le connessioni</h2><p class="muted">Seleziona un punto per vedere cosa fa, perché esiste e come potrebbe evolvere.</p><h3>Come leggere la mappa</h3><p class="muted">I colori distinguono radici, tronco e rami. Non certificano il funzionamento. Le classificazioni iniziali sono proposte euristiche, sempre correggibili.</p></aside></main>
 <script>
-"use strict";
-let atlas=null, selected=null;
-const $=id=>document.getElementById(id);
-const kinds={project:"◇",folder:"▣",file:"▤",function:"ƒ",class:"⬡"};
-function valid(a){
- if(!a || a.schema_version!==1 || !Array.isArray(a.nodes)||!Array.isArray(a.edges)||!Array.isArray(a.errors)) throw Error("Schema JSON non compatibile");
- if(a.nodes.some(n=>typeof n.id!=="string"||typeof n.name!=="string"||typeof n.kind!=="string")) throw Error("Nodo invalido");
-}
-function load(a){valid(a);atlas=a;selected=null; $("project").textContent=a.project||"Project"; $("summary").textContent=a.nodes.length+" nodi · "+a.edges.length+" relazioni · "+a.errors.length+" errori";$("limits").textContent=(a.limitations||[]).join(" · ")||"Analisi statica: non prova la correttezza a runtime";render();if(typeof drawGraph==="function")drawGraph();}
-function render(){
- const holder=$("tree");holder.replaceChildren();if(!atlas)return;
- const q=$("search").value.toLocaleLowerCase().trim();
- const nodes=atlas.nodes, byParent=new Map();
- nodes.forEach(n=>{let p=n.parent??"__root__";if(!byParent.has(p))byParent.set(p,[]);byParent.get(p).push(n);});
- const matches=new Set();
- for(const n of nodes){if(!q||[n.name,n.path||"",n.kind].join(" ").toLocaleLowerCase().includes(q)){let p=n;const seen=new Set();while(p&&!seen.has(p.id)){matches.add(p.id);seen.add(p.id);p=nodes.find(x=>x.id===p.parent);}}}
- function add(parent,id,depth){for(const n of byParent.get(id)||[]){if(!matches.has(n.id))continue;const btn=document.createElement("button");btn.className="item"+(selected===n.id?" active":"");btn.style.paddingLeft=(depth*13+8)+"px";btn.textContent=(kinds[n.kind]||"•")+" "+n.name;btn.onclick=()=>{selected=n.id;inspect(n);render()};parent.append(btn);add(parent,n.id,depth+1);}}
- add(holder,"__root__",0);
-}
-function inspect(n){
- const container=$("inspector");container.replaceChildren();const dl=document.createElement("dl");
- for(const [key,value] of Object.entries(n)){const dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=key;dd.textContent=String(value??"—");dl.append(dt,dd);}
- container.append(dl);
- const links=atlas.edges.filter(e=>e.from===n.id||e.to===n.id);
- const info=document.createElement("p");info.className="details";info.textContent=links.length+" collegamenti diretti (import non necessariamente risolti).";container.append(info);
- links.slice(0,30).forEach(e=>{const p=document.createElement("p");p.className="details";p.textContent=e.from+" → "+e.to+" ["+e.kind+", "+(e.resolution||"—")+"]";container.append(p);});
-}
-$("file").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{load(JSON.parse(await f.text()));}catch(err){alert("Impossibile aprire il file: "+err.message);}});
-$("search").addEventListener("input",render);
-
-let conceptual={schema_version:1,project:"",groups:[],relations:[]};
-const STORAGE_KEY="codeatlas-conceptual-v1";
-let savePending=false;
-function persistConcept(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(conceptual));savePending=false;}catch(e){savePending=true;}}
-
-const lenses={roots:"🌱 Radici",trunk:"🌳 Tronco",branches:"🌿 Rami",unassigned:"▫ Da classificare"};
-const statuses=["unknown","idea","planned","in_progress","implemented","verified","blocked"];
-function make(tag,text){let el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;}
-function checkOverlay(a){
- if(!a||a.schema_version!==1||!Array.isArray(a.groups)||!Array.isArray(a.relations))throw Error("Schema non compatibile");
- for(const n of a.groups){for(const key of ["goals","decisions","issues","evidence"]){if(n[key]!==undefined&&(!Array.isArray(n[key])||n[key].some(x=>!x||typeof x.text!=="string"||!x.text.trim()||!["manual","code","test","document","ai_suggestion"].includes(x.source||"manual"))))throw Error("Scheda non valida: "+key);}}
- const ids=new Set();
- for(const n of a.groups){if(!n||typeof n.id!=="string"||!n.id||ids.has(n.id)||typeof n.name!=="string"||!Object.hasOwn(lenses,n.lens||"unassigned")||!statuses.includes(n.status||"unknown"))throw Error("Nodo non valido");ids.add(n.id);}
- for(const n of a.groups){if(n.parent!=null&&!ids.has(n.parent))throw Error("Genitore inesistente");let seen=new Set(),p=n;while(p){if(seen.has(p.id))throw Error("Gerarchia circolare");seen.add(p.id);p=a.groups.find(g=>g.id===p.parent);}}
- for(const r of a.relations){if(!ids.has(r.from)||!ids.has(r.to)||!["depends_on","supports","blocks","implements","related_to"].includes(r.kind))throw Error("Relazione non valida");}
-}
-function renderConcept(){
- persistConcept();
- let area=$("conceptTree");area.replaceChildren();
- for(const [lens,label] of Object.entries(lenses)){
- const block=make("div");block.style.marginTop="12px";let strong=make("strong",label);block.append(strong);
- function descend(parent,depth,seen){for(const n of conceptual.groups.filter(g=>(g.parent??null)===parent && (g.lens||"unassigned")===lens)){if(seen.has(n.id))continue;let btn=make("button",n.name+" · "+(n.status||"unknown"));btn.style.display="block";btn.style.marginLeft=(depth*12)+"px";btn.onclick=()=>editConcept(n.id);block.append(btn);descend(n.id,depth+1,new Set([...seen,n.id]));}}
- descend(null,0,new Set());
- for(const n of conceptual.groups.filter(g=>(g.lens||"unassigned")===lens && g.parent!=null && conceptual.groups.find(p=>p.id===g.parent)?.lens!==lens)){let btn=make("button",n.name+" · "+(n.status||"unknown"));btn.style.display="block";btn.onclick=()=>editConcept(n.id);block.append(btn);}
- area.append(block);
- }
-}
-function editConcept(id){
- const n=conceptual.groups.find(g=>g.id===id);if(!n)return;
- const host=$("conceptInspector");host.replaceChildren();host.style.borderTop="1px solid #ddd";host.style.marginTop="12px";
- const title=make("h3","Modifica nodo");host.append(title);
- function field(label,value,change,multi=false){host.append(make("label",label));let e=make(multi?"textarea":"input");e.value=value||"";e.style.display="block";e.style.width="100%";e.style.padding="8px";e.style.margin="5px 0 10px";e.onchange=()=>{change(e.value);renderConcept();};host.append(e);}
- function choice(label,options,value,change){host.append(make("label",label));let e=make("select");e.style.display="block";e.style.padding="8px";e.style.margin="5px 0 10px";for(let [v,t] of options){let o=make("option",t);o.value=v;e.append(o);}e.value=value;e.onchange=()=>{change(e.value);renderConcept();};host.append(e);}
- field("Nome",n.name,v=>n.name=v);
- choice("Parte dell'albero",Object.entries(lenses),n.lens||"unassigned",v=>n.lens=v);
- choice("Stato",statuses.map(x=>[x,x]),n.status||"unknown",v=>n.status=v);
- choice("Genitore",[["","Nessuno"],...conceptual.groups.filter(g=>g.id!==id && g.lens===n.lens).map(g=>[g.id,g.name])],n.parent||"",v=>{const old=n.parent;n.parent=v||null;try{checkOverlay(conceptual)}catch(e){n.parent=old;alert(e.message)}});
- field("Descrizione",n.description||"",v=>n.description=v,true);
- function records(section,label){
-   n[section]??=[];
-   const head=make("h4",label);host.append(head);
-   n[section].forEach((record,i)=>{
-     const wrapper=make("div");wrapper.style.padding="9px";wrapper.style.marginBottom="6px";wrapper.style.border="1px solid #e4e7ed";wrapper.style.borderRadius="8px";
-     const note=make("textarea");note.value=record.text||"";note.style.width="100%";note.rows=2;
-     note.onchange=()=>{record.text=note.value.trim();persistConcept();};
-     wrapper.append(note);
-     const meta=make("p","Origine: "+(record.source||"manual")+(record.ref?" · Riferimento: "+record.ref:"")+(record.status?" · Stato: "+record.status:""));
-     meta.className="muted details";wrapper.append(meta);
-     const remove=make("button","Rimuovi");remove.onclick=()=>{n[section].splice(i,1);editConcept(id);};wrapper.append(remove);
-     host.append(wrapper);
-   });
-   const add=make("button","+ Aggiungi "+label.toLowerCase());add.style.background="#edf2ff";
-   add.onclick=()=>{n[section].push({text:"Da descrivere",source:"manual",...(section==="goals"?{status:"planned"}:{})});editConcept(id);};
-   host.append(add);
- }
- records("goals","Obiettivi");
- records("decisions","Decisioni");
- records("issues","Problemi");
- records("evidence","Evidenze");
- field("Riferimenti al codice (ID separati da virgola)",(n.code_refs||[]).join(", "),v=>n.code_refs=v.split(",").map(s=>s.trim()).filter(Boolean));
- const refs=make("p","Collegamenti: "+conceptual.relations.filter(r=>r.from===id||r.to===id).map(r=>r.from+" → "+r.to+" ("+r.kind+")").join("; "));refs.className="muted";host.append(refs);
- const createRelation=make("button","+ Dipendenza");createRelation.onclick=()=>{const target=prompt("ID del nodo di cui dipende");if(!target)return;if(!conceptual.groups.some(g=>g.id===target)){alert("ID sconosciuto");return;}conceptual.relations.push({from:id,to:target,kind:"depends_on"});editConcept(id);};host.append(createRelation);
- const del=make("button","Elimina nodo");del.onclick=()=>{if(conceptual.groups.some(g=>g.parent===id)){alert("Sposta o elimina prima i figli");return;}conceptual.groups=conceptual.groups.filter(g=>g.id!==id);conceptual.relations=conceptual.relations.filter(r=>r.from!==id&&r.to!==id);host.replaceChildren();renderConcept();};host.append(del);
-}
-$("addGroup").onclick=()=>{let id="concept-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,6);conceptual.groups.push({id,name:"Nuovo componente",lens:"unassigned",parent:null,status:"unknown",description:"",code_refs:[],goals:[],decisions:[],issues:[],evidence:[]});renderConcept();editConcept(id);};
-$("exportOverlay").onclick=()=>{try{checkOverlay(conceptual);const b=new Blob([JSON.stringify(conceptual,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="codeatlas-overlay.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300);}catch(e){alert(e.message)}};
-$("overlayFile").onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());checkOverlay(obj);conceptual=obj;renderConcept();}catch(err){alert(err.message)}};
-$("exampleLoad").onclick=async()=>{try{const r=await fetch("./examples/conceptual-map.json");if(!r.ok)throw Error("File esempio non disponibile");let obj=await r.json();checkOverlay(obj);conceptual=obj;renderConcept();}catch(e){alert(e.message)}};
-try{const saved=localStorage.getItem(STORAGE_KEY);if(saved){const loaded=JSON.parse(saved);checkOverlay(loaded);conceptual=loaded;}}catch(error){console.warn("Local saved data unavailable or invalid",error);}
-renderConcept();
-function renderComparison(data) {
- const view=$("comparison");view.replaceChildren();
- if(!data||!Array.isArray(data.results)){view.textContent="Nessun confronto disponibile";return;}
- const summary=make("p",data.results.length+" componenti progettuali valutati");view.append(summary);
- for(const item of data.results){
-  const box=make("div");box.style.padding="8px";box.style.borderBottom="1px solid #e4e7ed";
-  const strong=make("strong",item.name+" — "+item.classification);box.append(strong);
-  const p=make("p","Riferimenti trovati: "+item.found.length+" · Mancanti: "+item.missing.length);p.className="muted";box.append(p);
-  if(item.missing.length)box.append(make("p","Da verificare: "+item.missing.join(", ")));
-  view.append(box);
- }
-}
-$("reportFile").onchange=async e=>{
- try{
-  const file=e.target.files?.[0];if(!file)return;
-  const report=JSON.parse(await file.text());
-  if(!report.atlas||!report.comparison)throw Error("Serve un report con overlay (opzione --overlay).");
-  load(report.atlas);
-  if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
-  renderComparison(report.comparison);
-  const impacted=$("impact");impacted.replaceChildren();if(report.impact){impacted.append(make("p","Modificati: "+report.impact.changed.join(", ")));impacted.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));if(report.impact.unknown.length)impacted.append(make("p","Non riconosciuti: "+report.impact.unknown.join(", ")));}else impacted.textContent="Specifica --changed file:... per calcolare il potenziale impatto.";
- }catch(error){alert(error.message);}
-};
-
-function assessedStatus(n){
- const evidence=n.evidence||[];
- if(evidence.some(e=>e.source==="test" && e.result==="fail"))return "blocked";
- if(evidence.some(e=>e.source==="test" && e.result==="pass"))return (n.issues||[]).length?"in_progress":"verified";
- if((n.issues||[]).length || n.status==="blocked" || n.status==="in_progress" || n.status==="implemented")return "in_progress";
- return "unknown";
-}
-const STATUS_COLORS={verified:"#21996e",implemented:"#e2ac39",in_progress:"#e2ac39",blocked:"#db5560",unknown:"#9da5b3",planned:"#9da5b3",idea:"#9da5b3"};
-let graphMode=true;
-let researchData=null;
-function renderVerification(report){
- const v=$("versionDiff");v.replaceChildren();
- if(report.snapshot_diff){
-  const d=report.snapshot_diff;
-  v.append(make("h3","Differenze fra snapshot"));
-  for(const [label,key] of [["Nodi aggiunti","added_nodes"],["Nodi rimossi","removed_nodes"],["Nodi modificati","changed_nodes"],["Relazioni aggiunte","added_edges"],["Relazioni rimosse","removed_edges"]]){
-   const detail=make("details"),sum=make("summary",label+" ("+(d[key]||[]).length+")");detail.append(sum);
-   (d[key]||[]).slice(0,100).forEach(x=>detail.append(make("p",Array.isArray(x)?x.join(" → "):x)));
-   v.append(detail);
-  }
- }else v.textContent="Nessun confronto strutturale caricato.";
- const tests=$("junitEvidence");tests.replaceChildren();
- if(report.test_results){
-  const r=report.test_results;tests.append(make("h3","Evidenza JUnit importata"));
-  tests.append(make("p","Superati: "+r.summary.pass+" · Falliti: "+r.summary.fail+" · Saltati: "+r.summary.skip));
-  tests.append(make("p",r.warning));
-  const detail=make("details");detail.append(make("summary","Mostra casi di test"));
-  (r.test_cases||[]).slice(0,150).forEach(t=>detail.append(make("p",t.result+" · "+t.classname+"."+t.name)));
-  tests.append(detail);
- }else tests.textContent="Nessun file JUnit importato; i test scoperti non sono risultati verificati.";
-}
-function showResearch(i){
- researchData=i;
- const host=$("researchPanel");host.replaceChildren();if(!i)return;
- const buckets=[["Commit recenti",(i.history||[]).map(x=>x.sha.slice(0,8)+" · "+x.date.slice(0,10)+" · "+x.message+" · "+x.files.length+" file")],["Documentazione (solo indice, non interpretazione)",(i.documentation||[]).map(x=>x.path+" · "+x.headings.slice(0,4).join(" / "))],["Servizi infrastrutturali rilevati",(i.infrastructure||[]).map(x=>x.path+" · "+x.services.join(", "))],["Test individuati, NON eseguiti",(i.tests?.test_files||[])]];
- for(const [heading,items] of buckets){const d=make("details");const summary=make("summary",heading+" ("+items.length+")");d.append(summary);items.slice(0,50).forEach(line=>{const p=make("p",line);p.className="details";d.append(p);});host.append(d);}
-}
-function drawGraph(){
- const area=$("nodeGraph");area.replaceChildren();
- if(!graphMode){area.textContent="Modalità testuale attiva: utilizza l'albero concettuale qui sotto.";return;}
- const manual=conceptual.groups.length>0;
- const nodes=manual?conceptual.groups.slice(0,130):(atlas?.nodes||[]).filter(n=>n.kind==="file").slice(0,130).map(n=>({id:n.id,name:n.name,lens:"unassigned",status:"unknown",description:n.path,code_refs:[n.id]}));
- if(!nodes.length){area.textContent="Analizza una repository o crea nodi per visualizzarli.";return;}
- const ns="http://www.w3.org/2000/svg",w=850,h=Math.max(320,Math.ceil(nodes.length/6)*100+80);
- const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.style.width="100%";svg.style.minWidth="500px";
- const xy=new Map();const order=["roots","trunk","branches","unassigned"];
- nodes.forEach((n,i)=>{let row=order.indexOf(n.lens);if(row<0)row=3;const subset=nodes.filter(a=>a.lens===n.lens);const k=subset.indexOf(n);xy.set(n.id,{x:90+row*210,y:55+k*85});});
- const line=(a,b,dashed)=>{let e=document.createElementNS(ns,"line");for(let [key,val] of Object.entries({x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:"#a7b2c4","stroke-width":1.3}))e.setAttribute(key,val);if(dashed)e.setAttribute("stroke-dasharray","5 5");svg.append(e)};
- for(const n of nodes){if(n.parent&&xy.has(n.parent))line(xy.get(n.id),xy.get(n.parent),false);}
- for(const rel of conceptual.relations){if(xy.has(rel.from)&&xy.has(rel.to))line(xy.get(rel.from),xy.get(rel.to),true);}
- nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[assessedStatus(n)]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
- const open=()=>{
-  if(manual)editConcept(n.id);else if(atlas){const original=atlas.nodes.find(x=>x.id===n.id);if(original)inspect(original);}
-  const pane=$("graphInspector");pane.replaceChildren();
-  pane.append(make("h3",n.name));
-  pane.append(make("p",(n.description||"Nessuna descrizione")+" · Stato dichiarato: "+n.status+" · Stato basato su evidenze: "+assessedStatus(n)));
-  const refs=n.code_refs||[], commits=(researchData?.history||[]).filter(c=>refs.some(ref=>c.files.includes(ref.replace(/^file:/,"").split(":")[0])));
-  const details=make("details");details.open=true;details.append(make("summary","Terza dimensione · cronologia ("+commits.length+" commit recenti)"));
-  if(!refs.length)details.append(make("p","Associa prima i riferimenti al codice per collegare la storia."));
-  else if(!commits.length)details.append(make("p","Nessuna modifica trovata nella finestra Git analizzata."));
-  commits.forEach(c=>details.append(make("p",c.date.slice(0,10)+" · "+c.sha.slice(0,8)+" · "+c.message)));
-  pane.append(details);
-  pane.append(make("p","Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length));
-};
- circle.addEventListener("click",open);circle.addEventListener("keydown",e=>{if(e.key==="Enter")open();});svg.append(circle);
- const label=document.createElementNS(ns,"text");label.setAttribute("x",p.x+16);label.setAttribute("y",p.y+5);label.setAttribute("font-size","11");label.textContent=n.name.slice(0,24);svg.append(label);
- });
- area.append(svg);
-}
-$("modeGraph").onclick=()=>{graphMode=true;drawGraph();};
-$("modeText").onclick=()=>{graphMode=false;drawGraph();};
-const oldRenderConcept=renderConcept;
-renderConcept=function(){oldRenderConcept();drawGraph();};
-
-fetch("./report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(report=>{
- if(!report)return;
- if(report.atlas)load(report.atlas);
- if(report.intelligence)showResearch(report.intelligence);
- renderVerification(report);
- if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
- if(report.comparison)renderComparison(report.comparison);
- const v=$("impact");if(report.impact){v.replaceChildren();v.append(make("p","Modificati: "+report.impact.changed.join(", ")));v.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));}else v.textContent="Nessuna simulazione di impatto richiesta.";
-}).catch(err=>console.warn("Report locale non disponibile",err));
-drawGraph();
-
-let sessionToken=null;
-fetch("/api/session").then(r=>r.ok?r.json():null).then(a=>{if(a&&a.token){sessionToken=a.token;$("openStatus").textContent="Pronto: scegli una cartella da analizzare.";}else{$("openProject").disabled=true;}}).catch(()=>{$("openProject").disabled=true;});
-$("openProject").onclick=async()=>{
- const path=$("projectPath").value.trim();if(!path)return $("openStatus").textContent="Inserisci un percorso.";
- $("openProject").disabled=true;$("openStatus").textContent="Analisi in corso...";
- try{
-  const r=await fetch("/api/open",{method:"POST",headers:{"Content-Type":"application/json","X-Atlas-Token":sessionToken},body:JSON.stringify({path})});
-  const result=await r.json();if(!r.ok)throw Error(result.error||"Impossibile analizzare la cartella");
-  if(!result.atlas)throw Error("Report non valido");
-  load(result.atlas);if(result.intelligence)showResearch(result.intelligence);
-  if(result.comparison)renderComparison(result.comparison);
-  renderVerification(result);
-  $("openStatus").textContent="Analizzati "+result.atlas.nodes.length+" nodi. I file sorgente non sono stati modificati.";
- }catch(e){$("openStatus").textContent="Errore: "+e.message;}
- finally{$("openProject").disabled=false;}
-};
-</script>
-</body></html>
+'use strict';
+const $=id=>document.getElementById(id), colors={roots:'#b495ff',trunk:'#63b4ff',branches:'#63e1bf',unassigned:'#e6bd72'}, lenses={roots:'Radici',trunk:'Tronco',branches:'Rami',unassigned:'Da classificare'};
+let report=null,map=null,selected=null,expanded=new Set(),token='',storageKey='',mode='graph',zoom=1,pan={x:0,y:0},drag=null;
+const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e};
+function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
+function validate(m){if(!m||m.schema_version!==1||!Array.isArray(m.groups)||!Array.isArray(m.relations))throw Error('Mappa non compatibile');const ids=new Set();for(const n of m.groups){if(!n||typeof n.id!=='string'||ids.has(n.id)||typeof n.name!=='string'||!Object.hasOwn(lenses,n.lens)||!Array.isArray(n.code_refs||[]))throw Error('Nodo non valido');ids.add(n.id)}for(const n of m.groups){const seen=new Set([n.id]);let p=n.parent;while(p){if(!ids.has(p)||seen.has(p))throw Error('Gerarchia non valida');seen.add(p);p=m.groups.find(x=>x.id===p).parent}}for(const r of m.relations)if(!ids.has(r.from)||!ids.has(r.to))throw Error('Relazione non valida')}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(map));status('Modifiche salvate in questo browser per questo percorso. Esporta per una copia portabile.')}catch(e){status('Salvataggio locale non disponibile: esporta la mappa per conservarla.',true)}}
+function load(r){if(!r.atlas||!r.overlay)throw Error('Report senza mappa funzionale');validate(r.overlay);report=r;storageKey='codeatlas-v2:'+r.project_key;map=structuredClone(r.overlay);let restored=false;try{const old=JSON.parse(localStorage.getItem(storageKey));if(old){validate(old);const current=new Set(map.groups.map(n=>n.id));for(const n of old.groups){const fresh=map.groups.find(x=>x.id===n.id);if(n.source==='manual'){if(fresh){const refs=fresh.code_refs;Object.assign(fresh,n);fresh.code_refs=refs;}else map.groups.push(n)}}const edited=new Set(old.groups.filter(n=>n.source==='manual').map(n=>n.id));map.relations=map.relations.filter(e=>!edited.has(e.from));map.relations.push(...old.relations.filter(e=>edited.has(e.from)&&map.groups.some(n=>n.id===e.from)&&map.groups.some(n=>n.id===e.to)));validate(map);restored=true}}catch(e){status('Copia locale non leggibile: uso la scansione corrente.',true)}selected=null;expanded.clear();zoom=1;pan={x:0,y:0};$('project').textContent=r.atlas.project;$('empty').hidden=map.groups.length>0;if(!map.groups.length){$('empty').replaceChildren(el('h2','Nessuna responsabilità rilevata'),el('p','Nessun file supportato: puoi creare i nodi manualmente con + Nodo.'))}draw();inspect();status(`${map.groups.filter(n=>!n.parent).length} nodi principali · ${r.atlas.nodes.filter(n=>n.kind==='file').length} file di evidenza · ${r.atlas.errors.length} errori di scansione${restored?' · correzioni locali ripristinate':''}. Proposte da confermare.`)}
+function visible(){const q=$('search').value.trim().toLowerCase(),ids=new Set();if(q){for(const n of map.groups)if((n.name+' '+(n.description||'')).toLowerCase().includes(q)){let cur=n;while(cur&&!ids.has(cur.id)){ids.add(cur.id);cur=map.groups.find(p=>p.id===cur.parent)}}return map.groups.filter(n=>ids.has(n.id))}return map.groups.filter(n=>{let p=n.parent;while(p){if(!expanded.has(p))return false;p=map.groups.find(x=>x.id===p)?.parent}return true})}
+function choose(n){selected=n.id;if(map.groups.some(x=>x.parent===n.id)){if(expanded.has(n.id))expanded.delete(n.id);else expanded.add(n.id)}draw();inspect()}
+function draw(){const host=$('graph'),text=$('textView');host.replaceChildren();text.replaceChildren();if(!map)return;const nodes=visible();host.hidden=mode!=='graph';text.hidden=mode!=='text';for(const n of nodes){const b=el('button',`${n.parent?'↳ ':''}${n.name} · ${lenses[n.lens]}${map.groups.some(x=>x.parent===n.id)?' · '+(expanded.has(n.id)?'−':'+'):''}`);b.onclick=()=>choose(n);b.classList.toggle('active',n.id===selected);text.append(b)}if(!nodes.length){text.append(el('p','Nessun nodo corrispondente.'));host.append(el('p','Nessun nodo corrispondente.'));return}
+const ns='http://www.w3.org/2000/svg',s=(tag,attrs)=>{const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);return e},svg=s('svg',{viewBox:'0 0 1000 760',role:'group','aria-label':'Costellazione funzionale interattiva'});const layer=s('g',{transform:`translate(${pan.x} ${pan.y}) translate(500 380) scale(${zoom}) translate(-500 -380)`});svg.append(layer);const positions=new Map(),top=nodes.filter(n=>!n.parent),levels={roots:600,trunk:370,branches:160,unassigned:290};for(const lens of Object.keys(lenses)){const row=top.filter(n=>n.lens===lens);row.forEach((n,i)=>positions.set(n.id,{x:100+(i+1)*800/(row.length+1),y:levels[lens]+(i%2)*42}))}let pending=nodes.filter(n=>n.parent);for(let pass=0;pending.length&&pass<nodes.length;pass++){pending=pending.filter(n=>{const p=positions.get(n.parent);if(!p)return true;const siblings=nodes.filter(x=>x.parent===n.parent),i=siblings.indexOf(n),a=(i/Math.max(1,siblings.length))*Math.PI*2;positions.set(n.id,{x:p.x+Math.cos(a)*100,y:p.y+Math.sin(a)*80});return false})}
+// Deterministic collision relaxation. Keep hierarchy anchors while separating labels.
+for(let pass=0;pass<45;pass++){for(let i=0;i<nodes.length;i++){const a=positions.get(nodes[i].id);if(!a)continue;for(let j=i+1;j<nodes.length;j++){const b=positions.get(nodes[j].id);if(!b)continue;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d<105){if(d<.01){dx=1;dy=1;d=1}const f=(105-d)*.12;a.x-=dx/d*f;a.y-=dy/d*f;b.x+=dx/d*f;b.y+=dy/d*f}}a.x=Math.max(75,Math.min(925,a.x));a.y=Math.max(55,Math.min(700,a.y))}}
+const line=(a,b,c,dash)=>{if(!a||!b)return;layer.append(s('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:c,'stroke-width':1.2,'stroke-dasharray':dash||'','class':'edge'}))};for(const n of nodes)if(n.parent)line(positions.get(n.parent),positions.get(n.id),colors[n.lens]);for(const r of map.relations)line(positions.get(r.from),positions.get(r.to),colors[map.groups.find(n=>n.id===r.to)?.lens]||'#c5d8ef','4 5');
+for(const n of nodes){const p=positions.get(n.id);if(!p)continue;const g=s('g',{class:'node',tabindex:0,role:'button','aria-label':n.name,'aria-expanded':expanded.has(n.id),transform:`translate(${p.x} ${p.y})`});g.append(s('circle',{r:n.id===selected?22:16,fill:colors[n.lens],opacity:.09}),s('circle',{r:n.parent?4:6,fill:colors[n.lens],stroke:n.id===selected?'white':colors[n.lens],'stroke-width':2}));const label=s('text',{y:28,'text-anchor':'middle'});label.textContent=n.name.length>30?n.name.slice(0,29)+'…':n.name;const title=s('title',{});title.textContent=n.name+' · '+lenses[n.lens];g.append(label,title);if(map.groups.some(x=>x.parent===n.id)){const count=s('text',{x:13,y:-11});count.textContent=expanded.has(n.id)?'−':'+';g.append(count)}g.onclick=()=>choose(n);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(n)}};layer.append(g)}
+svg.onwheel=e=>{e.preventDefault();zoom=Math.max(.35,Math.min(4,zoom*(e.deltaY<0?1.12:.89)));draw()};svg.onpointerdown=e=>{if(e.target.closest('.node'))return;drag={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};svg.setPointerCapture(e.pointerId)};svg.onpointermove=e=>{if(!drag)return;const b=svg.getBoundingClientRect();pan={x:drag.px+(e.clientX-drag.x)*1000/b.width,y:drag.py+(e.clientY-drag.y)*760/b.height};layer.setAttribute('transform',`translate(${pan.x} ${pan.y}) translate(500 380) scale(${zoom}) translate(-500 -380)`)};svg.onpointerup=()=>{drag=null};host.append(svg)}
+function inspect(){const host=$('inspector');host.replaceChildren(el('span','DETTAGLIO DEL NODO'));const n=map?.groups.find(x=>x.id===selected);if(!n){host.append(el('h2','Esplora le connessioni'),el('p','Seleziona un punto. Un clic mostra la scheda ed espande o richiude i suoi sottopunti.'),el('h3','Provenienza e limiti'),el('p','Le proposte derivano da nomi, percorsi e import statici. Non provano comportamento, correttezza o intenzioni. Scopo e futuro richiedono conferma umana.'));return}const badge=el('span',lenses[n.lens]+' · '+(n.source==='manual'?'corretto dall’utente':'proposta da confermare'));badge.className='badge';host.append(el('h2',n.name),badge);function block(title,body){host.append(el('h3',title),el('p',body))}block('Cosa fa',n.description||'Descrizione da compilare.');block('Scopo',n.purpose||'Non deducibile con certezza dal codice. Da definire.');block('Evoluzione futura',n.future||(n.goals||[]).map(x=>x.text).join('\n')||'Nessun obiettivo dichiarato.');block('Problemi',(n.issues||[]).map(x=>x.text).join('\n')||'Nessun problema annotato. Non equivale a una verifica positiva.');const deps=map.relations.filter(r=>r.from===n.id);block('Dipendenze',deps.map(r=>(map.groups.find(x=>x.id===r.to)?.name||r.to)+' · '+r.kind).join('\n')||'Nessuna dipendenza nota; gli import dinamici possono mancare.');
+const children=map.groups.filter(x=>x.parent===n.id);if(children.length){host.append(el('h3','Sottopunti · '+children.length));for(const c of children){const b=el('button',c.name);b.onclick=()=>{expanded.add(n.id);selected=c.id;draw();inspect()};host.append(b)}}
+host.append(el('h3','Timeline individuale'));const paths=new Set((n.code_refs||[]).map(id=>report.atlas.nodes.find(x=>x.id===id)?.path).filter(Boolean));const history=(report.intelligence?.history||[]).filter(c=>c.files.some(f=>paths.has(f)));for(const c of history.slice(0,8)){const item=el('div');item.className='timeline';item.append(el('small',c.date.slice(0,10)+' · '+c.sha.slice(0,7)),el('div',c.message));host.append(item)}if(!history.length)host.append(el('p','Nessun commit pertinente nei commit recenti disponibili.'));for(const c of (n.timeline||[]).slice(-5).reverse()){const item=el('div',c.date.slice(0,10)+' · '+c.text);item.className='timeline';host.append(item)}host.append(el('small','Resoconti dei commit sui riferimenti associati, non ricostruzioni del comportamento passato.'));
+const edit=el('details');edit.append(el('summary','Modifica classificazione e scheda'));function field(label,value,apply,multi=false){const l=el('label',label),input=el(multi?'textarea':'input');input.value=value||'';l.append(input);edit.append(l);input.oninput=()=>{apply(input.value);n.source='manual';save()};input.onchange=()=>{apply(input.value);n.source='manual';n.timeline??=[];n.timeline.push({date:new Date().toISOString(),text:'Aggiornato: '+label});save();draw()}}function choice(label,value,options,apply){const l=el('label',label),input=el('select');for(const [v,t]of options){const o=el('option',t);o.value=v;input.append(o)}input.value=value||'';l.append(input);edit.append(l);input.onchange=()=>{apply(input.value);n.source='manual';save();draw()}}field('Nome',n.name,v=>n.name=v);choice('Classificazione',n.lens,Object.entries(lenses),v=>n.lens=v);const descendants=new Set([n.id]);let changed=true;while(changed){changed=false;for(const g of map.groups)if(descendants.has(g.parent)&&!descendants.has(g.id)){descendants.add(g.id);changed=true}}choice('Nodo superiore',n.parent,[['','Principale'],...map.groups.filter(g=>!descendants.has(g.id)).map(g=>[g.id,g.name])],v=>n.parent=v||null);field('Cosa fa',n.description,v=>n.description=v,true);field('Scopo',n.purpose,v=>n.purpose=v,true);field('Evoluzione futura',n.future,v=>n.future=v,true);field('Problemi (uno per riga)',(n.issues||[]).map(x=>x.text).join('\n'),v=>n.issues=v.split('\n').filter(Boolean).map(text=>({text,source:'manual'})),true);field('Dipendenze (ID separati da virgola)',deps.map(r=>r.to).join(', '),v=>{const ids=v.split(',').map(s=>s.trim()).filter(Boolean);if(ids.some(id=>id===n.id||!map.groups.some(g=>g.id===id))){status('Dipendenza non valida: usa gli ID indicati nelle evidenze dei nodi.',true);return}map.relations=map.relations.filter(r=>r.from!==n.id);for(const id of ids)map.relations.push({from:n.id,to:id,kind:'depends_on',source:'manual'})});const applyButton=el('button','Aggiorna scheda');applyButton.onclick=()=>{save();draw();inspect()};edit.append(applyButton);host.append(edit);
+const evidence=el('details');evidence.append(el('summary','Evidenze tecniche e limiti'));evidence.append(el('p','ID: '+n.id),el('p','Origine: '+(n.source||'manual')+' · '+(n.confidence||'dichiarazione utente')),el('p',n.reason||'Informazioni inserite dall’utente.'));const tech=el('div');tech.id='technical';tech.textContent=[...(n.code_refs||[]),...report.atlas.errors.filter(e=>paths.has(e.file)).map(e=>'Errore: '+e.file+' '+e.message)].join('\n')||'Nessun riferimento tecnico associato.';evidence.append(tech,el('p',(map.limitations||[]).join('\n')),el('p','Test individuati: '+(report.intelligence?.tests?.test_files?.length||0)+'. Non eseguiti da CodeAtlas.'));host.append(evidence)}
+$('openForm').onsubmit=async e=>{e.preventDefault();const b=$('openProject');b.disabled=true;status('Scansione locale in corso…');try{if(!token)throw Error('Avvia CodeAtlas con il launcher desktop per scegliere una cartella.');const res=await fetch('/api/open',{method:'POST',headers:{'Content-Type':'application/json','X-Atlas-Token':token},body:JSON.stringify({path:$('projectPath').value})});const r=await res.json();if(!res.ok)throw Error(r.error);load(r)}catch(e){status(e.message,true)}finally{b.disabled=false}};
+$('modeGraph').onclick=()=>{mode='graph';$('modeGraph').classList.add('active');$('modeText').classList.remove('active');draw()};$('modeText').onclick=()=>{mode='text';$('modeText').classList.add('active');$('modeGraph').classList.remove('active');draw()};$('search').oninput=draw;$('fit').onclick=()=>{zoom=1;pan={x:0,y:0};draw()};$('add').onclick=()=>{if(!map)return status('Apri prima un progetto.',true);const n={id:'manual:'+crypto.randomUUID(),name:'Nuova responsabilità',lens:'unassigned',parent:selected,code_refs:[],source:'manual',description:'',issues:[]};map.groups.push(n);if(selected)expanded.add(selected);selected=n.id;$('empty').hidden=true;save();draw();inspect();$('inspector details').open=true};$('export').onclick=()=>{if(!map)return;const url=URL.createObjectURL(new Blob([JSON.stringify(map,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download='codeatlas-map.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('import').onchange=async e=>{try{if(!report)throw Error('Apri prima un progetto.');const m=JSON.parse(await e.target.files[0].text());validate(m);map=m;selected=null;expanded.clear();save();draw();inspect()}catch(e){status(e.message,true)}};
+(async()=>{try{const s=await fetch('/api/session');if(s.ok)token=(await s.json()).token}catch(e){}try{const r=await fetch('/report.json');if(r.ok)load(await r.json())}catch(e){status('Impossibile caricare il report: '+e.message,true)}})();
+</script></body></html>

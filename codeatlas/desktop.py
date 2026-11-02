@@ -30,12 +30,12 @@ class AtlasHandler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             self._respond(200, INDEX.read_bytes(), "text/html; charset=utf-8")
         elif path == "/api/session":
-            self._json(200, {"token": self.token, "loaded": self.report is not None})
+            self._json(200, {"token": self.token, "loaded": getattr(self.server, 'report', None) is not None})
         elif path == "/report.json":
-            if self.report is None:
+            if getattr(self.server, 'report', None) is None:
                 self._json(404, {"error":"No repository selected"})
             else:
-                self._json(200, self.report)
+                self._json(200, self.server.report)
         elif path == "/examples/conceptual-map.json" and EXAMPLE.is_file():
             self._respond(200, EXAMPLE.read_bytes())
         else:
@@ -60,7 +60,7 @@ class AtlasHandler(BaseHTTPRequestHandler):
                 return self._json(400, {"error":"The selected path is not a directory"})
             # Read only. The analysis is local; target project code is never executed.
             generated = build_report(folder)
-            self.report = generated
+            self.server.report = generated
             return self._json(200, generated)
         except (OSError, UnicodeError, ValueError, RuntimeError) as exc:
             return self._json(400, {"error": str(exc)})
