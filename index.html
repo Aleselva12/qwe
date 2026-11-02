@@ -53,6 +53,10 @@ $("file").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)
 $("search").addEventListener("input",render);
 
 let conceptual={schema_version:1,project:"",groups:[],relations:[]};
+const STORAGE_KEY="codeatlas-conceptual-v1";
+let savePending=false;
+function persistConcept(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(conceptual));savePending=false;}catch(e){savePending=true;}}
+
 const lenses={roots:"🌱 Radici",trunk:"🌳 Tronco",branches:"🌿 Rami",unassigned:"▫ Da classificare"};
 const statuses=["unknown","idea","planned","in_progress","implemented","verified","blocked"];
 function make(tag,text){let el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;}
@@ -65,6 +69,7 @@ function checkOverlay(a){
  for(const r of a.relations){if(!ids.has(r.from)||!ids.has(r.to)||!["depends_on","supports","blocks","implements","related_to"].includes(r.kind))throw Error("Relazione non valida");}
 }
 function renderConcept(){
+ persistConcept();
  let area=$("conceptTree");area.replaceChildren();
  for(const [lens,label] of Object.entries(lenses)){
  const block=make("div");block.style.marginTop="12px";let strong=make("strong",label);block.append(strong);
@@ -91,7 +96,7 @@ function editConcept(id){
    n[section].forEach((record,i)=>{
      const wrapper=make("div");wrapper.style.padding="9px";wrapper.style.marginBottom="6px";wrapper.style.border="1px solid #e4e7ed";wrapper.style.borderRadius="8px";
      const note=make("textarea");note.value=record.text||"";note.style.width="100%";note.rows=2;
-     note.onchange=()=>{record.text=note.value.trim();};
+     note.onchange=()=>{record.text=note.value.trim();persistConcept();};
      wrapper.append(note);
      const meta=make("p","Origine: "+(record.source||"manual")+(record.ref?" · Riferimento: "+record.ref:"")+(record.status?" · Stato: "+record.status:""));
      meta.className="muted details";wrapper.append(meta);
@@ -115,6 +120,7 @@ $("addGroup").onclick=()=>{let id="concept-"+Date.now().toString(36)+"-"+Math.ra
 $("exportOverlay").onclick=()=>{try{checkOverlay(conceptual);const b=new Blob([JSON.stringify(conceptual,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="codeatlas-overlay.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300);}catch(e){alert(e.message)}};
 $("overlayFile").onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());checkOverlay(obj);conceptual=obj;renderConcept();}catch(err){alert(err.message)}};
 $("exampleLoad").onclick=async()=>{try{const r=await fetch("./examples/conceptual-map.json");if(!r.ok)throw Error("File esempio non disponibile");let obj=await r.json();checkOverlay(obj);conceptual=obj;renderConcept();}catch(e){alert(e.message)}};
+try{const saved=localStorage.getItem(STORAGE_KEY);if(saved){const loaded=JSON.parse(saved);checkOverlay(loaded);conceptual=loaded;}}catch(error){console.warn("Local saved data unavailable or invalid",error);}
 renderConcept();
 function renderComparison(data) {
  const view=$("comparison");view.replaceChildren();
