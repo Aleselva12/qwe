@@ -20,7 +20,7 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </head>
 <body>
 <header><h1>◈ CodeAtlas</h1><span class="pill">v1.1 · graph</span><small>Evidence first · read only</small></header>
-<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Grafo interattivo · struttura</h2><p class="muted">Clicca un punto per aprire la scheda testuale. I colori indicano lo stato dichiarato, non una verifica automatica.</p><button id="modeGraph">Grafo a punti</button><button id="modeText">Solo testo</button><div id="nodeGraph" style="overflow:auto;max-height:540px"></div><div id="graphInspector"></div></div><div class="card"><h2>Storia, documenti, infrastruttura e test</h2><div id="researchPanel" class="muted">Apri una repository con CodeAtlas.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
+<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Grafo interattivo · struttura</h2><p class="muted">Clicca un punto per aprire la scheda testuale. I colori indicano lo stato dichiarato, non una verifica automatica.</p><button id="modeGraph">Grafo a punti</button><button id="modeText">Solo testo</button><div id="nodeGraph" style="overflow:auto;max-height:540px"></div><div id="graphInspector"></div></div><div class="card"><h2>Confronto versioni e test</h2><div id="versionDiff" class="muted">Aggiungi --previous per confrontare due snapshot.</div><div id="junitEvidence" class="muted">Aggiungi --junit per importare risultati di test già eseguiti.</div></div><div class="card"><h2>Storia, documenti, infrastruttura e test</h2><div id="researchPanel" class="muted">Apri una repository con CodeAtlas.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
 let atlas=null, selected=null;
@@ -156,6 +156,27 @@ function assessedStatus(n){
 const STATUS_COLORS={verified:"#21996e",implemented:"#e2ac39",in_progress:"#e2ac39",blocked:"#db5560",unknown:"#9da5b3",planned:"#9da5b3",idea:"#9da5b3"};
 let graphMode=true;
 let researchData=null;
+function renderVerification(report){
+ const v=$("versionDiff");v.replaceChildren();
+ if(report.snapshot_diff){
+  const d=report.snapshot_diff;
+  v.append(make("h3","Differenze fra snapshot"));
+  for(const [label,key] of [["Nodi aggiunti","added_nodes"],["Nodi rimossi","removed_nodes"],["Nodi modificati","changed_nodes"],["Relazioni aggiunte","added_edges"],["Relazioni rimosse","removed_edges"]]){
+   const detail=make("details"),sum=make("summary",label+" ("+(d[key]||[]).length+")");detail.append(sum);
+   (d[key]||[]).slice(0,100).forEach(x=>detail.append(make("p",Array.isArray(x)?x.join(" → "):x)));
+   v.append(detail);
+  }
+ }else v.textContent="Nessun confronto strutturale caricato.";
+ const tests=$("junitEvidence");tests.replaceChildren();
+ if(report.test_results){
+  const r=report.test_results;tests.append(make("h3","Evidenza JUnit importata"));
+  tests.append(make("p","Superati: "+r.summary.pass+" · Falliti: "+r.summary.fail+" · Saltati: "+r.summary.skip));
+  tests.append(make("p",r.warning));
+  const detail=make("details");detail.append(make("summary","Mostra casi di test"));
+  (r.test_cases||[]).slice(0,150).forEach(t=>detail.append(make("p",t.result+" · "+t.classname+"."+t.name)));
+  tests.append(detail);
+ }else tests.textContent="Nessun file JUnit importato; i test scoperti non sono risultati verificati.";
+}
 function showResearch(i){
  researchData=i;
  const host=$("researchPanel");host.replaceChildren();if(!i)return;
@@ -202,6 +223,7 @@ fetch("./report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(repor
  if(!report)return;
  if(report.atlas)load(report.atlas);
  if(report.intelligence)showResearch(report.intelligence);
+ renderVerification(report);
  if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
  if(report.comparison)renderComparison(report.comparison);
  const v=$("impact");if(report.impact){v.replaceChildren();v.append(make("p","Modificati: "+report.impact.changed.join(", ")));v.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));}else v.textContent="Nessuna simulazione di impatto richiesta.";
