@@ -19,7 +19,7 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </style>
 </head>
 <body>
-<header><h1>◈ CodeAtlas</h1><span class="pill">v0.1 · standalone</span><small>Evidence first · read only</small></header>
+<header><h1>◈ CodeAtlas</h1><span class="pill">v0.3 · standalone</span><small>Evidence first · read only</small></header>
 <main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
@@ -58,6 +58,7 @@ const statuses=["unknown","idea","planned","in_progress","implemented","verified
 function make(tag,text){let el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;}
 function checkOverlay(a){
  if(!a||a.schema_version!==1||!Array.isArray(a.groups)||!Array.isArray(a.relations))throw Error("Schema non compatibile");
+ for(const n of a.groups){for(const key of ["goals","decisions","issues","evidence"]){if(n[key]!==undefined&&(!Array.isArray(n[key])||n[key].some(x=>!x||typeof x.text!=="string"||!x.text.trim()||!["manual","code","test","document","ai_suggestion"].includes(x.source||"manual"))))throw Error("Scheda non valida: "+key);}}
  const ids=new Set();
  for(const n of a.groups){if(!n||typeof n.id!=="string"||!n.id||ids.has(n.id)||typeof n.name!=="string"||!Object.hasOwn(lenses,n.lens||"unassigned")||!statuses.includes(n.status||"unknown"))throw Error("Nodo non valido");ids.add(n.id);}
  for(const n of a.groups){if(n.parent!=null&&!ids.has(n.parent))throw Error("Genitore inesistente");let seen=new Set(),p=n;while(p){if(seen.has(p.id))throw Error("Gerarchia circolare");seen.add(p.id);p=a.groups.find(g=>g.id===p.parent);}}
@@ -84,12 +85,33 @@ function editConcept(id){
  choice("Stato",statuses.map(x=>[x,x]),n.status||"unknown",v=>n.status=v);
  choice("Genitore",[["","Nessuno"],...conceptual.groups.filter(g=>g.id!==id && g.lens===n.lens).map(g=>[g.id,g.name])],n.parent||"",v=>{const old=n.parent;n.parent=v||null;try{checkOverlay(conceptual)}catch(e){n.parent=old;alert(e.message)}});
  field("Descrizione",n.description||"",v=>n.description=v,true);
+ function records(section,label){
+   n[section]??=[];
+   const head=make("h4",label);host.append(head);
+   n[section].forEach((record,i)=>{
+     const wrapper=make("div");wrapper.style.padding="9px";wrapper.style.marginBottom="6px";wrapper.style.border="1px solid #e4e7ed";wrapper.style.borderRadius="8px";
+     const note=make("textarea");note.value=record.text||"";note.style.width="100%";note.rows=2;
+     note.onchange=()=>{record.text=note.value.trim();};
+     wrapper.append(note);
+     const meta=make("p","Origine: "+(record.source||"manual")+(record.ref?" · Riferimento: "+record.ref:"")+(record.status?" · Stato: "+record.status:""));
+     meta.className="muted details";wrapper.append(meta);
+     const remove=make("button","Rimuovi");remove.onclick=()=>{n[section].splice(i,1);editConcept(id);};wrapper.append(remove);
+     host.append(wrapper);
+   });
+   const add=make("button","+ Aggiungi "+label.toLowerCase());add.style.background="#edf2ff";
+   add.onclick=()=>{n[section].push({text:"Da descrivere",source:"manual",...(section==="goals"?{status:"planned"}:{})});editConcept(id);};
+   host.append(add);
+ }
+ records("goals","Obiettivi");
+ records("decisions","Decisioni");
+ records("issues","Problemi");
+ records("evidence","Evidenze");
  field("Riferimenti al codice (ID separati da virgola)",(n.code_refs||[]).join(", "),v=>n.code_refs=v.split(",").map(s=>s.trim()).filter(Boolean));
  const refs=make("p","Collegamenti: "+conceptual.relations.filter(r=>r.from===id||r.to===id).map(r=>r.from+" → "+r.to+" ("+r.kind+")").join("; "));refs.className="muted";host.append(refs);
  const createRelation=make("button","+ Dipendenza");createRelation.onclick=()=>{const target=prompt("ID del nodo di cui dipende");if(!target)return;if(!conceptual.groups.some(g=>g.id===target)){alert("ID sconosciuto");return;}conceptual.relations.push({from:id,to:target,kind:"depends_on"});editConcept(id);};host.append(createRelation);
  const del=make("button","Elimina nodo");del.onclick=()=>{if(conceptual.groups.some(g=>g.parent===id)){alert("Sposta o elimina prima i figli");return;}conceptual.groups=conceptual.groups.filter(g=>g.id!==id);conceptual.relations=conceptual.relations.filter(r=>r.from!==id&&r.to!==id);host.replaceChildren();renderConcept();};host.append(del);
 }
-$("addGroup").onclick=()=>{let id="concept-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,6);conceptual.groups.push({id,name:"Nuovo componente",lens:"unassigned",parent:null,status:"unknown",description:"",code_refs:[]});renderConcept();editConcept(id);};
+$("addGroup").onclick=()=>{let id="concept-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,6);conceptual.groups.push({id,name:"Nuovo componente",lens:"unassigned",parent:null,status:"unknown",description:"",code_refs:[],goals:[],decisions:[],issues:[],evidence:[]});renderConcept();editConcept(id);};
 $("exportOverlay").onclick=()=>{try{checkOverlay(conceptual);const b=new Blob([JSON.stringify(conceptual,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="codeatlas-overlay.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300);}catch(e){alert(e.message)}};
 $("overlayFile").onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());checkOverlay(obj);conceptual=obj;renderConcept();}catch(err){alert(err.message)}};
 $("exampleLoad").onclick=async()=>{try{const r=await fetch("./examples/conceptual-map.json");if(!r.ok)throw Error("File esempio non disponibile");let obj=await r.json();checkOverlay(obj);conceptual=obj;renderConcept();}catch(e){alert(e.message)}};
