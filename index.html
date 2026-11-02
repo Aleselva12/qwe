@@ -19,7 +19,7 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </style>
 </head>
 <body>
-<header><h1>◈ CodeAtlas</h1><span class="pill">v0.4 · preview</span><small>Evidence first · read only</small></header>
+<header><h1>◈ CodeAtlas</h1><span class="pill">v0.5 · preview</span><small>Evidence first · read only</small></header>
 <main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
@@ -136,6 +136,7 @@ $("reportFile").onchange=async e=>{
   load(report.atlas);
   if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
   renderComparison(report.comparison);
+  const impacted=$("impact");impacted.replaceChildren();if(report.impact){impacted.append(make("p","Modificati: "+report.impact.changed.join(", ")));impacted.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));if(report.impact.unknown.length)impacted.append(make("p","Non riconosciuti: "+report.impact.unknown.join(", ")));}else impacted.textContent="Specifica --changed file:... per calcolare il potenziale impatto.";
  }catch(error){alert(error.message);}
 };
 </script>
