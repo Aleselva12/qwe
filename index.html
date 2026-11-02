@@ -19,8 +19,8 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </style>
 </head>
 <body>
-<header><h1>◈ CodeAtlas</h1><span class="pill">v1.0 · local</span><small>Evidence first · read only</small></header>
-<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
+<header><h1>◈ CodeAtlas</h1><span class="pill">v1.1 · graph</span><small>Evidence first · read only</small></header>
+<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>Grafo interattivo · struttura</h2><p class="muted">Clicca un punto per aprire la scheda testuale. I colori indicano lo stato dichiarato, non una verifica automatica.</p><button id="modeGraph">Grafo a punti</button><button id="modeText">Solo testo</button><div id="nodeGraph" style="overflow:auto;max-height:540px"></div><div id="graphInspector"></div></div><div class="card"><h2>Storia, documenti, infrastruttura e test</h2><div id="researchPanel" class="muted">Apri una repository con CodeAtlas.</div></div><div class="card"><h2>Confronto architettura / codice</h2><p class="muted">Carica il report dell'engine per vedere quali nodi progettuali hanno riferimenti al codice risolti. Un riferimento mancante non prova che una funzione non esista.</p><input id="reportFile" type="file" accept=".json,application/json"><div id="comparison"></div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
 let atlas=null, selected=null;
@@ -145,12 +145,46 @@ $("reportFile").onchange=async e=>{
   const impacted=$("impact");impacted.replaceChildren();if(report.impact){impacted.append(make("p","Modificati: "+report.impact.changed.join(", ")));impacted.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));if(report.impact.unknown.length)impacted.append(make("p","Non riconosciuti: "+report.impact.unknown.join(", ")));}else impacted.textContent="Specifica --changed file:... per calcolare il potenziale impatto.";
  }catch(error){alert(error.message);}
 };
+
+const STATUS_COLORS={verified:"#21996e",implemented:"#e2ac39",in_progress:"#e2ac39",blocked:"#db5560",unknown:"#9da5b3",planned:"#9da5b3",idea:"#9da5b3"};
+let graphMode=true;
+function showResearch(i){
+ const host=$("researchPanel");host.replaceChildren();if(!i)return;
+ const buckets=[["Commit recenti",(i.history||[]).map(x=>x.sha.slice(0,8)+" · "+x.date.slice(0,10)+" · "+x.message+" · "+x.files.length+" file")],["Documentazione (solo indice, non interpretazione)",(i.documentation||[]).map(x=>x.path+" · "+x.headings.slice(0,4).join(" / "))],["Servizi infrastrutturali rilevati",(i.infrastructure||[]).map(x=>x.path+" · "+x.services.join(", "))],["Test individuati, NON eseguiti",(i.tests?.test_files||[])]];
+ for(const [heading,items] of buckets){const d=make("details");const summary=make("summary",heading+" ("+items.length+")");d.append(summary);items.slice(0,50).forEach(line=>{const p=make("p",line);p.className="details";d.append(p);});host.append(d);}
+}
+function drawGraph(){
+ const area=$("nodeGraph");area.replaceChildren();
+ if(!graphMode){area.textContent="Modalità testuale attiva: utilizza l'albero concettuale qui sotto.";return;}
+ const nodes=conceptual.groups.slice(0,130);
+ if(!nodes.length){area.textContent="Carica o crea nodi per visualizzarli.";return;}
+ const ns="http://www.w3.org/2000/svg",w=850,h=Math.max(320,Math.ceil(nodes.length/6)*100+80);
+ const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.style.width="100%";svg.style.minWidth="500px";
+ const xy=new Map();const order=["roots","trunk","branches","unassigned"];
+ nodes.forEach((n,i)=>{let row=order.indexOf(n.lens);if(row<0)row=3;const subset=nodes.filter(a=>a.lens===n.lens);const k=subset.indexOf(n);xy.set(n.id,{x:90+row*210,y:55+k*85});});
+ const line=(a,b,dashed)=>{let e=document.createElementNS(ns,"line");for(let [key,val] of Object.entries({x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:"#a7b2c4","stroke-width":1.3}))e.setAttribute(key,val);if(dashed)e.setAttribute("stroke-dasharray","5 5");svg.append(e)};
+ for(const n of nodes){if(n.parent&&xy.has(n.parent))line(xy.get(n.id),xy.get(n.parent),false);}
+ for(const rel of conceptual.relations){if(xy.has(rel.from)&&xy.has(rel.to))line(xy.get(rel.from),xy.get(rel.to),true);}
+ nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[n.status]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
+ const open=()=>{editConcept(n.id);$("graphInspector").textContent=n.name+" · "+(n.description||"Nessuna descrizione")+" · Stato: "+n.status+" · Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length;};
+ circle.addEventListener("click",open);circle.addEventListener("keydown",e=>{if(e.key==="Enter")open();});svg.append(circle);
+ const label=document.createElementNS(ns,"text");label.setAttribute("x",p.x+16);label.setAttribute("y",p.y+5);label.setAttribute("font-size","11");label.textContent=n.name.slice(0,24);svg.append(label);
+ });
+ area.append(svg);
+}
+$("modeGraph").onclick=()=>{graphMode=true;drawGraph();};
+$("modeText").onclick=()=>{graphMode=false;drawGraph();};
+const oldRenderConcept=renderConcept;
+renderConcept=function(){oldRenderConcept();drawGraph();};
+
 fetch("./report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(report=>{
  if(!report)return;
  if(report.atlas)load(report.atlas);
+ if(report.intelligence)showResearch(report.intelligence);
  if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
  if(report.comparison)renderComparison(report.comparison);
  const v=$("impact");if(report.impact){v.replaceChildren();v.append(make("p","Modificati: "+report.impact.changed.join(", ")));v.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));}else v.textContent="Nessuna simulazione di impatto richiesta.";
 }).catch(err=>console.warn("Report locale non disponibile",err));
+drawGraph();
 </script>
 </body></html>
