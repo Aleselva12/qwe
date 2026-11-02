@@ -30,7 +30,7 @@ function valid(a){
  if(!a || a.schema_version!==1 || !Array.isArray(a.nodes)||!Array.isArray(a.edges)||!Array.isArray(a.errors)) throw Error("Schema JSON non compatibile");
  if(a.nodes.some(n=>typeof n.id!=="string"||typeof n.name!=="string"||typeof n.kind!=="string")) throw Error("Nodo invalido");
 }
-function load(a){valid(a);atlas=a;selected=null; $("project").textContent=a.project||"Project"; $("summary").textContent=a.nodes.length+" nodi · "+a.edges.length+" relazioni · "+a.errors.length+" errori";$("limits").textContent=(a.limitations||[]).join(" · ")||"Analisi statica: non prova la correttezza a runtime";render();}
+function load(a){valid(a);atlas=a;selected=null; $("project").textContent=a.project||"Project"; $("summary").textContent=a.nodes.length+" nodi · "+a.edges.length+" relazioni · "+a.errors.length+" errori";$("limits").textContent=(a.limitations||[]).join(" · ")||"Analisi statica: non prova la correttezza a runtime";render();if(typeof drawGraph==="function")drawGraph();}
 function render(){
  const holder=$("tree");holder.replaceChildren();if(!atlas)return;
  const q=$("search").value.toLocaleLowerCase().trim();
@@ -186,8 +186,9 @@ function showResearch(i){
 function drawGraph(){
  const area=$("nodeGraph");area.replaceChildren();
  if(!graphMode){area.textContent="Modalità testuale attiva: utilizza l'albero concettuale qui sotto.";return;}
- const nodes=conceptual.groups.slice(0,130);
- if(!nodes.length){area.textContent="Carica o crea nodi per visualizzarli.";return;}
+ const manual=conceptual.groups.length>0;
+ const nodes=manual?conceptual.groups.slice(0,130):(atlas?.nodes||[]).filter(n=>n.kind==="file").slice(0,130).map(n=>({id:n.id,name:n.name,lens:"unassigned",status:"unknown",description:n.path,code_refs:[n.id]}));
+ if(!nodes.length){area.textContent="Analizza una repository o crea nodi per visualizzarli.";return;}
  const ns="http://www.w3.org/2000/svg",w=850,h=Math.max(320,Math.ceil(nodes.length/6)*100+80);
  const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.style.width="100%";svg.style.minWidth="500px";
  const xy=new Map();const order=["roots","trunk","branches","unassigned"];
@@ -197,7 +198,7 @@ function drawGraph(){
  for(const rel of conceptual.relations){if(xy.has(rel.from)&&xy.has(rel.to))line(xy.get(rel.from),xy.get(rel.to),true);}
  nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[assessedStatus(n)]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
  const open=()=>{
-  editConcept(n.id);
+  if(manual)editConcept(n.id);else if(atlas){const original=atlas.nodes.find(x=>x.id===n.id);if(original)inspect(original);}
   const pane=$("graphInspector");pane.replaceChildren();
   pane.append(make("h3",n.name));
   pane.append(make("p",(n.description||"Nessuna descrizione")+" · Stato dichiarato: "+n.status+" · Stato basato su evidenze: "+assessedStatus(n)));
