@@ -27,6 +27,18 @@ def validate(overlay: dict) -> dict:
             raise ValueError("Each group needs a name")
         if not isinstance(item.get("code_refs", []), list) or any(not isinstance(x, str) for x in item.get("code_refs", [])):
             raise ValueError("code_refs must be string list")
+        for field in ("goals", "decisions", "issues", "evidence"):
+            if not isinstance(item.get(field, []), list):
+                raise ValueError(f"{field} must be a list")
+            for entry in item.get(field, []):
+                if not isinstance(entry, dict) or not isinstance(entry.get("text"), str) or not entry["text"].strip():
+                    raise ValueError(f"{field} entries require nonempty text")
+                if entry.get("source", "manual") not in {"manual", "code", "test", "document", "ai_suggestion"}:
+                    raise ValueError("Unknown information source")
+                if field == "goals" and entry.get("status", "planned") not in STATES:
+                    raise ValueError("Invalid goal status")
+                if field == "evidence" and entry.get("ref") is not None and not isinstance(entry["ref"], str):
+                    raise ValueError("Invalid evidence reference")
     for item in groups:
         parent = item.get("parent")
         if parent is not None and parent not in known:
