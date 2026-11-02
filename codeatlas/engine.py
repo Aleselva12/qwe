@@ -19,7 +19,16 @@ def inventory(root: Path) -> dict:
         raise ValueError("Path must be an existing directory")
     nodes = [{"id":"project","name":root.name,"parent":None,"path":".","kind":"project","source":"extracted"}]
     edges, errors, known_dirs = [], [], set()
-    files = sorted(p for p in root.rglob("*") if p.is_file() and not any(part in IGNORE for part in p.relative_to(root).parts) and (p.suffix in EXTENSIONS or p.name in INFRA))
+    # Prune dependency/vendor directories before traversal: critical on large monorepos.
+    import os
+    files = []
+    for current, dirs, names in os.walk(root, followlinks=False):
+        dirs[:] = sorted(d for d in dirs if d not in IGNORE and not d.startswith("."))
+        for name in names:
+            path = Path(current) / name
+            if (path.suffix in EXTENSIONS or name in INFRA) and not path.is_symlink():
+                files.append(path)
+    files.sort()
     for path in files:
         rel = path.relative_to(root).as_posix()
         if path.stat().st_size > MAX_SIZE:
