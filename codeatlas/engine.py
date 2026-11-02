@@ -87,12 +87,41 @@ def compare(atlas:dict,overlay:dict)->dict:
         results.append({"id":g["id"],"name":g["name"],"lens":g.get("lens","unassigned"),"status":g.get("status","unknown"),"found":found,"missing":missing,"classification":"unmapped" if not refs else "partially_mapped" if missing else "mapped"})
     return {"schema_version":1,"project":atlas["project"],"results":results,"summary":{"mapped":sum(x["classification"]=="mapped" for x in results),"partial":sum(x["classification"]=="partially_mapped" for x in results),"unmapped":sum(x["classification"]=="unmapped" for x in results)},"warning":"Missing references are not proof a feature is absent; unmapped means not yet associated with evidence."}
 
+
+def impact(atlas: dict, overlay: dict, changed: list[str]) -> dict:
+    """Find potential reverse dependencies, never assert actual breakage."""
+    from codeatlas.overlay import validate
+    validate(overlay)
+    nodes={node["id"] for node in atlas.get("nodes", [])}
+    groups={g["id"]:g for g in overlay["groups"]}
+    reverse={}
+    for edge in atlas.get("edges",[]):
+        if edge.get("to") in nodes and edge.get("from") in nodes:
+            reverse.setdefault(edge["to"],set()).add(edge["from"])
+    for edge in overlay.get("relations",[]):
+        if edge.get("kind")=="depends_on":
+            reverse.setdefault(edge["to"],set()).add(edge["from"])
+    # Bridge implementation references to conceptual components.
+    for group in groups.values():
+        for ref in group.get("code_refs",[]):
+            if ref in nodes: reverse.setdefault(ref,set()).add(group["id"])
+    unknown=[ident for ident in changed if ident not in nodes and ident not in groups]
+    seen=set(changed)-set(unknown)
+    queue=list(seen)
+    while queue:
+        for dependent in reverse.get(queue.pop(0),()):
+            if dependent not in seen:
+                seen.add(dependent)
+                queue.append(dependent)
+    return {"changed":changed,"unknown":unknown,"potentially_affected":sorted(seen-set(changed)), "warning":"Static potential impact only. Missing or dynamic dependencies may not appear."}
+
 def main():
     import argparse
     p=argparse.ArgumentParser()
     p.add_argument("root")
     p.add_argument("--overlay")
     p.add_argument("--output",default="codeatlas-report.json")
+    p.add_argument("--changed",action="append",default=[],help="Changed node ID; repeat to simulate impact")
     args=p.parse_args()
     root=Path(args.root).resolve()
     target=Path(args.output).resolve()
@@ -103,6 +132,7 @@ def main():
         from codeatlas.overlay import load
         report["overlay"]=load(args.overlay)
         report["comparison"]=compare(atlas,report["overlay"])
+        if args.changed:report["impact"]=impact(atlas,report["overlay"],args.changed)
     target.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(f"Saved {target}: {len(atlas['nodes'])} nodes, {len(atlas['edges'])} edges")
 
