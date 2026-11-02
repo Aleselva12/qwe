@@ -9,7 +9,14 @@
       "parent": null,
       "status": "planned",
       "description": "CPU, GPU, RAM, storage e limiti di inferenza",
-      "code_refs": []
+      "code_refs": [],
+      "goals": [
+        {
+          "text": "Definire requisiti minimi CPU, RAM, GPU per il runtime",
+          "source": "manual",
+          "status": "planned"
+        }
+      ]
     },
     {
       "id": "roots-network",
@@ -36,7 +43,13 @@
       "parent": "trunk-core",
       "status": "planned",
       "description": "Gestione e collaborazione degli agenti",
-      "code_refs": []
+      "code_refs": [],
+      "decisions": [
+        {
+          "text": "Separare orchestrazione e interfaccia utente",
+          "source": "manual"
+        }
+      ]
     },
     {
       "id": "branch-chat",
@@ -45,7 +58,13 @@
       "parent": null,
       "status": "planned",
       "description": "Interfaccia conversazionale",
-      "code_refs": []
+      "code_refs": [],
+      "evidence": [
+        {
+          "text": "Esempio illustrativo: nessuna verifica del codice effettuata",
+          "source": "manual"
+        }
+      ]
     },
     {
       "id": "branch-calendar",
@@ -54,7 +73,13 @@
       "parent": null,
       "status": "idea",
       "description": "Eventi e integrazioni calendario",
-      "code_refs": []
+      "code_refs": [],
+      "issues": [
+        {
+          "text": "Verificare affidabilità dei collegamenti a servizi esterni",
+          "source": "manual"
+        }
+      ]
     }
   ],
   "relations": [
