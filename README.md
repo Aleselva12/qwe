@@ -247,3 +247,14 @@ JUnit XML is parsed and summarized but not verified as genuine CI output. **Impo
 ### Release gate
 
 A feature-complete candidate is not the same as a verified release. Before attaching a stable v1.0 tag: all unit tests pass, the browser graph/selection/mode switch work, snapshots compare meaningfully on repeated scans, and scan duration and result size are measured on the three trial repositories. The target is practical confidence, not an arbitrary version number.
+
+
+## Desktop launch / folder path picker (latest)
+
+On Windows, install Python 3.10+ and double-click **Avvia CodeAtlas.bat** in the cloned CodeAtlas directory. You may right-click that file and choose **Send to > Desktop (create shortcut)** for a clickable desktop icon. The launcher starts the local server and opens the web interface. In the left panel enter an absolute directory path, for example `C:\\Users\\YourName\\Documents\\project`, then click **Analizza cartella**. The repository can be changed again without restarting the app.
+
+On macOS/Linux the analogous entry is `python3 -m codeatlas.desktop`; the included `Avvia CodeAtlas.command` may need execute permission (`chmod +x`) on macOS before double-clicking it.
+
+The picker uses a typed folder path rather than an operating-system directory dialog. Paths refer to the **computer running the CodeAtlas server**, not a different computer or browser client. CodeAtlas only listens on 127.0.0.1, validates local same-origin requests using a per-process token, and never executes the project code. Stop the process with Ctrl+C or by closing its terminal.
+
+If another instance already occupies port 8765, close it or run `python -m codeatlas.desktop --port 8766`. The new selection only loads extracted technical and research data; conceptual overlays still need to be imported manually. The local app remains a prototype until full browser tests and GitHub CI are confirmed.
