@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CodeAtlas · Repository map</title>
+<style>
+:root{font:15px system-ui,sans-serif;color:#182437;background:#f5f7fb}*{box-sizing:border-box}
+header{display:flex;align-items:center;gap:20px;padding:18px 24px;background:#fff;border-bottom:1px solid #e4e7ed}
+h1{font-size:20px;margin:0}header small{color:#687389}.pill{background:#e8efff;color:#3656a8;padding:5px 10px;border-radius:30px}
+main{display:grid;grid-template-columns:minmax(250px,330px) 1fr;min-height:calc(100vh - 70px)}
+aside{border-right:1px solid #e3e7ee;background:white;padding:20px;overflow:auto}
+section{padding:24px;min-width:0}input[type=search]{width:100%;padding:11px;border:1px solid #d9e0e9;border-radius:10px;margin:12px 0}
+button{border:0;cursor:pointer;background:transparent;text-align:left;padding:8px;border-radius:7px;color:inherit}
+button:hover,button.active{background:#edf2ff}.item{display:block;width:100%;overflow-wrap:anywhere}
+.tree{padding-left:15px;border-left:1px solid #e9edf3}.card{background:white;border:1px solid #e4e7ed;border-radius:14px;padding:22px;margin-bottom:16px}
+h2{margin:0 0 10px}dl{display:grid;grid-template-columns:100px 1fr;gap:12px}dt{color:#788397}dd{margin:0;overflow-wrap:anywhere}
+code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.details{font-size:13px}
+@media(max-width:700px){main{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #e3e7ee}section{padding:12px}}
+</style>
+</head>
+<body>
+<header><h1>◈ CodeAtlas</h1><span class="pill">v0.1 · standalone</span><small>Evidence first · read only</small></header>
+<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div></section></main>
+<script>
+"use strict";
+let atlas=null, selected=null;
+const $=id=>document.getElementById(id);
+const kinds={project:"◇",folder:"▣",file:"▤",function:"ƒ",class:"⬡"};
+function valid(a){
+ if(!a || a.schema_version!==1 || !Array.isArray(a.nodes)||!Array.isArray(a.edges)||!Array.isArray(a.errors)) throw Error("Schema JSON non compatibile");
+ if(a.nodes.some(n=>typeof n.id!=="string"||typeof n.name!=="string"||typeof n.kind!=="string")) throw Error("Nodo invalido");
+}
+function load(a){valid(a);atlas=a;selected=null; $("project").textContent=a.project||"Project"; $("summary").textContent=a.nodes.length+" nodi · "+a.edges.length+" relazioni · "+a.errors.length+" errori";$("limits").textContent=(a.limitations||[]).join(" · ")||"Analisi statica: non prova la correttezza a runtime";render();}
+function render(){
+ const holder=$("tree");holder.replaceChildren();if(!atlas)return;
+ const q=$("search").value.toLocaleLowerCase().trim();
+ const nodes=atlas.nodes, byParent=new Map();
+ nodes.forEach(n=>{let p=n.parent??"__root__";if(!byParent.has(p))byParent.set(p,[]);byParent.get(p).push(n);});
+ const matches=new Set();
+ for(const n of nodes){if(!q||[n.name,n.path||"",n.kind].join(" ").toLocaleLowerCase().includes(q)){let p=n;const seen=new Set();while(p&&!seen.has(p.id)){matches.add(p.id);seen.add(p.id);p=nodes.find(x=>x.id===p.parent);}}}
+ function add(parent,id,depth){for(const n of byParent.get(id)||[]){if(!matches.has(n.id))continue;const btn=document.createElement("button");btn.className="item"+(selected===n.id?" active":"");btn.style.paddingLeft=(depth*13+8)+"px";btn.textContent=(kinds[n.kind]||"•")+" "+n.name;btn.onclick=()=>{selected=n.id;inspect(n);render()};parent.append(btn);add(parent,n.id,depth+1);}}
+ add(holder,"__root__",0);
+}
+function inspect(n){
+ const container=$("inspector");container.replaceChildren();const dl=document.createElement("dl");
+ for(const [key,value] of Object.entries(n)){const dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=key;dd.textContent=String(value??"—");dl.append(dt,dd);}
+ container.append(dl);
+ const links=atlas.edges.filter(e=>e.from===n.id||e.to===n.id);
+ const info=document.createElement("p");info.className="details";info.textContent=links.length+" collegamenti diretti (import non necessariamente risolti).";container.append(info);
+ links.slice(0,30).forEach(e=>{const p=document.createElement("p");p.className="details";p.textContent=e.from+" → "+e.to+" ["+e.kind+", "+(e.resolution||"—")+"]";container.append(p);});
+}
+$("file").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{load(JSON.parse(await f.text()));}catch(err){alert("Impossibile aprire il file: "+err.message);}});
+$("search").addEventListener("input",render);
+</script>
+</body></html>
