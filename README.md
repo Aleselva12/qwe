@@ -208,3 +208,42 @@ Selecting a conceptual point opens a textual card and lists recent Git commits t
 **Deferred for Serveria integration:** AI-assisted categorization and automated interpretation of source/documentation; keep evidence, confidence, proposed change and user approval separate.
 
 **Validation status:** Changes were committed and source files retrieved for inspection. A local clone/test run could not complete because the execution container could not resolve github.com. Do not label the current update as end-to-end verified until CI and browser checks are successful.
+
+
+## Trial plan — three confirmed public repositories
+
+1. **Small / Python:** https://github.com/pallets/click — scan `examples/` first, not necessarily the entire framework. This validates simple modules, classes and imports.
+2. **Medium / Python + React TS + infrastructure:** https://github.com/fastapi/full-stack-fastapi-template — validates split frontend/backend, manifests and tests.
+3. **Large / agent-oriented multi-service:** https://github.com/langgenius/dify — stresses graph scale, Docker services, mixed runtime and historical indexing.
+
+Commands, after cloning these repositories separately:
+
+```bash
+python -m codeatlas.app /path/to/click/examples --save-report /tmp/codeatlas-click.json
+python -m codeatlas.app /path/to/full-stack-fastapi-template --save-report /tmp/codeatlas-fullstack.json
+python -m codeatlas.app /path/to/dify --save-report /tmp/codeatlas-dify.json
+```
+
+Run each separately (same default port); stop the previous one first. No target application needs to be installed or run just to scan.
+
+### Compare two scans of the same target
+
+```bash
+python -m codeatlas.app /path/to/target --save-report /tmp/target-before.json
+# Later, after a code change (on the target), scan again:
+python -m codeatlas.app /path/to/target --previous /tmp/target-before.json --save-report /tmp/target-after.json
+```
+
+Two snapshots must come from **the same project** for a meaningful difference. CodeAtlas does not change Git branches or commits for you.
+
+### Import test results from an external runner
+
+```bash
+python -m codeatlas.app /path/to/target --junit /tmp/test-results.xml
+```
+
+JUnit XML is parsed and summarized but not verified as genuine CI output. **Imported test results are not automatically mapped to conceptual nodes**, therefore a green concept node still requires explicit evidence linked by a human. Automatic proof mapping remains a future capability.
+
+### Release gate
+
+A feature-complete candidate is not the same as a verified release. Before attaching a stable v1.0 tag: all unit tests pass, the browser graph/selection/mode switch work, snapshots compare meaningfully on repeated scans, and scan duration and result size are measured on the three trial repositories. The target is practical confidence, not an arbitrary version number.
