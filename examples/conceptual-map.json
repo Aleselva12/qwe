@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "project": "Esempio di sistema agentico (illustrativo, non Serveria verificato)",
+  "groups": [
+    {
+      "id": "roots-hardware",
+      "name": "Hardware e capacità di calcolo",
+      "lens": "roots",
+      "parent": null,
+      "status": "planned",
+      "description": "CPU, GPU, RAM, storage e limiti di inferenza",
+      "code_refs": []
+    },
+    {
+      "id": "roots-network",
+      "name": "Rete e servizi esterni",
+      "lens": "roots",
+      "parent": null,
+      "status": "unknown",
+      "description": "Connettività e disponibilità di servizi",
+      "code_refs": []
+    },
+    {
+      "id": "trunk-core",
+      "name": "Architettura portante",
+      "lens": "trunk",
+      "parent": null,
+      "status": "in_progress",
+      "description": "Funzioni trasversali del sistema",
+      "code_refs": []
+    },
+    {
+      "id": "trunk-agent",
+      "name": "Orchestrazione agentica",
+      "lens": "trunk",
+      "parent": "trunk-core",
+      "status": "planned",
+      "description": "Gestione e collaborazione degli agenti",
+      "code_refs": []
+    },
+    {
+      "id": "branch-chat",
+      "name": "Chat",
+      "lens": "branches",
+      "parent": null,
+      "status": "planned",
+      "description": "Interfaccia conversazionale",
+      "code_refs": []
+    },
+    {
+      "id": "branch-calendar",
+      "name": "Calendario",
+      "lens": "branches",
+      "parent": null,
+      "status": "idea",
+      "description": "Eventi e integrazioni calendario",
+      "code_refs": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "branch-chat",
+      "to": "trunk-agent",
+      "kind": "depends_on"
+    },
+    {
+      "from": "trunk-agent",
+      "to": "roots-hardware",
+      "kind": "depends_on"
+    },
+    {
+      "from": "branch-calendar",
+      "to": "roots-network",
+      "kind": "depends_on"
+    }
+  ]
+}
