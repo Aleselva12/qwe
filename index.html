@@ -20,7 +20,7 @@ code{background:#f2f5fa;border-radius:5px;padding:3px}.muted{color:#687389}.deta
 </head>
 <body>
 <header><h1>◈ CodeAtlas</h1><span class="pill">v0.1 · standalone</span><small>Evidence first · read only</small></header>
-<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div></section></main>
+<main><aside><strong>Repository map</strong><p class="muted">Carica il JSON generato dallo scanner. I file restano nel browser.</p><input id="file" type="file" accept=".json,application/json"><input id="search" type="search" placeholder="Cerca componenti..." aria-label="Cerca"><div id="tree" role="tree"></div></aside><section><div class="card"><h2 id="project">Nessun progetto caricato</h2><p id="summary" class="muted">Seleziona un export JSON per iniziare.</p></div><div class="card"><h2>Dettaglio</h2><div id="inspector" class="muted">Seleziona un nodo dell'albero.</div></div><div class="card"><h2>Provenienza e limiti</h2><div id="limits" class="muted">Le informazioni estratte non sono verifiche di funzionamento.</div></div><div class="card"><h2>🌱 Albero concettuale</h2><p class="muted">Radici, tronco e rami sono scelte progettuali manuali. Non alterano il codice analizzato.</p><input type="file" id="overlayFile" accept=".json,application/json"><button id="exampleLoad" style="background:#edf2ff">Carica esempio</button><button id="addGroup" style="background:#edf2ff">+ Nuovo nodo</button><button id="exportOverlay" style="background:#edf2ff">Esporta mappa</button><div id="conceptTree"></div><div id="conceptInspector"></div></div></section></main>
 <script>
 "use strict";
 let atlas=null, selected=null;
@@ -51,5 +51,49 @@ function inspect(n){
 }
 $("file").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{load(JSON.parse(await f.text()));}catch(err){alert("Impossibile aprire il file: "+err.message);}});
 $("search").addEventListener("input",render);
+
+let conceptual={schema_version:1,project:"",groups:[],relations:[]};
+const lenses={roots:"🌱 Radici",trunk:"🌳 Tronco",branches:"🌿 Rami",unassigned:"▫ Da classificare"};
+const statuses=["unknown","idea","planned","in_progress","implemented","verified","blocked"];
+function make(tag,text){let el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;}
+function checkOverlay(a){
+ if(!a||a.schema_version!==1||!Array.isArray(a.groups)||!Array.isArray(a.relations))throw Error("Schema non compatibile");
+ const ids=new Set();
+ for(const n of a.groups){if(!n||typeof n.id!=="string"||!n.id||ids.has(n.id)||typeof n.name!=="string"||!Object.hasOwn(lenses,n.lens||"unassigned")||!statuses.includes(n.status||"unknown"))throw Error("Nodo non valido");ids.add(n.id);}
+ for(const n of a.groups){if(n.parent!=null&&!ids.has(n.parent))throw Error("Genitore inesistente");let seen=new Set(),p=n;while(p){if(seen.has(p.id))throw Error("Gerarchia circolare");seen.add(p.id);p=a.groups.find(g=>g.id===p.parent);}}
+ for(const r of a.relations){if(!ids.has(r.from)||!ids.has(r.to)||!["depends_on","supports","blocks","implements","related_to"].includes(r.kind))throw Error("Relazione non valida");}
+}
+function renderConcept(){
+ let area=$("conceptTree");area.replaceChildren();
+ for(const [lens,label] of Object.entries(lenses)){
+ const block=make("div");block.style.marginTop="12px";let strong=make("strong",label);block.append(strong);
+ function descend(parent,depth,seen){for(const n of conceptual.groups.filter(g=>(g.parent??null)===parent && (g.lens||"unassigned")===lens)){if(seen.has(n.id))continue;let btn=make("button",n.name+" · "+(n.status||"unknown"));btn.style.display="block";btn.style.marginLeft=(depth*12)+"px";btn.onclick=()=>editConcept(n.id);block.append(btn);descend(n.id,depth+1,new Set([...seen,n.id]));}}
+ descend(null,0,new Set());
+ for(const n of conceptual.groups.filter(g=>(g.lens||"unassigned")===lens && g.parent!=null && conceptual.groups.find(p=>p.id===g.parent)?.lens!==lens)){let btn=make("button",n.name+" · "+(n.status||"unknown"));btn.style.display="block";btn.onclick=()=>editConcept(n.id);block.append(btn);}
+ area.append(block);
+ }
+}
+function editConcept(id){
+ const n=conceptual.groups.find(g=>g.id===id);if(!n)return;
+ const host=$("conceptInspector");host.replaceChildren();host.style.borderTop="1px solid #ddd";host.style.marginTop="12px";
+ const title=make("h3","Modifica nodo");host.append(title);
+ function field(label,value,change,multi=false){host.append(make("label",label));let e=make(multi?"textarea":"input");e.value=value||"";e.style.display="block";e.style.width="100%";e.style.padding="8px";e.style.margin="5px 0 10px";e.onchange=()=>{change(e.value);renderConcept();};host.append(e);}
+ function choice(label,options,value,change){host.append(make("label",label));let e=make("select");e.style.display="block";e.style.padding="8px";e.style.margin="5px 0 10px";for(let [v,t] of options){let o=make("option",t);o.value=v;e.append(o);}e.value=value;e.onchange=()=>{change(e.value);renderConcept();};host.append(e);}
+ field("Nome",n.name,v=>n.name=v);
+ choice("Parte dell'albero",Object.entries(lenses),n.lens||"unassigned",v=>n.lens=v);
+ choice("Stato",statuses.map(x=>[x,x]),n.status||"unknown",v=>n.status=v);
+ choice("Genitore",[["","Nessuno"],...conceptual.groups.filter(g=>g.id!==id && g.lens===n.lens).map(g=>[g.id,g.name])],n.parent||"",v=>{const old=n.parent;n.parent=v||null;try{checkOverlay(conceptual)}catch(e){n.parent=old;alert(e.message)}});
+ field("Descrizione",n.description||"",v=>n.description=v,true);
+ field("Riferimenti al codice (ID separati da virgola)",(n.code_refs||[]).join(", "),v=>n.code_refs=v.split(",").map(s=>s.trim()).filter(Boolean));
+ const refs=make("p","Collegamenti: "+conceptual.relations.filter(r=>r.from===id||r.to===id).map(r=>r.from+" → "+r.to+" ("+r.kind+")").join("; "));refs.className="muted";host.append(refs);
+ const createRelation=make("button","+ Dipendenza");createRelation.onclick=()=>{const target=prompt("ID del nodo di cui dipende");if(!target)return;if(!conceptual.groups.some(g=>g.id===target)){alert("ID sconosciuto");return;}conceptual.relations.push({from:id,to:target,kind:"depends_on"});editConcept(id);};host.append(createRelation);
+ const del=make("button","Elimina nodo");del.onclick=()=>{if(conceptual.groups.some(g=>g.parent===id)){alert("Sposta o elimina prima i figli");return;}conceptual.groups=conceptual.groups.filter(g=>g.id!==id);conceptual.relations=conceptual.relations.filter(r=>r.from!==id&&r.to!==id);host.replaceChildren();renderConcept();};host.append(del);
+}
+$("addGroup").onclick=()=>{let id="concept-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,6);conceptual.groups.push({id,name:"Nuovo componente",lens:"unassigned",parent:null,status:"unknown",description:"",code_refs:[]});renderConcept();editConcept(id);};
+$("exportOverlay").onclick=()=>{try{checkOverlay(conceptual);const b=new Blob([JSON.stringify(conceptual,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="codeatlas-overlay.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300);}catch(e){alert(e.message)}};
+$("overlayFile").onchange=async e=>{try{let obj=JSON.parse(await e.target.files[0].text());checkOverlay(obj);conceptual=obj;renderConcept();}catch(err){alert(err.message)}};
+$("exampleLoad").onclick=async()=>{try{const r=await fetch("./examples/conceptual-map.json");if(!r.ok)throw Error("File esempio non disponibile");let obj=await r.json();checkOverlay(obj);conceptual=obj;renderConcept();}catch(e){alert(e.message)}};
+renderConcept();
+
 </script>
 </body></html>
