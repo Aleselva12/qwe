@@ -79,3 +79,44 @@ Entries carry a `source` value: `manual`, `code`, `test`, `document`, or `ai_sug
 - **v1.0 (future):** installable standalone application, reproducible tests, persistence, multiple languages and adapter API for optional Serveria integration.
 
 Run unit tests locally with `python -m unittest discover -s tests -v`.
+
+## v0.5 release candidate — integration trial (2026-11)
+
+The program now includes an independent multi-language static engine. **Not yet a certified v1.0**: browser behavior and GitHub Actions must pass before tagging.
+
+### Scope
+
+- Python: top-level functions, classes and imports using the Python AST.
+- JavaScript / TypeScript (including JSX/TSX): source file inventory and simple ESM import relations only. No full semantic/type-aware parser, no call graph.
+- Infrastructure: Dockerfile, Docker Compose manifests, pyproject, package.json, requirements and Makefile as inventory items. This **does not** analyze real hardware or containers; roots are editable conceptual nodes.
+- Excludes typical generated/vendor folders and files over 2 MB.
+- No LLM and no project code execution.
+- The program does not modify or automatically commit any target repository.
+
+### Generate and view a report
+
+From a cloned working copy:
+
+```bash
+python -m codeatlas.engine demo --overlay examples/conceptual-map.json --changed file:sample.py --output /tmp/codeatlas-report.json
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8000/`, upload the resulting report in **Confronto architettura / codice**. The scanner's `demo` directory is only an illustrative test target. The included conceptual groups intentionally lack code references until users assign them.
+
+For a real project:
+
+```bash
+python -m codeatlas.engine /path/to/repo --overlay /path/to/overlay.json --changed file:app/main.py --output /tmp/atlas-report.json
+```
+
+The overlay references exact scanner node IDs such as `file:app/main.py`. A missing ID is not proof that the intended feature is missing. Use `python -m unittest discover -s tests -v` for tests.
+
+### Step 4 and 5 mechanics
+
+- **Step 4:** compares manually linked conceptual groups with code node identifiers, reporting `mapped`, `partially_mapped`, or `unmapped`; unlinked groups are not automatically called incomplete.
+- **Step 5:** reverse graph traversal over resolved static imports, conceptual `depends_on` links and code-to-concept links. Reports `potentially_affected` and unknown IDs. Dynamic imports, runtime plugins, container network dependencies, and actual test coverage are not resolved yet.
+
+### Before v1.0
+
+Confirm CI status, run the end-to-end report import in a browser, fix any findings, add automatic persistence instead of relying on manual export, and verify a multi-project project size/latency benchmark. Python/JS/TS support is **deliberately uneven**. Never treat `mapped` as verified correctness or `verified` manual status as a passing test.
