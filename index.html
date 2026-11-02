@@ -145,5 +145,12 @@ $("reportFile").onchange=async e=>{
   const impacted=$("impact");impacted.replaceChildren();if(report.impact){impacted.append(make("p","Modificati: "+report.impact.changed.join(", ")));impacted.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));if(report.impact.unknown.length)impacted.append(make("p","Non riconosciuti: "+report.impact.unknown.join(", ")));}else impacted.textContent="Specifica --changed file:... per calcolare il potenziale impatto.";
  }catch(error){alert(error.message);}
 };
+fetch("./report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(report=>{
+ if(!report)return;
+ if(report.atlas)load(report.atlas);
+ if(report.overlay){checkOverlay(report.overlay);conceptual=report.overlay;renderConcept();}
+ if(report.comparison)renderComparison(report.comparison);
+ const v=$("impact");if(report.impact){v.replaceChildren();v.append(make("p","Modificati: "+report.impact.changed.join(", ")));v.append(make("p","Potenzialmente interessati: "+report.impact.potentially_affected.join(", ")));}else v.textContent="Nessuna simulazione di impatto richiesta.";
+}).catch(err=>console.warn("Report locale non disponibile",err));
 </script>
 </body></html>
