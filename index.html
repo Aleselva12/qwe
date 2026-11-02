@@ -155,7 +155,9 @@ function assessedStatus(n){
 }
 const STATUS_COLORS={verified:"#21996e",implemented:"#e2ac39",in_progress:"#e2ac39",blocked:"#db5560",unknown:"#9da5b3",planned:"#9da5b3",idea:"#9da5b3"};
 let graphMode=true;
+let researchData=null;
 function showResearch(i){
+ researchData=i;
  const host=$("researchPanel");host.replaceChildren();if(!i)return;
  const buckets=[["Commit recenti",(i.history||[]).map(x=>x.sha.slice(0,8)+" · "+x.date.slice(0,10)+" · "+x.message+" · "+x.files.length+" file")],["Documentazione (solo indice, non interpretazione)",(i.documentation||[]).map(x=>x.path+" · "+x.headings.slice(0,4).join(" / "))],["Servizi infrastrutturali rilevati",(i.infrastructure||[]).map(x=>x.path+" · "+x.services.join(", "))],["Test individuati, NON eseguiti",(i.tests?.test_files||[])]];
  for(const [heading,items] of buckets){const d=make("details");const summary=make("summary",heading+" ("+items.length+")");d.append(summary);items.slice(0,50).forEach(line=>{const p=make("p",line);p.className="details";d.append(p);});host.append(d);}
@@ -173,7 +175,19 @@ function drawGraph(){
  for(const n of nodes){if(n.parent&&xy.has(n.parent))line(xy.get(n.id),xy.get(n.parent),false);}
  for(const rel of conceptual.relations){if(xy.has(rel.from)&&xy.has(rel.to))line(xy.get(rel.from),xy.get(rel.to),true);}
  nodes.forEach(n=>{const p=xy.get(n.id);const circle=document.createElementNS(ns,"circle");circle.setAttribute("cx",p.x);circle.setAttribute("cy",p.y);circle.setAttribute("r",13);circle.setAttribute("fill",STATUS_COLORS[assessedStatus(n)]||STATUS_COLORS.unknown);circle.setAttribute("stroke","#fff");circle.setAttribute("stroke-width","3");circle.style.cursor="pointer";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label",n.name);
- const open=()=>{editConcept(n.id);$("graphInspector").textContent=n.name+" · "+(n.description||"Nessuna descrizione")+" · Stato dichiarato: "+n.status+" · Stato basato su evidenze: "+assessedStatus(n)+" · Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length;};
+ const open=()=>{
+  editConcept(n.id);
+  const pane=$("graphInspector");pane.replaceChildren();
+  pane.append(make("h3",n.name));
+  pane.append(make("p",(n.description||"Nessuna descrizione")+" · Stato dichiarato: "+n.status+" · Stato basato su evidenze: "+assessedStatus(n)));
+  const refs=n.code_refs||[], commits=(researchData?.history||[]).filter(c=>refs.some(ref=>c.files.includes(ref.replace(/^file:/,"").split(":")[0])));
+  const details=make("details");details.open=true;details.append(make("summary","Terza dimensione · cronologia ("+commits.length+" commit recenti)"));
+  if(!refs.length)details.append(make("p","Associa prima i riferimenti al codice per collegare la storia."));
+  else if(!commits.length)details.append(make("p","Nessuna modifica trovata nella finestra Git analizzata."));
+  commits.forEach(c=>details.append(make("p",c.date.slice(0,10)+" · "+c.sha.slice(0,8)+" · "+c.message)));
+  pane.append(details);
+  pane.append(make("p","Obiettivi: "+(n.goals||[]).length+" · Problemi: "+(n.issues||[]).length));
+};
  circle.addEventListener("click",open);circle.addEventListener("keydown",e=>{if(e.key==="Enter")open();});svg.append(circle);
  const label=document.createElementNS(ns,"text");label.setAttribute("x",p.x+16);label.setAttribute("y",p.y+5);label.setAttribute("font-size","11");label.textContent=n.name.slice(0,24);svg.append(label);
  });
