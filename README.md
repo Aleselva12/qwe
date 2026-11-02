@@ -58,3 +58,24 @@ Design inspiration (concepts, not copied source): Backstage's separation of comp
 ### Known limitations
 
 Conceptual node editor supports basic relationships but not a relation deletion UI. Parent selection is limited to nodes in the same lens. No automatic validation that `code_refs` actually exist in the uploaded code atlas. Group search and persistence are not yet implemented.
+
+## v0.3 — Step 3: project cards
+
+Each conceptual node can now hold four kinds of structured entries:
+- `goals`: planned outcomes, with a separate status field (API/model level).
+- `decisions`: human design decisions.
+- `issues`: known problems and blockers.
+- `evidence`: notes linking a claim to a source/ref.
+
+Entries carry a `source` value: `manual`, `code`, `test`, `document`, or `ai_suggestion`. A manually entered `source` is an *assertion*, not a validated provenance check. v0.3 browser editing supports adding, editing the description text, and deleting entries; source/reference/status metadata are preserved on import/export, but not yet directly editable in the UI. No AI is required.
+
+### Roadmap and honest completion criteria
+
+- **Step 1 (v0.1):** simple Python scanner and JSON export — prototype.
+- **Step 2 (v0.2):** manually editable roots/trunk/branches and relationships — prototype.
+- **Step 3 (v0.3):** structured cards for goals, decisions, issues, status and evidence — baseline implemented; code cross-reference validation, metadata editing, and durable saving remain.
+- **Step 4 (v0.4 planned):** compare intended architecture against extracted repository reality; distinguish verified gaps and unverified assumptions.
+- **Step 5 (v0.5 planned):** dependency-based change impact and test coverage evidence.
+- **v1.0 (future):** installable standalone application, reproducible tests, persistence, multiple languages and adapter API for optional Serveria integration.
+
+Run unit tests locally with `python -m unittest discover -s tests -v`.
