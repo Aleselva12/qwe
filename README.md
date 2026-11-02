@@ -179,3 +179,22 @@ GitHub Actions `.github/workflows/checks.yml` runs those checks on push and PR. 
 ### Versioning and security
 
 The intended v1.0 scope is a local, non-destructive Python/JS/TS code inventory with an editable conceptual overlay. This is a self-contained candidate implementation; public repository visibility does not grant permission to access private code or servers. Scanning untrusted repositories can consume resources; use an isolated machine when necessary.
+
+
+## Experimental v1.1 extensions: requested research views
+
+The standalone app now adds:
+- **Interactive point graph** showing up to 130 manually classified conceptual nodes with root/trunk/branch columns and links. Click a point for its textual detail and editing panel; switch to text-only mode. Long names are abbreviated in the graphic.
+- **Git timeline (read-only):** recent commits, date, message and modified files (up to 30). This is a chronological research view, not historical snapshots of the entire conceptual map. Full version-by-version graph diff remains future work.
+- **Document index separate from architecture:** scans Markdown file names and headings only. The program does **not** interpret their meaning or rewrite conceptual nodes from docs.
+- **Infrastructure heuristic:** detects Compose services by basic indentation and Dockerfiles. This is not a full YAML parser, service dependency resolver or live hardware scanner.
+- **Test inventory:** lists test-like files without running them. Discovery does not imply success.
+- **Evidence-aware graph palette:** green requires a test evidence entry with `source: "test", result: "pass"` and no open issues; red requires `result: "fail"`; yellow is used for issues or incomplete implementation, grey for unknown. This evidence is currently user supplied and **not cryptographically checked or linked to CI**. Never confuse a green badge with a verified CI result.
+
+Test locally with `python -m unittest discover -s tests -v`.
+
+**Deferred to optional Serveria integration:** AI-assisted architecture classification, doc interpretation, suggestions and human review. No AI is included or required in this release.
+
+### Outstanding limitations
+
+Detailed JS/TS semantic analysis and reliable test result ingestion from CI are not complete; the current engine remains import-oriented. The point graph is a compact SVG proof of concept, not a large-scale force-directed/zoomable visualization. Comparative version snapshots are not automatically preserved. Large repositories, private projects and browser workflows still need hands-on validation.
