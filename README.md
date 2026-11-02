@@ -198,3 +198,13 @@ Test locally with `python -m unittest discover -s tests -v`.
 ### Outstanding limitations
 
 Detailed JS/TS semantic analysis and reliable test result ingestion from CI are not complete; the current engine remains import-oriented. The point graph is a compact SVG proof of concept, not a large-scale force-directed/zoomable visualization. Comparative version snapshots are not automatically preserved. Large repositories, private projects and browser workflows still need hands-on validation.
+
+### Latest graph and historical drill-down
+
+Selecting a conceptual point opens a textual card and lists recent Git commits touching its linked `code_refs` paths, when present. This is an initial historical third dimension, **not** a structural graph diff across arbitrary revisions. JS/TS now indexes some top-level declarations via regular-expression heuristics, each explicitly marked `source: heuristic`; full semantic graphing requires a real parser in a future release.
+
+**Color rules:** green only with explicitly entered passing test evidence, red with explicitly entered failed test evidence, yellow for open issues/in-progress/implemented without passing evidence, gray for unknown. The current app cannot independently prove that a manually entered test outcome is genuine. Test discovery alone yields unknown.
+
+**Deferred for Serveria integration:** AI-assisted categorization and automated interpretation of source/documentation; keep evidence, confidence, proposed change and user approval separate.
+
+**Validation status:** Changes were committed and source files retrieved for inspection. A local clone/test run could not complete because the execution container could not resolve github.com. Do not label the current update as end-to-end verified until CI and browser checks are successful.
