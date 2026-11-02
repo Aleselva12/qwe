@@ -13,8 +13,9 @@ from functools import partial
 from .engine import inventory, compare, impact
 from .overlay import load
 from .intelligence import enrich
+from .snapshots import diff_snapshots, read_snapshot, read_junit
 
-def build_report(root: Path, overlay_path=None, changed=None):
+def build_report(root: Path, overlay_path=None, changed=None, previous=None, junit=None):
     atlas = inventory(root)
     report = {"atlas": atlas, "intelligence": enrich(root)}
     if overlay_path:
@@ -23,6 +24,10 @@ def build_report(root: Path, overlay_path=None, changed=None):
         report["comparison"] = compare(atlas, overlay)
         if changed:
             report["impact"] = impact(atlas, overlay, changed)
+    if previous:
+        report["snapshot_diff"] = diff_snapshots(read_snapshot(Path(previous)), report)
+    if junit:
+        report["test_results"] = read_junit(Path(junit))
     return report
 
 def main():
@@ -30,11 +35,16 @@ def main():
     parser.add_argument("repository",type=Path)
     parser.add_argument("--overlay",type=Path,help="Optional conceptual map JSON")
     parser.add_argument("--changed",action="append",default=[],help="Change impact node ID (repeatable)")
+    parser.add_argument("--previous",type=Path,help="Older exported report JSON for structural diff")
+    parser.add_argument("--junit",type=Path,help="JUnit XML evidence file, not executed by CodeAtlas")
+    parser.add_argument("--save-report",type=Path,help="Export current report JSON as a version snapshot")
     parser.add_argument("--port",type=int,default=8765)
     parser.add_argument("--no-browser",action="store_true")
     args=parser.parse_args()
     if not (1<=args.port<=65535):parser.error("Port must be 1..65535")
-    report=build_report(args.repository,args.overlay,args.changed)
+    report=build_report(args.repository,args.overlay,args.changed,args.previous,args.junit)
+    if args.save_report:
+        args.save_report.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     index=Path(__file__).resolve().parent.parent/"index.html"
     if not index.is_file():parser.error("index.html not found next to codeatlas package")
     with tempfile.TemporaryDirectory(prefix="codeatlas-") as temporary:
