@@ -57,136 +57,213 @@
     },
     {
       "id": "R1",
-      "title": "R1 · Macchine",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "title": "R1 · Macchine e infrastruttura fisica",
+      "note": "Dispositivi e risorse, non selezione dei task",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "R2",
-      "title": "R2 · Dati",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "title": "R2 · Dati e archiviazione",
+      "note": "Collocazione fisica e persistenza, non strumenti documentali",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "R3",
-      "title": "R3 · IA, modelli e dipendenze",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "title": "R3 · Motori IA e modelli",
+      "note": "Software e modelli eseguibili, non routing fra agenti",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "R4",
-      "title": "R4 · Ambiente operativo presente",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "title": "R4 · Ambiente operativo",
+      "note": "Sistema operativo, container, dipendenze e servizi host",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "R5",
       "title": "R5 · Affidabilità della base",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "note": "Backup, restore, aggiornamenti e rilascio sicuro",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "R6",
       "title": "R6 · Sicurezza",
-      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "note": "Rete privata, identità, credenziali e Permission Engine",
       "priority": "unknown",
-      "parent": "radici"
+      "parent": "radici",
+      "earlierNote": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "classification": "area"
     },
     {
       "id": "T1",
       "title": "T1 · Supervisor e orchestrazione",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "note": "Supervisor LangGraph e router shadow; collaudo causale Debian aperto",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T1",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T2",
-      "title": "T2 · Capability",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T2 · Capability Registry e strumenti",
+      "note": "Unico registro delle capacità e contratti di tool",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T2",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T3",
-      "title": "T3 · Coordinamento",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T3 · System Coordinator",
+      "note": "Coordinamento proprietà e stato dei componenti oggi read-only",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T3",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T4",
-      "title": "T4 · Runtime",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T4 · Runtime e State Machine",
+      "note": "Esecuzioni stati transizioni e controllo degli effetti",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T4",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T5",
-      "title": "T5 · Bus",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T5 · Event Bus e Component Bus",
+      "note": "Messaggi eventi e collegamenti tipizzati nel processo",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T5",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T6",
-      "title": "T6 · Contesto",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T6 · Context Manager",
+      "note": "Contratti ContextRequest ContextPacket; retrieval progressivo non completo",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T6",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T7",
       "title": "T7 · Memoria",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "note": "Quattro livelli e revisioni ancora da collaudare nell’uso",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T7",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T8",
-      "title": "T8 · Agenti",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T8 · Registro e configurazione degli agenti",
+      "note": "Ruoli strumenti modelli e configurazione agenti",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T8",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T9",
-      "title": "T9 · Pianificazione",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T9 · Planner e pianificazione task",
+      "note": "Plan multi step code persistenti scheduler failover fase 2",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "planned",
+      "classification": "star",
+      "code": "T9",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T10",
-      "title": "T10 · Diagnostica",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T10 · Tracciabilità ed errori",
+      "note": "Attività trace decisioni e diagnosi causale da collaudare",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T10",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T11",
-      "title": "T11 · Test",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T11 · Registro unico test e salute",
+      "note": "Catalogo e cicli periodici nel codice; non tutto E2E collaudato",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T11",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T12",
-      "title": "T12 · Interfaccia",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T12 · Interfaccia comune Cora",
+      "note": "Home navigazione Impostazioni Architettura Attività e PWA",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T12",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "T13",
-      "title": "T13 · Automazioni",
-      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "title": "T13 · Motore comune automazioni",
+      "note": "Editor e validazione; esecutore generico da realizzare",
       "priority": "unknown",
-      "parent": "tronco"
+      "parent": "tronco",
+      "earlierNote": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "status": "partial",
+      "classification": "star",
+      "code": "T13",
+      "sourceType": "architecture-v2"
     },
     {
       "id": "A",
@@ -348,7 +425,2483 @@
       "note": "Idea futura discussa; nessun impegno o stato verificato.",
       "priority": "unknown",
       "parent": "C1"
+    },
+    {
+      "id": "R1.1",
+      "title": "R1.1 · Server Debian",
+      "priority": "unknown",
+      "note": "Nodo centrale operativo per Cora e servizi; GPU locale futura",
+      "status": "partial",
+      "classification": "star",
+      "code": "R1.1",
+      "sourceType": "architecture-v2",
+      "parent": "R1"
+    },
+    {
+      "id": "R1.1.p1",
+      "title": "Macchina centrale",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1"
+    },
+    {
+      "id": "R1.1.p1.m1",
+      "title": "Debian",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p1"
+    },
+    {
+      "id": "R1.1.p1.m2",
+      "title": "Applicazioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p1"
+    },
+    {
+      "id": "R1.1.p1.m3",
+      "title": "Servizi 24/7",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p1"
+    },
+    {
+      "id": "R1.1.p2",
+      "title": "Risorse hardware",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1"
+    },
+    {
+      "id": "R1.1.p2.m1",
+      "title": "CPU e RAM",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p2"
+    },
+    {
+      "id": "R1.1.p2.m2",
+      "title": "Espansione GPU futura",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p2"
+    },
+    {
+      "id": "R1.1.p3",
+      "title": "Continuità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1"
+    },
+    {
+      "id": "R1.1.p3.m1",
+      "title": "Indipendenza da worker esterni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p3"
+    },
+    {
+      "id": "R1.1.p3.m2",
+      "title": "Accesso SSH controllato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.1.p3"
+    },
+    {
+      "id": "R1.2",
+      "title": "R1.2 · Desktop",
+      "priority": "unknown",
+      "note": "RX 6800 con inferenza GPU riportata dall’utente; modello effettivo non sempre attestato",
+      "status": "partial",
+      "classification": "star",
+      "code": "R1.2",
+      "sourceType": "architecture-v2",
+      "parent": "R1"
+    },
+    {
+      "id": "R1.2.p1",
+      "title": "Capacità GPU",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2"
+    },
+    {
+      "id": "R1.2.p1.m1",
+      "title": "RX 6800 16 GB",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p1"
+    },
+    {
+      "id": "R1.2.p1.m2",
+      "title": "Profili VRAM",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p1"
+    },
+    {
+      "id": "R1.2.p2",
+      "title": "Disponibilità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2"
+    },
+    {
+      "id": "R1.2.p2.m1",
+      "title": "Attivazione esplicita",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p2"
+    },
+    {
+      "id": "R1.2.p2.m2",
+      "title": "Verifica inferenza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p2"
+    },
+    {
+      "id": "R1.2.p3",
+      "title": "Prestazioni",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2"
+    },
+    {
+      "id": "R1.2.p3.m1",
+      "title": "Modello eseguito",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p3"
+    },
+    {
+      "id": "R1.2.p3.m2",
+      "title": "Tempi misurati",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.2.p3"
+    },
+    {
+      "id": "R1.3",
+      "title": "R1.3 · Laptop",
+      "priority": "unknown",
+      "note": "Worker GPU già provato; futuro dispositivo per agente locale",
+      "status": "partial",
+      "classification": "star",
+      "code": "R1.3",
+      "sourceType": "architecture-v2",
+      "parent": "R1"
+    },
+    {
+      "id": "R1.3.p1",
+      "title": "Capacità GPU",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3"
+    },
+    {
+      "id": "R1.3.p1.m1",
+      "title": "Inferenza provata dall’utente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p1"
+    },
+    {
+      "id": "R1.3.p1.m2",
+      "title": "Profili del worker",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p1"
+    },
+    {
+      "id": "R1.3.p2",
+      "title": "Disponibilità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3"
+    },
+    {
+      "id": "R1.3.p2.m1",
+      "title": "Stato online e offline",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p2"
+    },
+    {
+      "id": "R1.3.p2.m2",
+      "title": "Tailscale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p2"
+    },
+    {
+      "id": "R1.3.p3",
+      "title": "Espansione futura",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3"
+    },
+    {
+      "id": "R1.3.p3.m1",
+      "title": "Agenti operativi locali",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p3"
+    },
+    {
+      "id": "R1.3.p3.m2",
+      "title": "Tool autorizzati",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R1.3.p3"
+    },
+    {
+      "id": "R1.4",
+      "title": "R1.4 · NAS dedicato",
+      "priority": "unknown",
+      "note": "Nodo futuro per foto file cloud e backup; non tutti i database per forza sul NAS",
+      "status": "planned",
+      "classification": "star",
+      "code": "R1.4",
+      "sourceType": "architecture-v2",
+      "parent": "R1"
+    },
+    {
+      "id": "R1.4.p1",
+      "title": "Hardware NAS",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4"
+    },
+    {
+      "id": "R1.4.p1.m1",
+      "title": "Dischi e ridondanza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p1"
+    },
+    {
+      "id": "R1.4.p1.m2",
+      "title": "Acquisti e alimentazione",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p1"
+    },
+    {
+      "id": "R1.4.p2",
+      "title": "Archiviazione",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4"
+    },
+    {
+      "id": "R1.4.p2.m1",
+      "title": "Fotografie e file",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p2"
+    },
+    {
+      "id": "R1.4.p2.m2",
+      "title": "Backup Serveria",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p2"
+    },
+    {
+      "id": "R1.4.p3",
+      "title": "Servizi opzionali",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4"
+    },
+    {
+      "id": "R1.4.p3.m1",
+      "title": "Valutazione per servizio",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p3"
+    },
+    {
+      "id": "R1.4.p3.m2",
+      "title": "Non migrare automaticamente PostgreSQL",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "R1.4.p3"
+    },
+    {
+      "id": "R2.1",
+      "title": "R2.1 · Database e persistenza",
+      "priority": "unknown",
+      "note": "PostgreSQL pgvector e SQL aziendali; collocazione Debian NAS da decidere",
+      "status": "partial",
+      "classification": "star",
+      "code": "R2.1",
+      "sourceType": "architecture-v2",
+      "parent": "R2"
+    },
+    {
+      "id": "R2.1.p1",
+      "title": "PostgreSQL",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1"
+    },
+    {
+      "id": "R2.1.p1.m1",
+      "title": "Memoria e runtime",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p1"
+    },
+    {
+      "id": "R2.1.p1.m2",
+      "title": "Log e registri",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p1"
+    },
+    {
+      "id": "R2.1.p2",
+      "title": "Database applicativi",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1"
+    },
+    {
+      "id": "R2.1.p2.m1",
+      "title": "Database SQL clienti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p2"
+    },
+    {
+      "id": "R2.1.p2.m2",
+      "title": "Evita doppie anagrafiche",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p2"
+    },
+    {
+      "id": "R2.1.p3",
+      "title": "Schema e collocazione",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1"
+    },
+    {
+      "id": "R2.1.p3.m1",
+      "title": "Versioni e migrazioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p3"
+    },
+    {
+      "id": "R2.1.p3.m2",
+      "title": "Database Debian NAS per singolo servizio",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.1.p3"
+    },
+    {
+      "id": "R2.2",
+      "title": "R2.2 · Archiviazione dei file",
+      "priority": "unknown",
+      "note": "Filesystem Debian Libreria IA e futuro NAS",
+      "status": "partial",
+      "classification": "star",
+      "code": "R2.2",
+      "sourceType": "architecture-v2",
+      "parent": "R2"
+    },
+    {
+      "id": "R2.2.p1",
+      "title": "Storage Debian",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2"
+    },
+    {
+      "id": "R2.2.p1.m1",
+      "title": "Condivisioni e percorsi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p1"
+    },
+    {
+      "id": "R2.2.p1.m2",
+      "title": "Originali e copie",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p1"
+    },
+    {
+      "id": "R2.2.p2",
+      "title": "Integrità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2"
+    },
+    {
+      "id": "R2.2.p2.m1",
+      "title": "Disponibilità mount",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p2"
+    },
+    {
+      "id": "R2.2.p2.m2",
+      "title": "Conflitti e versioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p2"
+    },
+    {
+      "id": "R2.2.p3",
+      "title": "NAS futuro",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2"
+    },
+    {
+      "id": "R2.2.p3.m1",
+      "title": "Storage condiviso",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p3"
+    },
+    {
+      "id": "R2.2.p3.m2",
+      "title": "Migrazione controllata",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R2.2.p3"
+    },
+    {
+      "id": "R3.1",
+      "title": "R3.1 · Motori di inferenza",
+      "priority": "unknown",
+      "note": "Ollama motori audio ed embeddings locali o remoti",
+      "status": "partial",
+      "classification": "star",
+      "code": "R3.1",
+      "sourceType": "architecture-v2",
+      "parent": "R3"
+    },
+    {
+      "id": "R3.1.p1",
+      "title": "Ollama e LLM",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1"
+    },
+    {
+      "id": "R3.1.p1.m1",
+      "title": "API modelli",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p1"
+    },
+    {
+      "id": "R3.1.p1.m2",
+      "title": "Inferenza reale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p1"
+    },
+    {
+      "id": "R3.1.p2",
+      "title": "Trascrizione",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1"
+    },
+    {
+      "id": "R3.1.p2.m1",
+      "title": "Whisper e prerequisiti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p2"
+    },
+    {
+      "id": "R3.1.p2.m2",
+      "title": "Diarizzazione opzionale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p2"
+    },
+    {
+      "id": "R3.1.p3",
+      "title": "Embeddings",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1"
+    },
+    {
+      "id": "R3.1.p3.m1",
+      "title": "Indicizzazione vettoriale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p3"
+    },
+    {
+      "id": "R3.1.p3.m2",
+      "title": "Verifica del retrieval",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.1.p3"
+    },
+    {
+      "id": "R3.2",
+      "title": "R3.2 · Modelli IA",
+      "priority": "unknown",
+      "note": "Modelli installati requisiti hardware e valutazione nuovi modelli",
+      "status": "partial",
+      "classification": "star",
+      "code": "R3.2",
+      "sourceType": "architecture-v2",
+      "parent": "R3"
+    },
+    {
+      "id": "R3.2.p1",
+      "title": "Catalogo",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2"
+    },
+    {
+      "id": "R3.2.p1.m1",
+      "title": "Versione e identità",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p1"
+    },
+    {
+      "id": "R3.2.p1.m2",
+      "title": "Compatibilità RAM VRAM",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p1"
+    },
+    {
+      "id": "R3.2.p2",
+      "title": "Valutazione",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2"
+    },
+    {
+      "id": "R3.2.p2.m1",
+      "title": "Qualità e latenza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p2"
+    },
+    {
+      "id": "R3.2.p2.m2",
+      "title": "Benchmark ripetibili",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p2"
+    },
+    {
+      "id": "R3.2.p3",
+      "title": "Ricerca futura",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2"
+    },
+    {
+      "id": "R3.2.p3.m1",
+      "title": "Colibrì da valutare",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p3"
+    },
+    {
+      "id": "R3.2.p3.m2",
+      "title": "Licenze e disponibilità",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R3.2.p3"
+    },
+    {
+      "id": "R4.1",
+      "title": "R4.1 · Sistema operativo e servizi host",
+      "priority": "unknown",
+      "note": "Debian processi servizi amministrativi e systemd",
+      "status": "present",
+      "classification": "star",
+      "code": "R4.1",
+      "sourceType": "architecture-v2",
+      "parent": "R4"
+    },
+    {
+      "id": "R4.1.p1",
+      "title": "Debian",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1"
+    },
+    {
+      "id": "R4.1.p1.m1",
+      "title": "Utenti e permessi host",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p1"
+    },
+    {
+      "id": "R4.1.p1.m2",
+      "title": "Aggiornamenti OS",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p1"
+    },
+    {
+      "id": "R4.1.p2",
+      "title": "systemd",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1"
+    },
+    {
+      "id": "R4.1.p2.m1",
+      "title": "Updater host",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p2"
+    },
+    {
+      "id": "R4.1.p2.m2",
+      "title": "Avvio stop e log",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p2"
+    },
+    {
+      "id": "R4.1.p3",
+      "title": "Amministrazione",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1"
+    },
+    {
+      "id": "R4.1.p3.m1",
+      "title": "SSH",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p3"
+    },
+    {
+      "id": "R4.1.p3.m2",
+      "title": "Configurazione dei servizi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.1.p3"
+    },
+    {
+      "id": "R4.2",
+      "title": "R4.2 · Ambiente applicativo",
+      "priority": "unknown",
+      "note": "Docker Compose Python FastAPI React Vite",
+      "status": "present",
+      "classification": "star",
+      "code": "R4.2",
+      "sourceType": "architecture-v2",
+      "parent": "R4"
+    },
+    {
+      "id": "R4.2.p1",
+      "title": "Docker Compose",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2"
+    },
+    {
+      "id": "R4.2.p1.m1",
+      "title": "Immagini e container",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p1"
+    },
+    {
+      "id": "R4.2.p1.m2",
+      "title": "Deploy e variabili",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p1"
+    },
+    {
+      "id": "R4.2.p2",
+      "title": "Backend",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2"
+    },
+    {
+      "id": "R4.2.p2.m1",
+      "title": "Python e FastAPI",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p2"
+    },
+    {
+      "id": "R4.2.p2.m2",
+      "title": "Dipendenze e profili",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p2"
+    },
+    {
+      "id": "R4.2.p3",
+      "title": "Frontend",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2"
+    },
+    {
+      "id": "R4.2.p3.m1",
+      "title": "React Vite PWA",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p3"
+    },
+    {
+      "id": "R4.2.p3.m2",
+      "title": "Build e compatibilità",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "present",
+      "note": "",
+      "parent": "R4.2.p3"
+    },
+    {
+      "id": "R5.1",
+      "title": "R5.1 · Backup e ripristino",
+      "priority": "unknown",
+      "note": "Copie e procedure presenti o previste; restore completo da provare",
+      "status": "partial",
+      "classification": "star",
+      "code": "R5.1",
+      "sourceType": "architecture-v2",
+      "parent": "R5"
+    },
+    {
+      "id": "R5.1.p1",
+      "title": "Backup",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1"
+    },
+    {
+      "id": "R5.1.p1.m1",
+      "title": "Database",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p1"
+    },
+    {
+      "id": "R5.1.p1.m2",
+      "title": "File e configurazioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p1"
+    },
+    {
+      "id": "R5.1.p2",
+      "title": "Ripristino isolato",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1"
+    },
+    {
+      "id": "R5.1.p2.m1",
+      "title": "Database vuoto",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p2"
+    },
+    {
+      "id": "R5.1.p2.m2",
+      "title": "Verifica dati e hash",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p2"
+    },
+    {
+      "id": "R5.1.p3",
+      "title": "NAS futuro",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1"
+    },
+    {
+      "id": "R5.1.p3.m1",
+      "title": "Politica copie",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p3"
+    },
+    {
+      "id": "R5.1.p3.m2",
+      "title": "Frequenza e retention",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.1.p3"
+    },
+    {
+      "id": "R5.2",
+      "title": "R5.2 · Aggiornamenti e rilasci",
+      "priority": "unknown",
+      "note": "Updater Cora presente; aggiornamenti Immich Nextcloud lavoro W2",
+      "status": "partial",
+      "classification": "star",
+      "code": "R5.2",
+      "sourceType": "architecture-v2",
+      "parent": "R5"
+    },
+    {
+      "id": "R5.2.p1",
+      "title": "Updater Cora",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2"
+    },
+    {
+      "id": "R5.2.p1.m1",
+      "title": "Commit e deploy",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p1"
+    },
+    {
+      "id": "R5.2.p1.m2",
+      "title": "Rollback",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p1"
+    },
+    {
+      "id": "R5.2.p2",
+      "title": "CI e verifica",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2"
+    },
+    {
+      "id": "R5.2.p2.m1",
+      "title": "Test codice",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p2"
+    },
+    {
+      "id": "R5.2.p2.m2",
+      "title": "Collaudo versione Debian",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p2"
+    },
+    {
+      "id": "R5.2.p3",
+      "title": "App esterne",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2"
+    },
+    {
+      "id": "R5.2.p3.m1",
+      "title": "Immich e Nextcloud",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p3"
+    },
+    {
+      "id": "R5.2.p3.m2",
+      "title": "Backup conferma e health finale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R5.2.p3"
+    },
+    {
+      "id": "R6.1",
+      "title": "R6.1 · Rete privata identità credenziali",
+      "priority": "unknown",
+      "note": "Tailscale e accessi privati non equivalgono ai permessi dell’applicazione",
+      "status": "partial",
+      "classification": "star",
+      "code": "R6.1",
+      "sourceType": "architecture-v2",
+      "parent": "R6"
+    },
+    {
+      "id": "R6.1.p1",
+      "title": "Tailscale",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1"
+    },
+    {
+      "id": "R6.1.p1.m1",
+      "title": "Accesso remoto",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p1"
+    },
+    {
+      "id": "R6.1.p1.m2",
+      "title": "Connessione tra nodi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p1"
+    },
+    {
+      "id": "R6.1.p2",
+      "title": "Identità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1"
+    },
+    {
+      "id": "R6.1.p2.m1",
+      "title": "Account e dispositivi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p2"
+    },
+    {
+      "id": "R6.1.p2.m2",
+      "title": "Chiavi e segreti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p2"
+    },
+    {
+      "id": "R6.1.p3",
+      "title": "Futuro trust",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1"
+    },
+    {
+      "id": "R6.1.p3.m1",
+      "title": "Identità per agente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p3"
+    },
+    {
+      "id": "R6.1.p3.m2",
+      "title": "Revoca e rotazione",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.1.p3"
+    },
+    {
+      "id": "R6.2",
+      "title": "R6.2 · Permessi e autorizzazioni",
+      "priority": "unknown",
+      "note": "Permission Engine indipendente dal modello e approvazioni esplicite",
+      "status": "partial",
+      "classification": "star",
+      "code": "R6.2",
+      "sourceType": "architecture-v2",
+      "parent": "R6"
+    },
+    {
+      "id": "R6.2.p1",
+      "title": "Permission Engine",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2"
+    },
+    {
+      "id": "R6.2.p1.m1",
+      "title": "Automatico richiesta bloccato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p1"
+    },
+    {
+      "id": "R6.2.p1.m2",
+      "title": "Regole deterministiche",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p1"
+    },
+    {
+      "id": "R6.2.p2",
+      "title": "Ambito",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2"
+    },
+    {
+      "id": "R6.2.p2.m1",
+      "title": "Tool e agente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p2"
+    },
+    {
+      "id": "R6.2.p2.m2",
+      "title": "File database dispositivo",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p2"
+    },
+    {
+      "id": "R6.2.p3",
+      "title": "Audit e revoca",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2"
+    },
+    {
+      "id": "R6.2.p3.m1",
+      "title": "Operazioni con effetti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p3"
+    },
+    {
+      "id": "R6.2.p3.m2",
+      "title": "Revocare accessi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "R6.2.p3"
+    },
+    {
+      "id": "T1.p1",
+      "title": "Supervisor",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T1"
+    },
+    {
+      "id": "T1.p1.m1",
+      "title": "Ingresso richieste",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p1"
+    },
+    {
+      "id": "T1.p1.m2",
+      "title": "Delega a specialisti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p1"
+    },
+    {
+      "id": "T1.p2",
+      "title": "Router shadow",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T1"
+    },
+    {
+      "id": "T1.p2.m1",
+      "title": "Routing proposto non autorevole",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p2"
+    },
+    {
+      "id": "T1.p2.m2",
+      "title": "Escalation verificabile",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p2"
+    },
+    {
+      "id": "T1.p3",
+      "title": "Larva v0",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T1"
+    },
+    {
+      "id": "T1.p3.m1",
+      "title": "Osservatore deterministico",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p3"
+    },
+    {
+      "id": "T1.p3.m2",
+      "title": "Niente azioni autonome",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T1.p3"
+    },
+    {
+      "id": "T2.p1",
+      "title": "Capability Registry",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T2"
+    },
+    {
+      "id": "T2.p1.m1",
+      "title": "Tool realmente esposti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p1"
+    },
+    {
+      "id": "T2.p1.m2",
+      "title": "Identità e descrizioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p1"
+    },
+    {
+      "id": "T2.p2",
+      "title": "Contratti",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T2"
+    },
+    {
+      "id": "T2.p2.m1",
+      "title": "Parametri e errori",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p2"
+    },
+    {
+      "id": "T2.p2.m2",
+      "title": "Permessi richiesti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p2"
+    },
+    {
+      "id": "T2.p3",
+      "title": "Collegamenti",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T2"
+    },
+    {
+      "id": "T2.p3.m1",
+      "title": "Agente chiama tool corretto",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p3"
+    },
+    {
+      "id": "T2.p3.m2",
+      "title": "Errori di delega",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T2.p3"
+    },
+    {
+      "id": "T3.p1",
+      "title": "Ownership",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T3"
+    },
+    {
+      "id": "T3.p1.m1",
+      "title": "Responsabilità dei moduli",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p1"
+    },
+    {
+      "id": "T3.p1.m2",
+      "title": "Nessuno stato duplicato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p1"
+    },
+    {
+      "id": "T3.p2",
+      "title": "Panoramica",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T3"
+    },
+    {
+      "id": "T3.p2.m1",
+      "title": "Coordinator osserva",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p2"
+    },
+    {
+      "id": "T3.p2.m2",
+      "title": "Stato servizi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p2"
+    },
+    {
+      "id": "T3.p3",
+      "title": "Evoluzioni",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T3"
+    },
+    {
+      "id": "T3.p3.m1",
+      "title": "Integrazioni distribuite",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p3"
+    },
+    {
+      "id": "T3.p3.m2",
+      "title": "Nuovi componenti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T3.p3"
+    },
+    {
+      "id": "T4.p1",
+      "title": "Runtime persistente",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T4"
+    },
+    {
+      "id": "T4.p1.m1",
+      "title": "Identità run",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p1"
+    },
+    {
+      "id": "T4.p1.m2",
+      "title": "Risultati e revisioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p1"
+    },
+    {
+      "id": "T4.p2",
+      "title": "State Machine",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T4"
+    },
+    {
+      "id": "T4.p2.m1",
+      "title": "Transizioni lecite",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p2"
+    },
+    {
+      "id": "T4.p2.m2",
+      "title": "Annullamento e ripresa",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p2"
+    },
+    {
+      "id": "T4.p3",
+      "title": "Effetti",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T4"
+    },
+    {
+      "id": "T4.p3.m1",
+      "title": "Retry idempotente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p3"
+    },
+    {
+      "id": "T4.p3.m2",
+      "title": "Stato incerto mai ripetuto ciecamente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T4.p3"
+    },
+    {
+      "id": "T5.p1",
+      "title": "Event Bus",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T5"
+    },
+    {
+      "id": "T5.p1.m1",
+      "title": "Eventi e sottoscrizioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p1"
+    },
+    {
+      "id": "T5.p1.m2",
+      "title": "Origine timestamp",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p1"
+    },
+    {
+      "id": "T5.p2",
+      "title": "Component Bus",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T5"
+    },
+    {
+      "id": "T5.p2.m1",
+      "title": "Messaggi tipizzati",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p2"
+    },
+    {
+      "id": "T5.p2.m2",
+      "title": "Risposta al destinatario",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p2"
+    },
+    {
+      "id": "T5.p3",
+      "title": "Futuro distribuito",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T5"
+    },
+    {
+      "id": "T5.p3.m1",
+      "title": "Bus tra nodi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p3"
+    },
+    {
+      "id": "T5.p3.m2",
+      "title": "Disconnessioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T5.p3"
+    },
+    {
+      "id": "T6.p1",
+      "title": "Contratti di contesto",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T6"
+    },
+    {
+      "id": "T6.p1.m1",
+      "title": "Richiesta e pacchetto",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p1"
+    },
+    {
+      "id": "T6.p1.m2",
+      "title": "Budget",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p1"
+    },
+    {
+      "id": "T6.p2",
+      "title": "Selezione progressiva",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T6"
+    },
+    {
+      "id": "T6.p2.m1",
+      "title": "Recupero rilevante",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p2"
+    },
+    {
+      "id": "T6.p2.m2",
+      "title": "Escalation",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p2"
+    },
+    {
+      "id": "T6.p3",
+      "title": "Letterale e rielaborato",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T6"
+    },
+    {
+      "id": "T6.p3.m1",
+      "title": "Fonte originale",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p3"
+    },
+    {
+      "id": "T6.p3.m2",
+      "title": "Interpretazione distinta",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T6.p3"
+    },
+    {
+      "id": "T7.p1",
+      "title": "Permanente",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T7"
+    },
+    {
+      "id": "T7.p1.m1",
+      "title": "Identità",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p1"
+    },
+    {
+      "id": "T7.p1.m2",
+      "title": "Revisione",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p1"
+    },
+    {
+      "id": "T7.p2",
+      "title": "Semantica",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T7"
+    },
+    {
+      "id": "T7.p2.m1",
+      "title": "Conoscenza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p2"
+    },
+    {
+      "id": "T7.p2.m2",
+      "title": "Provenienza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p2"
+    },
+    {
+      "id": "T7.p3",
+      "title": "Episodica",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T7"
+    },
+    {
+      "id": "T7.p3.m1",
+      "title": "Eventi e passaggi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p3"
+    },
+    {
+      "id": "T7.p3.m2",
+      "title": "Collegamento ai run",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p3"
+    },
+    {
+      "id": "T7.p4",
+      "title": "Di lavoro",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T7"
+    },
+    {
+      "id": "T7.p4.m1",
+      "title": "Task correnti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p4"
+    },
+    {
+      "id": "T7.p4.m2",
+      "title": "Scadenza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p4"
+    },
+    {
+      "id": "T7.p5",
+      "title": "Custodia futura",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T7"
+    },
+    {
+      "id": "T7.p5.m1",
+      "title": "Mente saggia o Custode idea",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p5"
+    },
+    {
+      "id": "T7.p5.m2",
+      "title": "Versionamento governato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T7.p5"
+    },
+    {
+      "id": "T8.p1",
+      "title": "Registro agenti",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T8"
+    },
+    {
+      "id": "T8.p1.m1",
+      "title": "Ruolo e capability",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p1"
+    },
+    {
+      "id": "T8.p1.m2",
+      "title": "Specialisti presenti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p1"
+    },
+    {
+      "id": "T8.p2",
+      "title": "Modello per agente",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T8"
+    },
+    {
+      "id": "T8.p2.m1",
+      "title": "Selezione e salvataggio",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p2"
+    },
+    {
+      "id": "T8.p2.m2",
+      "title": "Profilo worker",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p2"
+    },
+    {
+      "id": "T8.p3",
+      "title": "Verifica effettiva",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T8"
+    },
+    {
+      "id": "T8.p3.m1",
+      "title": "Modello eseguito",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p3"
+    },
+    {
+      "id": "T8.p3.m2",
+      "title": "Macchina usata",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T8.p3"
+    },
+    {
+      "id": "T9.p1",
+      "title": "Plan",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "T9"
+    },
+    {
+      "id": "T9.p1.m1",
+      "title": "Multi step strutturato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p1"
+    },
+    {
+      "id": "T9.p1.m2",
+      "title": "Persistenza e ripresa",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p1"
+    },
+    {
+      "id": "T9.p2",
+      "title": "Code e priorità",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "T9"
+    },
+    {
+      "id": "T9.p2.m1",
+      "title": "Limiti e concorrenza",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p2"
+    },
+    {
+      "id": "T9.p2.m2",
+      "title": "Nessun effetto doppio",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p2"
+    },
+    {
+      "id": "T9.p3",
+      "title": "Scheduling",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "planned",
+      "note": "",
+      "parent": "T9"
+    },
+    {
+      "id": "T9.p3.m1",
+      "title": "Worker spento o acceso",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p3"
+    },
+    {
+      "id": "T9.p3.m2",
+      "title": "Failover controllato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "planned",
+      "note": "",
+      "parent": "T9.p3"
+    },
+    {
+      "id": "T10.p1",
+      "title": "Run e trace",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T10"
+    },
+    {
+      "id": "T10.p1.m1",
+      "title": "Richiesta verso risposta",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p1"
+    },
+    {
+      "id": "T10.p1.m2",
+      "title": "Correlazione degli hop",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p1"
+    },
+    {
+      "id": "T10.p2",
+      "title": "Causa errore",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T10"
+    },
+    {
+      "id": "T10.p2.m1",
+      "title": "Individuare primo passaggio fallito",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p2"
+    },
+    {
+      "id": "T10.p2.m2",
+      "title": "Timeout fallback",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p2"
+    },
+    {
+      "id": "T10.p3",
+      "title": "Prestazioni",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T10"
+    },
+    {
+      "id": "T10.p3.m1",
+      "title": "Tempi per fase",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p3"
+    },
+    {
+      "id": "T10.p3.m2",
+      "title": "Regressioni tra versioni",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T10.p3"
+    },
+    {
+      "id": "T11.p1",
+      "title": "Catalogo unico",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T11"
+    },
+    {
+      "id": "T11.p1.m1",
+      "title": "ID test e componenti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p1"
+    },
+    {
+      "id": "T11.p1.m2",
+      "title": "Nessun monitor duplicato",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p1"
+    },
+    {
+      "id": "T11.p2",
+      "title": "Test sicuri",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T11"
+    },
+    {
+      "id": "T11.p2.m1",
+      "title": "Preflight e contratti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p2"
+    },
+    {
+      "id": "T11.p2.m2",
+      "title": "Sintetici E2E isolati",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p2"
+    },
+    {
+      "id": "T11.p3",
+      "title": "Storico",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T11"
+    },
+    {
+      "id": "T11.p3.m1",
+      "title": "Ambiente e commit",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p3"
+    },
+    {
+      "id": "T11.p3.m2",
+      "title": "Stato dopo riavvio",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p3"
+    },
+    {
+      "id": "T11.p4",
+      "title": "Regressioni",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T11"
+    },
+    {
+      "id": "T11.p4.m1",
+      "title": "Chat orchestratore agente",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p4"
+    },
+    {
+      "id": "T11.p4.m2",
+      "title": "Audio Word Calendar worker",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T11.p4"
+    },
+    {
+      "id": "T12.p1",
+      "title": "Home e roadmap",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T12"
+    },
+    {
+      "id": "T12.p1.m1",
+      "title": "W1 W2 W3",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p1"
+    },
+    {
+      "id": "T12.p1.m2",
+      "title": "Obiettivi M1 M4",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p1"
+    },
+    {
+      "id": "T12.p2",
+      "title": "Architettura Impostazioni",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T12"
+    },
+    {
+      "id": "T12.p2.m1",
+      "title": "Modelli e agenti",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p2"
+    },
+    {
+      "id": "T12.p2.m2",
+      "title": "Gestione Memoria",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p2"
+    },
+    {
+      "id": "T12.p3",
+      "title": "PWA",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T12"
+    },
+    {
+      "id": "T12.p3.m1",
+      "title": "Telefono e notifiche",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p3"
+    },
+    {
+      "id": "T12.p3.m2",
+      "title": "Aggiorna Cora",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p3"
+    },
+    {
+      "id": "T12.p4",
+      "title": "Attività",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T12"
+    },
+    {
+      "id": "T12.p4.m1",
+      "title": "Collegamento a trace",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p4"
+    },
+    {
+      "id": "T12.p4.m2",
+      "title": "Errori",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T12.p4"
+    },
+    {
+      "id": "T13.p1",
+      "title": "Bozze grafiche",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T13"
+    },
+    {
+      "id": "T13.p1.m1",
+      "title": "Editor",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p1"
+    },
+    {
+      "id": "T13.p1.m2",
+      "title": "Validazione",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p1"
+    },
+    {
+      "id": "T13.p2",
+      "title": "Esecutore",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T13"
+    },
+    {
+      "id": "T13.p2.m1",
+      "title": "Tool con permessi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p2"
+    },
+    {
+      "id": "T13.p2.m2",
+      "title": "Annullamento",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p2"
+    },
+    {
+      "id": "T13.p3",
+      "title": "Trigger",
+      "priority": "unknown",
+      "classification": "planet",
+      "status": "partial",
+      "note": "",
+      "parent": "T13"
+    },
+    {
+      "id": "T13.p3.m1",
+      "title": "Pianificazione periodica",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p3"
+    },
+    {
+      "id": "T13.p3.m2",
+      "title": "Condizioni ed eventi",
+      "priority": "unknown",
+      "classification": "moon",
+      "status": "partial",
+      "note": "",
+      "parent": "T13.p3"
     }
   ],
-  "revision_note": "Bozza parziale del 3 novembre 2026. Leggere docs/MEMORIA_CORA.md prima di completarla."
+  "revision_note": "Ricostruzione concettuale V2: radici e tronco completi, rami applicativi in completamento. Non dedurre priorità verde né prova operativa dalla presenza del codice.",
+  "revision": "CORA-V2-2026-11-03",
+  "legend": {
+    "unknown": "Da valutare",
+    "ok": "Tutto ok",
+    "plan": "Aggiornamento previsto",
+    "minor": "Problema minore",
+    "problem": "Problema"
+  },
+  "sourceContext": [
+    "docs/MEMORIA_CORA.md",
+    "docs/CORA_MAPPA_V2_COMPLETA.md",
+    "Aleselva12/serveria1:docs/project-status.json"
+  ],
+  "nextWork": [
+    "W1 Orchestratore V1: CI e collaudo Debian",
+    "W2 Aggiornamenti Immich Nextcloud",
+    "W3 Agente programmatore"
+  ]
 }
