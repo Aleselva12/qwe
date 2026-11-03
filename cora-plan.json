@@ -5,7 +5,8 @@
       "id": "radici",
       "role": "radici",
       "title": "Radici",
-      "note": "Requisiti e risorse su cui poggia Cora."
+      "note": "Requisiti e risorse su cui poggia Cora.",
+      "priority": "unknown"
     },
     {
       "id": "R1",
@@ -1582,7 +1583,8 @@
       "id": "tronco",
       "role": "tronco",
       "title": "Tronco comune",
-      "note": "Capacità generali scelte per progetto. L’appartenenza resta stabile anche quando solo un ramo le usa."
+      "note": "Capacità generali scelte per progetto. L’appartenenza resta stabile anche quando solo un ramo le usa.",
+      "priority": "unknown"
     },
     {
       "id": "T1",
