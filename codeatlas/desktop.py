@@ -29,6 +29,8 @@ class AtlasHandler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path in ("/", "/index.html"):
             self._respond(200, INDEX.read_bytes(), "text/html; charset=utf-8")
+        elif path == "/views.js":
+            self._respond(200, (INDEX.parent / "views.js").read_bytes(), "text/javascript; charset=utf-8")
         elif path == "/api/session":
             self._json(200, {"token": self.token, "loaded": getattr(self.server, 'report', None) is not None})
         elif path == "/report.json":

@@ -53,6 +53,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="codeatlas-") as temporary:
         directory=Path(temporary)
         (directory/"index.html").write_bytes(index.read_bytes())
+        (directory/"views.js").write_bytes((index.parent/"views.js").read_bytes())
         (directory/"report.json").write_text(json.dumps(report,ensure_ascii=False),encoding="utf-8")
         if (index.parent/"examples"/"conceptual-map.json").is_file():
             (directory/"examples").mkdir()

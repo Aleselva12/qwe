@@ -14,3 +14,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Python compilation
         run: python -m compileall -q codeatlas tests
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: View projection tests
+        run: node --test tests/test_views.cjs
