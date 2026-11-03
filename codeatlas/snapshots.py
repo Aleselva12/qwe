@@ -20,20 +20,41 @@ def diff_snapshots(before:dict,after:dict)->dict:
             "note":"Structural metadata changes, not a source-code or runtime correctness diff."}
 
 def read_junit(path:Path):
-    """Read JUnit XML results; only explicit, available test output counts as evidence."""
-    root=ET.parse(path).getroot()
-    cases=[]
-    for suite in root.iter("testcase"):
-        name=suite.get("name","unnamed")
-        cls=suite.get("classname","")
-        result="pass"
-        if suite.find("failure") is not None or suite.find("error") is not None:
-            result="fail"
-        elif suite.find("skipped") is not None:
-            result="skip"
-        cases.append({"name":name,"classname":cls,"result":result,"source":"test","reference":str(path.name)})
-    return {"test_cases":cases,"summary":{status:sum(x["result"]==status for x in cases) for status in ("pass","fail","skip")},
-            "source_file":path.name,"warning":"Imported XML is not independently authenticated; CI provenance is not verified."}
+    """Import bounded JUnit output; metadata is producer-declared, never inferred."""
+    import hashlib
+    from datetime import datetime, timezone
+    raw = path.read_bytes()
+    declarations = raw.replace(b"\x00", b"").upper()
+    if len(raw) > 10_000_000 or b"<!DOCTYPE" in declarations or b"<!ENTITY" in declarations:
+        raise ValueError("JUnit too large or contains unsupported entity declarations")
+    root = ET.fromstring(raw)
+    if root.tag not in {"testsuite", "testsuites"}:
+        raise ValueError("Expected testsuite or testsuites")
+    cases, occurrences = [], {}
+    for case in root.iter("testcase"):
+        if len(cases) >= 50000:
+            raise ValueError("Too many test cases")
+        name, cls, file = case.get("name", "unnamed"), case.get("classname", ""), case.get("file", "")
+        key = json.dumps([file, cls, name], ensure_ascii=False, separators=(",", ":"))
+        occurrence = occurrences.get(key, 0)
+        occurrences[key] = occurrence + 1
+        failure = case.find("failure")
+        if failure is None:
+            failure = case.find("error")
+        result = "fail" if failure is not None else "skip" if case.find("skipped") is not None else "pass"
+        cases.append({"id":key+":"+str(occurrence), "name":name, "classname":cls, "file":file,
+                      "result":result, "source":"test", "reference":path.name,
+                      "message": ((failure.get("message", "") or failure.text or "")[:4000] if failure is not None else "")})
+    # Only report-level properties: suite-specific commits must not be promoted to a whole run.
+    props = {p.get("name"):p.get("value", "") for p in root.findall("./properties/property")}
+    metadata = {"commit":props.get("commit", ""), "environment":props.get("environment", ""),
+                "executed_at":root.get("timestamp", "")}
+    if props.get("workspace_clean") in {"true", "false"}:
+        metadata["workspace_clean"] = props["workspace_clean"] == "true"
+    return {"schema_version":1, "id":hashlib.sha256(raw).hexdigest(), "metadata":metadata,
+            "imported_at":datetime.now(timezone.utc).isoformat(), "test_cases":cases,
+            "summary":{status:sum(x["result"]==status for x in cases) for status in ("pass", "fail", "skip")},
+            "source_file":path.name, "warning":"Imported XML is not independently authenticated; CI provenance is not verified."}
 
 def read_snapshot(path:Path):
     obj=json.loads(path.read_text(encoding="utf-8"))

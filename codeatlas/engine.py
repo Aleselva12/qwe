@@ -10,6 +10,11 @@ from pathlib import Path
 
 IGNORE = {".git", ".venv", "venv", "node_modules", "__pycache__", "dist", "build", ".next", ".mypy_cache", ".pytest_cache", "coverage"}
 EXTENSIONS = {".py": "python", ".js": "javascript", ".jsx": "javascript", ".ts": "typescript", ".tsx": "typescript"}
+# Additional languages are inventoried without pretending to parse their semantics.
+EXTENSIONS.update({".mjs":"javascript", ".cjs":"javascript", ".go":"go", ".rs":"rust", ".java":"java",
+                   ".cs":"csharp", ".c":"c", ".cpp":"cpp", ".h":"c", ".rb":"ruby", ".php":"php",
+                   ".swift":"swift", ".kt":"kotlin", ".sql":"sql", ".html":"html", ".css":"css",
+                   ".vue":"vue", ".svelte":"svelte"})
 INFRA = {"Dockerfile", "compose.yml", "compose.yaml", "docker-compose.yml", "docker-compose.yaml", "pyproject.toml", "package.json", "requirements.txt", "Makefile", ".env.example"}
 MAX_SIZE = 2_000_000
 
@@ -69,7 +74,7 @@ def inventory(root: Path) -> dict:
                                        for alias in (item.names[:1] if item.module else item.names)]
                     for name in modules:
                         if name:edges.append({"from":fid,"to":"module:"+name,"kind":"imports","line":item.lineno,"resolution":"unresolved","source":"extracted"})
-        else:
+        elif lang in {"javascript", "typescript"}:
             # Heuristic declarations for JS/TS. Source ranges are hints, not compiler semantics.
             for line_no,line in enumerate(source.splitlines(),1):
                 m=re.match(r"^\s*(?:export\s+)?(?:default\s+)?(?:async\s+)?(?:function|class|interface|type|enum)\s+([A-Za-z_$][\w$]*)",line)

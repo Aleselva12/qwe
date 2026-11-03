@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "name": "Team prodotto e clienti",
+  "default_view": "graph",
+  "categories": [
+    {"id": "roots", "label": "Infrastruttura", "color": "#b495ff"},
+    {"id": "trunk", "label": "Servizi condivisi", "color": "#63b4ff"},
+    {"id": "branches", "label": "Funzionalità", "color": "#63e1bf"},
+    {"id": "customer", "label": "Esperienza cliente", "color": "#ffb978"}
+  ],
+  "fields": [{"id": "owner", "label": "Responsabile"}, {"id": "priority", "label": "Priorità"}],
+  "nodes": [
+    {"id": "team:customer-records", "name": "Schede clienti", "lens": "customer", "parent": null, "source": "ai_suggestion", "status": "planned", "code_refs": [], "description": "Proposta da valutare con il team, non funzionalità accertata.", "future": "Consolidare note e contatti in schede cliente.", "goals": [{"text": "Definire i dati necessari e le verifiche di accettazione", "source": "ai_suggestion", "status": "planned"}]}
+  ],
+  "rules": [{"path_glob": "src/customers/**", "group_id": "team:customer-records"}],
+  "test_links": [{"group_id": "team:customer-records", "classname": "CustomerTests", "name": "test_create_customer", "source": "ai_suggestion"}]
+}

@@ -21,9 +21,10 @@ class DesktopSmokeTests(unittest.TestCase):
             thread = threading.Thread(target=server.serve_forever, daemon=True)
             thread.start()
             try:
-                with urllib.request.urlopen(f'http://127.0.0.1:{server.server_port}/views.js') as response:
-                    self.assertIn('javascript', response.headers['Content-Type'])
-                    self.assertEqual(response.read(), (INDEX.parent / 'views.js').read_bytes())
+                for asset in ('views.js', 'profiles.js', 'evidence.js', 'workbench.js'):
+                    with urllib.request.urlopen(f'http://127.0.0.1:{server.server_port}/{asset}') as response:
+                        self.assertIn('javascript', response.headers['Content-Type'])
+                        self.assertEqual(response.read(), (INDEX.parent / asset).read_bytes())
             finally:
                 server.shutdown()
                 thread.join(timeout=3)

@@ -3,3 +3,7 @@ __pycache__/
 .venv/
 *.json
 !demo/*.json
+node_modules/
+!package.json
+!package-lock.json
+!examples/*.json
