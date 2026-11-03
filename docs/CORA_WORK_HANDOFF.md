@@ -57,6 +57,10 @@ Le vecchie note non identiche alla nuova `note` sono conservate anche come `earl
 - `priority` e `status` sono separati. Evitare di tradurre automaticamente `partial` in arancione o `planned` in giallo.
 - Dati di schema non ancora implementati in Direzione: prove/versione/ambienti per singola stella, cronologia dettagliata e convalida delle fonti. Prima di aggiungere dati reali progettare un formato incrementale e migrabile, non sovraccaricare `note` arbitrariamente.
 
+- `timeline` per ogni stella: `past` (vuoto finché non abbiamo commit/decisioni documentate), `present.statement` e `present.runtimeVerified:false`, `future` (obiettivi conosciuti). Non riempire il passato con eventi inventati né trasformare la descrizione corrente in certificazione di collaudo.
+- `knownIssues[]` conserva difetti e dubbi da non perdere. `roadmapRefs[]` rimanda agli identificativi dei macro-obiettivi di serveria1. `observations[]` contiene soltanto conferme riferite dall'utente, con `commit:null` e `observedAt:null` finché non sappiamo versione/data della prova. Sono *provenienze*, non test E2E registrati.
+- I nodi più importanti per i lavori prossimi sono T1/T9/T10 (W1), R5.2/Immich/Nextcloud (W2), G1 (W3), E1 (M3 clienti), F2 (M4 agenti distribuiti).
+
 **Profondità:** radici → area → stella → pianeta → luna (5 livelli). Tronco → stella → pianeta → luna e ramo → stella → pianeta → luna (4). Il JS di Direzione è stato adattato per questi limiti e per l'apertura iniziale senza espansione dei pianeti.
 
 ## Come effettuare l'integrazione senza distruggere dati
