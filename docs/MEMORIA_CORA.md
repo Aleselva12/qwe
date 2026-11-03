@@ -1,3 +1,5 @@
+> **Aggiornamento 3 novembre 2026 — V2 completa:** questa pagina conserva la ricostruzione storica *parziale* dell'altra conversazione. La classificazione estesa e riconciliata (45 stelle, pianeti, lune, 37 link) è in [CORA_MAPPA_V2_COMPLETA.md](CORA_MAPPA_V2_COMPLETA.md) e la consegna per Work è in [CORA_WORK_HANDOFF.md](CORA_WORK_HANDOFF.md). Gli ID degli appunti precedenti sono conservati nella [pianta V2](../cora-plan.json); **non interpretare la parola “parziale” nelle sezioni storiche come stato dell'attuale mappa completa**. I collaudi reali del software restano separati dalla classificazione.
+
 # Cora in CodeAtlas · consegna alle prossime conversazioni
 
 **3 novembre 2026 · Ricostruzione parziale.** Per riprendere il lavoro leggere questo documento e `cora-plan.json` sul branch `progetti/cora-serveria` di Aleselva12/qwe. Il programma da comprendere è Aleselva12/serveria1. La pianta registra intenzioni e scelte di direzione. Le condizioni operative di Cora richiedono una verifica distinta. Le foto inviate mostrano l’uso di Atlas e non costituiscono una lista di difetti.
