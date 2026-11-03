@@ -24,8 +24,12 @@ function validate(data){
   }
   for(const n of data.nodes){
     const path=trail(n,byId);
-    if(!['radici','tronco','ramo'].includes(path[0].role)||path.length>4)throw Error('Struttura non valida o più di quattro livelli');
+    if(!['radici','tronco','ramo'].includes(path[0].role)||path.length>(path[0].role==='radici'?5:4))throw Error('Struttura non valida o livelli eccedenti: '+n.id);
     if(n.trunkLinks!==undefined&&(!Array.isArray(n.trunkLinks)||n.trunkLinks.some(id=>!byId.has(id)||trail(byId.get(id),byId)[0].role!=='tronco')))throw Error('Collegamento al tronco non valido');
+  }
+  if(data.relations!==undefined){
+    if(!Array.isArray(data.relations))throw Error('Collegamenti non validi');
+    for(const link of data.relations)if(!byId.has(link.from)||!byId.has(link.to)||!['uses','depends_on','communicates_with','produces_for'].includes(link.kind))throw Error('Collegamento non valido tra stelle');
   }
   for(const role of ['radici','tronco'])if(data.nodes.filter(n=>!n.parent&&n.role===role).length!==1)throw Error('Servono radici e un solo tronco');
   return data;
@@ -35,7 +39,7 @@ function commit(next){
 }
 function action(text,fn){const b=element('button',text);b.onclick=()=>{try{fn()}catch(e){$('message').textContent=e.message}};return b}
 function badge(value){const b=element('span',labels[value]);b.className='badge '+value;return b}
-function role(path){if(path.length===1)return path[0].role;if(path[0].role!=='ramo')return 'componente';return ['','', 'stella','pianeta','luna'][path.length]}
+function role(path){if(path.length===1)return path[0].role;return (path[0].role==='radici'?['','', 'area','stella','pianeta','luna']:['','stella','pianeta','luna'])[path.length]||'componente'}
 function edit(id,parent,top=false){
   const n=plan.nodes.find(n=>n.id===id);const form=element('dialog');document.body.append(form);
   const title=element('input'),note=element('textarea'),priority=element('select'),position=element('select'),links=element('select');links.multiple=true;
@@ -45,7 +49,7 @@ function edit(id,parent,top=false){
   for(const k of ranks)option(priority,k,labels[k]);priority.value=n?.priority||'unknown';field('Priorità propria',priority);
   const map=new Map(plan.nodes.map(x=>[x.id,x]));
   const fixed=n&&!n.parent&&['radici','tronco'].includes(n.role);
-  if(!fixed){option(position,'','Ramo autonomo');for(const p of plan.nodes){const path=trail(p,map);if(path.length<4&&!path.some(x=>x.id===id))option(position,p.id,path.map(x=>x.title).join(' / '))}position.value=n?.parent||parent||'';field('Collocazione',position)}
+  if(!fixed){option(position,'','Ramo autonomo');for(const p of plan.nodes){const path=trail(p,map);if(path.length<(path[0].role==='radici'?5:4)&&!path.some(x=>x.id===id))option(position,p.id,path.map(x=>x.title).join(' / '))}position.value=n?.parent||parent||'';field('Collocazione',position)}
   for(const p of plan.nodes)if(p.parent&&trail(p,map)[0].role==='tronco'){option(links,p.id,p.title);links.lastChild.selected=(n?.trunkLinks||[]).includes(p.id)}
   if(links.options.length)field('Componenti del tronco utilizzati',links);
   form.append(action('Salva',()=>{const next=structuredClone(plan);let dst=next.nodes.find(x=>x.id===id);if(!dst){dst={id:crypto.randomUUID()};next.nodes.push(dst)}Object.assign(dst,{title:title.value.trim(),note:note.value,priority:priority.value,trunkLinks:Array.from(links.selectedOptions,o=>o.value)});if(!fixed){if(position.value){dst.parent=position.value;delete dst.role}else{delete dst.parent;dst.role='ramo'}}commit(next);form.close()}),action('Annulla',()=>form.close()));
@@ -53,13 +57,13 @@ function edit(id,parent,top=false){
 }
 function render(){
  const host=$('tree');host.replaceChildren();const byId=new Map(plan.nodes.map(n=>[n.id,n]));
- function draw(n){const path=trail(n,byId),box=element('details'),s=element('summary');box.open=path.length===1;s.append(document.createTextNode(role(path)+' · '+n.title+' '),badge(n.priority||'unknown'));box.append(s);
+ function draw(n){const path=trail(n,byId),box=element('details'),s=element('summary');box.open=path.length<=(path[0].role==='radici'?2:1);s.append(document.createTextNode(role(path)+' · '+n.title+' '),badge(n.priority||'unknown'));box.append(s);
  if(n.note)box.append(element('p',n.note));for(const id of n.trunkLinks||[])box.append(element('p','Usa dal tronco: '+byId.get(id).title));
- box.append(action('Modifica o sposta',()=>edit(n.id)));if(path.length<4)box.append(action('Aggiungi sottopunto',()=>edit(null,n.id)));
+ box.append(action('Modifica o sposta',()=>edit(n.id)));if(path.length<(path[0].role==='radici'?5:4))box.append(action('Aggiungi sottopunto',()=>edit(null,n.id)));
  for(const child of plan.nodes.filter(x=>x.parent===n.id))box.append(draw(child));return box}
  for(const n of plan.nodes.filter(x=>!x.parent)){const card=element('article');card.append(draw(n));host.append(card)}
 }
-async function start(){const saved=localStorage.getItem(storage);plan=validate(saved?JSON.parse(saved):await (await fetch('/cora-plan.json')).json());render();
+async function start(){const template=validate(await (await fetch('/cora-plan.json')).json());const saved=localStorage.getItem(storage);plan=validate(saved?JSON.parse(saved):template);render();if(saved&&plan.revision!==template.revision)$('message').textContent='La pianta salvata in questo browser ha una revisione diversa dalla repository: esportala prima di importare lo schema Cora V2. Nessuna modifica automatica ai tuoi appunti.';
  for(const k of ranks)$('legend').append(badge(k),document.createTextNode(' '));
  $('add').onclick=()=>edit(null);$('export').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(plan,null,2)],{type:'application/json'}));const a=element('a');a.href=url;a.download='cora-plan.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
  $('import').onchange=async e=>{try{const file=e.target.files[0];if(file&&confirm('Sostituire la pianta locale con quella importata?'))commit(JSON.parse(await file.text()))}catch(err){$('message').textContent=err.message}finally{e.target.value=''}}}
