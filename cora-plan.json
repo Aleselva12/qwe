@@ -1,15 +1,354 @@
 {
   "version": 1,
   "nodes": [
-    {"id":"radici","role":"radici","title":"Radici","note":"Requisiti e risorse su cui poggia Cora."},
-    {"id":"tronco","role":"tronco","title":"Tronco comune","note":"Capacità generali scelte per progetto. L’appartenenza resta stabile anche quando solo un ramo le usa."},
-    {"id":"programmi","role":"ramo","title":"Programmi esterni","note":"Stelle parallele."},
-    {"id":"immich","parent":"programmi","title":"Immich"},
-    {"id":"nextcloud","parent":"programmi","title":"Nextcloud"},
-    {"id":"magazzino","parent":"programmi","title":"Magazzino Tele"},
-    {"id":"macchine","role":"ramo","title":"Macchine e lavoro distribuito"},
-    {"id":"worker","parent":"macchine","title":"Far lavorare insieme più macchine"},
-    {"id":"installare","parent":"worker","title":"Collegare un worker su un altro dispositivo"},
-    {"id":"assegnare","parent":"worker","title":"Assegnare lavoro ai worker"}
-  ]
+    {
+      "id": "radici",
+      "role": "radici",
+      "title": "Radici",
+      "note": "Requisiti e risorse su cui poggia Cora."
+    },
+    {
+      "id": "tronco",
+      "role": "tronco",
+      "title": "Tronco comune",
+      "note": "Capacità generali scelte per progetto. L’appartenenza resta stabile anche quando solo un ramo le usa."
+    },
+    {
+      "id": "programmi",
+      "role": "ramo",
+      "title": "Programmi esterni",
+      "note": "D · Programmi esterni. Stelle parallele. Eventuali biforcazioni dipendono dall’importanza nel progetto."
+    },
+    {
+      "id": "immich",
+      "parent": "programmi",
+      "title": "Immich"
+    },
+    {
+      "id": "nextcloud",
+      "parent": "programmi",
+      "title": "Nextcloud"
+    },
+    {
+      "id": "magazzino",
+      "parent": "programmi",
+      "title": "Magazzino Tele"
+    },
+    {
+      "id": "macchine",
+      "role": "ramo",
+      "title": "Macchine e lavoro distribuito",
+      "note": "F · Lavoro distribuito. Ricostruzione parziale; una sola stella Worker con pianeti."
+    },
+    {
+      "id": "worker",
+      "parent": "macchine",
+      "title": "Far lavorare insieme più macchine"
+    },
+    {
+      "id": "installare",
+      "parent": "worker",
+      "title": "Collegare un worker su un altro dispositivo"
+    },
+    {
+      "id": "assegnare",
+      "parent": "worker",
+      "title": "Assegnare lavoro ai worker"
+    },
+    {
+      "id": "R1",
+      "title": "R1 · Macchine",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "R2",
+      "title": "R2 · Dati",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "R3",
+      "title": "R3 · IA, modelli e dipendenze",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "R4",
+      "title": "R4 · Ambiente operativo presente",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "R5",
+      "title": "R5 · Affidabilità della base",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "R6",
+      "title": "R6 · Sicurezza",
+      "note": "Schema V2 parziale. Inventario e confini da validare nella repository e sul server.",
+      "priority": "unknown",
+      "parent": "radici"
+    },
+    {
+      "id": "T1",
+      "title": "T1 · Supervisor e orchestrazione",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T2",
+      "title": "T2 · Capability",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T3",
+      "title": "T3 · Coordinamento",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T4",
+      "title": "T4 · Runtime",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T5",
+      "title": "T5 · Bus",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T6",
+      "title": "T6 · Contesto",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T7",
+      "title": "T7 · Memoria",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T8",
+      "title": "T8 · Agenti",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T9",
+      "title": "T9 · Pianificazione",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T10",
+      "title": "T10 · Diagnostica",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T11",
+      "title": "T11 · Test",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T12",
+      "title": "T12 · Interfaccia",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "T13",
+      "title": "T13 · Automazioni",
+      "note": "Proposta V2 parziale. Responsabilità, evidenze e collegamenti da confermare.",
+      "priority": "unknown",
+      "parent": "tronco"
+    },
+    {
+      "id": "A",
+      "title": "A · Conversazione",
+      "note": "Articolazione parziale da approfondire.",
+      "priority": "unknown",
+      "role": "ramo"
+    },
+    {
+      "id": "B",
+      "title": "B · File, documenti e conoscenza",
+      "note": "Articolazione parziale da approfondire.",
+      "priority": "unknown",
+      "role": "ramo"
+    },
+    {
+      "id": "C",
+      "title": "C · Comunicazione e organizzazione",
+      "note": "Articolazione parziale da approfondire.",
+      "priority": "unknown",
+      "role": "ramo"
+    },
+    {
+      "id": "E",
+      "title": "E · Clienti e commerciale",
+      "note": "Articolazione parziale da approfondire.",
+      "priority": "unknown",
+      "role": "ramo"
+    },
+    {
+      "id": "G",
+      "title": "G · Agente programmatore",
+      "note": "Articolazione parziale da approfondire.",
+      "priority": "unknown",
+      "role": "ramo"
+    },
+    {
+      "id": "A1",
+      "title": "Chat",
+      "note": "Parziale · Interazione principale con Cora.",
+      "priority": "unknown",
+      "parent": "A"
+    },
+    {
+      "id": "A2",
+      "title": "Sessioni",
+      "note": "Parziale · Continuità delle conversazioni.",
+      "priority": "unknown",
+      "parent": "A"
+    },
+    {
+      "id": "B1",
+      "title": "Gestione file",
+      "note": "Parziale · Accesso e modifica dei file.",
+      "priority": "unknown",
+      "parent": "B"
+    },
+    {
+      "id": "B2",
+      "title": "Libreria IA",
+      "note": "Parziale · Riferimenti e copie per gli agenti.",
+      "priority": "unknown",
+      "parent": "B"
+    },
+    {
+      "id": "B3",
+      "title": "Documenti",
+      "note": "Parziale · Esempio: appunti cliente in Word.",
+      "priority": "unknown",
+      "parent": "B"
+    },
+    {
+      "id": "C1",
+      "title": "Calendario",
+      "note": "Parziale · Caso guida: dire un appuntamento, registrarlo una sola volta e ricevere il promemoria sul telefono.",
+      "priority": "unknown",
+      "parent": "C"
+    },
+    {
+      "id": "C2",
+      "title": "Email",
+      "note": "Parziale · Comunicazione e preventivi.",
+      "priority": "unknown",
+      "parent": "C"
+    },
+    {
+      "id": "C3",
+      "title": "Audio",
+      "note": "Parziale · Caso guida: da conversazione a trascrizione e appunto utilizzabile.",
+      "priority": "unknown",
+      "parent": "C"
+    },
+    {
+      "id": "E1",
+      "title": "Schede cliente · M3",
+      "note": "Parziale · Placeholder: organizzare note e dati nel database clienti.",
+      "priority": "unknown",
+      "parent": "E"
+    },
+    {
+      "id": "E2",
+      "title": "Assistente commerciale · M4",
+      "note": "Parziale · Placeholder: definizione e confini da confermare.",
+      "priority": "unknown",
+      "parent": "E"
+    },
+    {
+      "id": "G1",
+      "title": "Agente programmatore",
+      "note": "Parziale · G è riservato al programmatore. Distinguere strumenti presenti, collaudo e uso operativo.",
+      "priority": "unknown",
+      "parent": "G"
+    },
+    {
+      "id": "D4",
+      "title": "Preventivi",
+      "note": "Proposta parziale nella famiglia dei programmi esterni; integrazione da verificare.",
+      "priority": "unknown",
+      "parent": "programmi"
+    },
+    {
+      "id": "D5",
+      "title": "CodeAtlas",
+      "note": "Proposta parziale nella famiglia dei programmi esterni; integrazione da verificare.",
+      "priority": "unknown",
+      "parent": "programmi"
+    },
+    {
+      "id": "C1a",
+      "title": "Interpretare la richiesta",
+      "note": "Scomposizione illustrativa parziale. Il livello stella/pianeta dipende dalla granularità scelta.",
+      "priority": "unknown",
+      "parent": "C1"
+    },
+    {
+      "id": "C1b",
+      "title": "Registrare o modificare l’evento",
+      "note": "Scomposizione illustrativa parziale. Il livello stella/pianeta dipende dalla granularità scelta.",
+      "priority": "unknown",
+      "parent": "C1"
+    },
+    {
+      "id": "C1c",
+      "title": "Consegnare la notifica",
+      "note": "Scomposizione illustrativa parziale. Il livello stella/pianeta dipende dalla granularità scelta.",
+      "priority": "unknown",
+      "parent": "C1"
+    },
+    {
+      "id": "C1d",
+      "title": "Riorganizzare la settimana con IA",
+      "note": "Idea futura discussa; nessun impegno o stato verificato.",
+      "priority": "unknown",
+      "parent": "C1"
+    },
+    {
+      "id": "C1e",
+      "title": "Aggiornare il calendario in camera tramite API",
+      "note": "Idea futura discussa; nessun impegno o stato verificato.",
+      "priority": "unknown",
+      "parent": "C1"
+    }
+  ],
+  "revision_note": "Bozza parziale del 3 novembre 2026. Leggere docs/MEMORIA_CORA.md prima di completarla."
 }

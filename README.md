@@ -1,5 +1,7 @@
 # CodeAtlas
 
+**Branch Cora.** Per riprendere il progetto da un’altra conversazione, leggere [Memoria e decisioni Cora](docs/MEMORIA_CORA.md) e la [pianta parziale](cora-plan.json).
+
 Mappa locale del programma: **capacità utili verso l’utente, processi che le realizzano e requisiti alla base**. Sei schemi navigabili, dettagli espandibili e schede modificabili. CodeAtlas è indipendente da Serveria e non modifica né esegue il progetto analizzato.
 
 ## Avvio
