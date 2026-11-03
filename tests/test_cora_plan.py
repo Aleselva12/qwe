@@ -94,6 +94,20 @@ class CoraV2StructureTests(unittest.TestCase):
                 self.assertIn(target, self.ids)
                 self.assertEqual(self.ids[target]["parent"], "tronco")
 
+    def test_every_star_preserves_future_problems_without_fabricating_history(self):
+        stars = [n for n in self.nodes if n.get("classification") == "star"]
+        for star in stars:
+            with self.subTest(star=star["id"]):
+                self.assertEqual(star["timeline"]["past"], [])
+                self.assertFalse(star["timeline"]["present"]["runtimeVerified"])
+                self.assertIsInstance(star["timeline"]["future"], list)
+                self.assertIsInstance(star["knownIssues"], list)
+                self.assertIsInstance(star["roadmapRefs"], list)
+                for report in star.get("observations", []):
+                    self.assertEqual(report["type"], "owner_report")
+                    self.assertIsNone(report["commit"])
+                    self.assertIsNone(report["observedAt"])
+
     def test_work_priorities_remain_agreed(self):
         self.assertEqual(len(PLAN["nextWork"]), 3)
         self.assertIn("W1 Orchestratore", PLAN["nextWork"][0])
