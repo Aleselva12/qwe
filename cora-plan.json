@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "nodes": [
+    {"id":"radici","role":"radici","title":"Radici","note":"Requisiti e risorse su cui poggia Cora."},
+    {"id":"tronco","role":"tronco","title":"Tronco comune","note":"Capacità generali scelte per progetto. L’appartenenza resta stabile anche quando solo un ramo le usa."},
+    {"id":"programmi","role":"ramo","title":"Programmi esterni","note":"Stelle parallele."},
+    {"id":"immich","parent":"programmi","title":"Immich"},
+    {"id":"nextcloud","parent":"programmi","title":"Nextcloud"},
+    {"id":"magazzino","parent":"programmi","title":"Magazzino Tele"},
+    {"id":"macchine","role":"ramo","title":"Macchine e lavoro distribuito"},
+    {"id":"worker","parent":"macchine","title":"Far lavorare insieme più macchine"},
+    {"id":"installare","parent":"worker","title":"Collegare un worker su un altro dispositivo"},
+    {"id":"assegnare","parent":"worker","title":"Assegnare lavoro ai worker"}
+  ]
+}
