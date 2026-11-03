@@ -24,7 +24,8 @@ Il server ascolta solo su `127.0.0.1:8765`. Chiudi la sua finestra o premi Ctrl+
 ## Esplorazione
 
 - All'inizio compaiono solo i componenti principali. Clic o Invio su un nodo apre la scheda ed espande/richiude i sottopunti. La ricerca rende visibili anche i risultati nascosti con i loro antenati.
-- Layout automatico deterministico con separazione delle posizioni; rotella per zoom, trascinamento dello sfondo e **Centra**. Nessun limite arbitrario che nasconda parte dei nodi.
+- Struttura progressiva: **responsabilità → file → dichiarazioni**. Ogni sottogruppo ha spazio dedicato, senza comprimere tutti i punti in un rettangolo fisso.
+- Layout deterministico, collegamenti curvi, evidenza del nodo selezionato; rotella o **+ / −** per zoom, trascinamento dello sfondo e **Centra**. **Panoramica** richiude i dettagli. Le etichette si adattano allo spazio per non accavallarsi: avvicinati con lo zoom o usa ricerca/vista testuale per leggere i dettagli. Nessun limite al numero dei nodi visibili imposto dal layout.
 - Colori per classificazione, mai per certificare test passati. Linee continue per gerarchia; tratteggiate per dipendenze statiche/proposte o dichiarate. Non vengono inventate connessioni per riempire il disegno.
 - La scheda contiene cosa fa, scopo, futuro, problemi, dipendenze, sottopunti e timeline individuale. Le note iniziali derivano da docstring quando disponibili, altrimenti sono proposte esplicitamente incerte.
 - **Modifica classificazione e scheda** permette di cambiare nome, categoria, genitore, descrizioni, problemi e dipendenze. **Aggiorna scheda** aggiorna il dettaglio visibile. Per dipendenze usa gli ID dei nodi mostrati nelle evidenze. **+ Nodo** crea anche radici manuali per hardware, modelli e servizi non rilevati.
@@ -48,6 +49,10 @@ L'API Python e le opzioni CLI per overlay, impatto, snapshot e JUnit rimangono d
 python -m unittest discover -s tests -v
 python -m compileall -q codeatlas tests
 ```
+
+Il collaudo browser opzionale è riproducibile con `python tests/browser_smoke.py` dopo aver installato Playwright e Chromium (istruzioni nello script). Non sono dipendenze del programma. La CI conserva screenshot e risultati come artifact.
+
+Per distribuire una prova, includi anche [LEGGIMI - Per iniziare.txt](LEGGIMI%20-%20Per%20iniziare.txt).
 
 Vedi [VALIDATION.md](VALIDATION.md) per esiti effettivi, prove browser e lavoro ancora da fare. Nessuna dichiarazione di affidabilità su grandi monorepo senza un benchmark separato.
 

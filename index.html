@@ -1,10 +1,36 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CodeAtlas · Costellazione</title>
 <style>
-:root{color-scheme:dark;font:14px system-ui,sans-serif;background:#05070c;color:#e5eaf3;--muted:#929fb5;--line:#253047}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit;color:inherit;background:#111827;border:1px solid var(--line);border-radius:7px;padding:9px}button{cursor:pointer}button:hover,button.active{background:#233451;border-color:#769cd6}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a1c6ff;outline-offset:3px}header{min-height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:24px;padding:14px 24px}h1{font-size:20px;margin:0;letter-spacing:.03em}small,.muted{color:var(--muted)}header small{display:block;font-size:11px;margin-top:4px}#openForm{display:flex;gap:8px;flex:1;max-width:750px}#projectPath{flex:1;min-width:120px}.primary{background:#294978}main{display:grid;grid-template-columns:minmax(0,1fr) 370px;height:calc(100vh - 73px)}#workspace{display:flex;flex-direction:column;min-width:0;position:relative}#toolbar{padding:20px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}#project{font-size:18px;margin:0 auto 0 0}#search{width:180px}#legend{padding:0 24px 12px;display:flex;gap:20px;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px}#graph{flex:1;min-height:250px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#101c2a 0%,#05070c 68%)}svg{position:absolute;inset:0;width:100%;height:100%;display:block}svg text{fill:#b8c6db;font-size:15px}svg .node{cursor:pointer;outline:none}svg .node:focus circle{stroke:white;stroke-width:3}svg .node:hover text{fill:white}.edge{stroke-opacity:.5}#textView{flex:1;overflow:auto;padding:10px 24px}#textView button{display:block;margin:6px 0;width:100%;text-align:left}#empty{position:absolute;top:43%;left:15%;right:15%;text-align:center;pointer-events:none}#empty h2{font-size:28px;font-weight:500}#status{padding:12px 24px;margin:0;border-top:1px solid var(--line);color:var(--muted);font-size:12px;min-height:42px}aside{border-left:1px solid var(--line);background:#0c111c;overflow:auto;padding:25px}aside h2{font-size:23px;margin:10px 0}aside h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#97aac7;margin:25px 0 8px}aside p{line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.badge{font-size:11px;border:1px solid #3d5272;border-radius:20px;padding:4px 9px;display:inline-block;color:#b5c9e8}.sectionTitle{font-size:10px;letter-spacing:.18em;color:var(--muted)}details{border-top:1px solid var(--line);margin-top:20px;padding-top:15px}summary{cursor:pointer;color:#a8c4ed}label{display:block;font-size:12px;color:#abb9cf;margin:12px 0 5px}textarea,aside input,aside select{width:100%}textarea{min-height:70px;resize:vertical}.timeline{border-left:1px solid #3d5272;padding-left:14px;margin:12px 0;font-size:12px}.timeline small{display:block;margin-bottom:5px}#tools{padding:10px 24px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;font-size:12px}#tools input{max-width:200px;font-size:11px}#zoomInfo{margin-right:auto;color:var(--muted)}[hidden]{display:none!important}#technical{max-height:300px;overflow:auto;font-size:12px;white-space:pre-wrap}.error{color:#ffafa4!important}@media(max-width:850px){main{grid-template-columns:minmax(0,1fr) 310px}header{flex-wrap:wrap}#openForm{max-width:none}main{height:calc(100vh - 120px)}#toolbar{padding:12px}#search{width:130px}}@media(max-width:620px){main{display:flex;flex-direction:column;height:auto}#workspace{height:80vh;min-height:680px}#tools,#status,#toolbar,#legend{flex-shrink:0}aside{border-left:0;border-top:1px solid var(--line);overflow:visible}header{padding:14px}#legend{gap:10px}#tools{flex-wrap:wrap}}
+:root{color-scheme:dark;font:14px system-ui,sans-serif;background:#05070c;color:#e5eaf3;--muted:#929fb5;--line:#253047}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit;color:inherit;background:#111827;border:1px solid var(--line);border-radius:7px;padding:9px}button{cursor:pointer}button:hover,button.active{background:#233451;border-color:#769cd6}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a1c6ff;outline-offset:3px}header{min-height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:24px;padding:14px 24px}h1{font-size:20px;margin:0;letter-spacing:.03em}small,.muted{color:var(--muted)}header small{display:block;font-size:11px;margin-top:4px}#openForm{display:flex;gap:8px;flex:1;max-width:750px}#projectPath{flex:1;min-width:120px}.primary{background:#294978}main{display:grid;grid-template-columns:minmax(0,1fr) 370px;height:calc(100vh - 73px)}#workspace{display:flex;flex-direction:column;min-width:0;position:relative}#toolbar{padding:20px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}#project{font-size:18px;margin:0 auto 0 0}#search{width:180px}#legend{padding:0 24px 12px;display:flex;gap:20px;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px}#graph{flex:1;min-height:250px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#101c2a 0%,#05070c 68%)}svg{position:absolute;inset:0;width:100%;height:100%;display:block}svg text{fill:#b8c6db}svg .node{cursor:pointer;outline:none}svg .node:focus circle{stroke:white;stroke-width:3}svg .node:hover text{fill:white}.edge{stroke-opacity:.5}#textView{flex:1;overflow:auto;padding:10px 24px}#textView button{display:block;margin:6px 0;width:100%;text-align:left}#empty{position:absolute;top:43%;left:15%;right:15%;text-align:center;pointer-events:none}#empty h2{font-size:28px;font-weight:500}#status{padding:12px 24px;margin:0;border-top:1px solid var(--line);color:var(--muted);font-size:12px;min-height:42px}aside{border-left:1px solid var(--line);background:#0c111c;overflow:auto;padding:25px}aside h2{font-size:23px;margin:10px 0}aside h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#97aac7;margin:25px 0 8px}aside p{line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.badge{font-size:11px;border:1px solid #3d5272;border-radius:20px;padding:4px 9px;display:inline-block;color:#b5c9e8}.sectionTitle{font-size:10px;letter-spacing:.18em;color:var(--muted)}details{border-top:1px solid var(--line);margin-top:20px;padding-top:15px}summary{cursor:pointer;color:#a8c4ed}label{display:block;font-size:12px;color:#abb9cf;margin:12px 0 5px}textarea,aside input,aside select{width:100%}textarea{min-height:70px;resize:vertical}.timeline{border-left:1px solid #3d5272;padding-left:14px;margin:12px 0;font-size:12px}.timeline small{display:block;margin-bottom:5px}#tools{padding:10px 24px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;font-size:12px}#tools input{max-width:200px;font-size:11px}#zoomInfo{margin-right:auto;color:var(--muted)}[hidden]{display:none!important}#technical{max-height:300px;overflow:auto;font-size:12px;white-space:pre-wrap}.error{color:#ffafa4!important}@media(max-width:850px){main{grid-template-columns:minmax(0,1fr) 310px}header{flex-wrap:wrap}#openForm{max-width:none}main{height:calc(100vh - 120px)}#toolbar{padding:12px}#search{width:130px}}@media(max-width:620px){main{display:flex;flex-direction:column;height:auto}#workspace{height:80vh;min-height:680px}#tools,#status,#toolbar,#legend{flex-shrink:0}aside{border-left:0;border-top:1px solid var(--line);overflow:visible}header{padding:14px}#legend{gap:10px}#tools{flex-wrap:wrap}}
+/* Constellation presentation: quiet chrome, a large stage and readable evidence. */
+:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#06090f;--line:#202b3b;--muted:#8c9bb1}
+body{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+header{min-height:82px;flex-shrink:0;padding:16px 28px;gap:30px;background:#090e17}
+h1{font-size:22px;letter-spacing:-.04em;font-weight:650}header small{font-size:9px;letter-spacing:.14em;color:#7689a6;margin-top:6px}
+button,input,select,textarea{border-radius:8px;background:#0d1522;border-color:#28364b}button{transition:background .15s,border-color .15s}button:hover{background:#1a2a42;border-color:#6189bd}
+.primary{background:#b9d7ff;color:#0b1b32;font-weight:650;border-color:#b9d7ff}.primary:hover{background:#d3e6ff;color:#0b1b32}
+#projectPath{background:#070c14;padding:12px 14px}#openForm{max-width:800px;gap:10px}.badge{font-size:10px;letter-spacing:.02em;border-color:#294039;color:#a6cebd}
+main{flex:1;min-height:0;height:auto;grid-template-columns:minmax(0,1fr) 330px}
+#toolbar{padding:23px 26px 13px;gap:8px}#project{font-weight:550;font-size:20px;letter-spacing:-.03em}#toolbar button{font-size:11px;padding:9px 11px}#toolbar button.active{background:#1a2b43;border-color:#45658e}
+#search{font-size:11px;width:165px;background:#090f19}#legend{font-size:10px;padding:0 26px 17px;gap:18px}.dot{width:5px;height:5px;box-shadow:0 0 10px currentColor}
+#graph{min-height:220px;background:radial-gradient(ellipse at 50% 45%,#14243870,transparent 68%),radial-gradient(#738cb017 .6px,transparent .6px);background-size:auto,24px 24px}
+#graph svg{touch-action:none;cursor:grab}#graph svg.dragging{cursor:grabbing}
+.node-label{fill:#dbe6f5;font-weight:500;paint-order:stroke;stroke:#0a101a;stroke-width:3px;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.node-meta{fill:#7f94b1;letter-spacing:.03em;paint-order:stroke;stroke:#0a101a;stroke-width:3px;vector-effect:non-scaling-stroke}.expand-mark{fill:#b5c9e6}.band-label{font:9px ui-monospace,monospace;letter-spacing:.22em;fill:#68809f;pointer-events:none}
+svg .node:focus .node-hit{stroke:#d8e8ff;stroke-width:1px;vector-effect:non-scaling-stroke}svg .node:hover .node-label{fill:white}svg .node:hover .node-hit{fill:#b9d7ff0a}
+#stageInfo{position:absolute;top:0;right:22px;font:9px ui-monospace,monospace;letter-spacing:.08em;color:#647a98;pointer-events:none}#mapStats{white-space:nowrap}
+#tools{padding:12px 20px;gap:7px;background:#090e17;flex-wrap:wrap}#tools button{font-size:11px;padding:8px 10px}#tools input{max-width:175px;font-size:10px}#zoomInfo{font-size:10px;color:#8498b3}#zoomLevel{font:10px ui-monospace,monospace;min-width:36px;text-align:center;color:#b2c7e2}
+#status{padding:11px 22px;line-height:1.5;font-size:10px;background:#070b12;flex-shrink:0}.error{color:#ffb6a2!important}
+aside{padding:28px 25px;background:linear-gradient(155deg,#0d1522,#090e17);border-color:#202e42}aside>span:first-child{font-size:9px;letter-spacing:.18em;color:#7f94b1}aside h2{font-size:25px;letter-spacing:-.035em;font-weight:500;margin:20px 0 14px}aside h3{font-size:9px;letter-spacing:.16em;color:#829ab9}aside p{font-size:12px;color:#a9bad0;line-height:1.8}aside>button{margin:3px 0;max-width:100%;overflow-wrap:anywhere}aside small{font-size:10px;line-height:1.7}.sectionTitle{color:#829ab9}
+#empty h2{font-size:33px;letter-spacing:-.04em}#empty p{font-size:13px;line-height:1.8}#empty{top:38%}.welcome-steps{display:grid;gap:12px;margin-top:25px}.welcome-step{padding:13px 14px;border:1px solid #233148;border-radius:9px;font-size:11px;color:#a4b8d4}.welcome-step b{color:#c2d9f6;margin-right:12px;font-family:ui-monospace,monospace}.scan-summary{display:flex;gap:10px;margin-top:24px}.scan-summary div{flex:1;border-top:1px solid #31425c;padding-top:13px;color:#7187a7;font-size:10px}.scan-summary strong{display:block;font-size:24px;letter-spacing:-.04em;color:#c6d9f3;font-weight:450;margin-bottom:4px}
+@media(max-width:1100px){header{gap:18px;padding:15px 20px}header>.badge{display:none}main{grid-template-columns:minmax(0,1fr) 290px}#toolbar{flex-wrap:wrap}#project{flex-basis:100%;margin-bottom:5px}#zoomInfo{display:none}}
+@media(max-width:760px){header{flex-wrap:wrap;gap:14px}header>div{width:100%}#openForm{width:100%}main{grid-template-columns:minmax(0,1fr) 250px}#toolbar{padding:15px}#search{width:100%}#legend{padding:0 15px 15px;gap:12px;flex-wrap:wrap}aside{padding:22px 18px}#tools label{display:none}}
+@media(max-width:620px){body{height:auto;min-height:100dvh;overflow:auto}main{display:flex;height:auto;flex-direction:column}#workspace{height:76dvh;min-height:600px}aside{min-height:300px;overflow:visible}header>div{width:auto}header{padding:15px}#toolbar{flex-direction:row}#project{flex-basis:auto;margin-right:auto}#search{width:140px}#graph{min-height:250px}#stageInfo{right:12px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
 </style></head><body>
 <header><div><h1>◈ CodeAtlas</h1><small>LA MAPPA DEL TUO PROGRAMMA</small></div><form id="openForm"><input id="projectPath" aria-label="Percorso del progetto" placeholder="Percorso completo della cartella…" required><button id="openProject" class="primary">Apri progetto</button></form><span class="badge">Locale · sola lettura</span></header>
-<main><section id="workspace" aria-label="Mappa funzionale"><div id="toolbar"><h2 id="project">Costellazione</h2><input id="search" type="search" aria-label="Cerca nodi" placeholder="Cerca una funzione…"><button id="modeGraph" class="active">Costellazione</button><button id="modeText">Vista testuale</button></div><div id="legend"><span><i class="dot" style="background:#b495ff"></i>Radici</span><span><i class="dot" style="background:#63b4ff"></i>Tronco</span><span><i class="dot" style="background:#63e1bf"></i>Rami</span><span><i class="dot" style="background:#e6bd72"></i>Da confermare</span></div><div id="graph"></div><div id="textView" hidden></div><div id="empty"><h2>Ogni programma ha una forma.</h2><p class="muted">Apri una cartella per esplorare responsabilità e collegamenti.<br>Nessun file JSON necessario.</p></div><div id="tools"><span id="zoomInfo">Zoom con rotella · trascina · linee: gerarchia / dipendenze tratteggiate</span><button id="fit">Centra</button><button id="add">+ Nodo</button><button id="export">Esporta mappa</button><label style="margin:0">Importa <input id="import" type="file" accept=".json"></label></div><p id="status" role="status">Seleziona il percorso del progetto sul computer che esegue CodeAtlas.</p></section><aside id="inspector" aria-label="Dettaglio del nodo"><span class="sectionTitle">DETTAGLIO DEL NODO</span><h2>Esplora le connessioni</h2><p class="muted">Seleziona un punto per vedere cosa fa, perché esiste e come potrebbe evolvere.</p><h3>Come leggere la mappa</h3><p class="muted">I colori distinguono radici, tronco e rami. Non certificano il funzionamento. Le classificazioni iniziali sono proposte euristiche, sempre correggibili.</p></aside></main>
+<main><section id="workspace" aria-label="Mappa funzionale"><div id="toolbar"><h2 id="project">Costellazione</h2><input id="search" type="search" aria-label="Cerca nodi" placeholder="Cerca una funzione…"><button id="modeGraph" class="active">Costellazione</button><button id="modeText">Vista testuale</button></div><div id="legend"><span><i class="dot" style="background:#b495ff"></i>Radici</span><span><i class="dot" style="background:#63b4ff"></i>Tronco</span><span><i class="dot" style="background:#63e1bf"></i>Rami</span><span><i class="dot" style="background:#e6bd72"></i>Da confermare</span></div><div id="graph"></div><div id="stageInfo"><span id="mapStats"></span></div><div id="textView" hidden></div><div id="empty"><h2>Ogni programma ha una forma.</h2><p class="muted">Apri una cartella per esplorare responsabilità e collegamenti.<br>Nessun file JSON necessario.</p></div><div id="tools"><span id="zoomInfo">Zoom con rotella · trascina · linee: gerarchia / dipendenze tratteggiate</span><button id="zoomOut" aria-label="Riduci zoom">−</button><span id="zoomLevel">100%</span><button id="zoomIn" aria-label="Aumenta zoom">+</button><button id="fit">Centra</button><button id="collapse">Panoramica</button><button id="add">+ Nodo</button><button id="export">Esporta mappa</button><label style="margin:0">Importa <input id="import" type="file" accept=".json"></label></div><p id="status" role="status">Seleziona il percorso del progetto sul computer che esegue CodeAtlas.</p></section><aside id="inspector" aria-label="Dettaglio del nodo"><span class="sectionTitle">DETTAGLIO DEL NODO</span><h2>Esplora le connessioni</h2><p class="muted">Seleziona un punto per vedere cosa fa, perché esiste e come potrebbe evolvere.</p><h3>Come leggere la mappa</h3><p class="muted">I colori distinguono radici, tronco e rami. Non certificano il funzionamento. Le classificazioni iniziali sono proposte euristiche, sempre correggibili.</p></aside></main>
 <script>
 'use strict';
 const $=id=>document.getElementById(id), colors={roots:'#b495ff',trunk:'#63b4ff',branches:'#63e1bf',unassigned:'#e6bd72'}, lenses={roots:'Radici',trunk:'Tronco',branches:'Rami',unassigned:'Da classificare'};
@@ -13,22 +39,186 @@ const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.
 function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
 function validate(m){if(!m||m.schema_version!==1||!Array.isArray(m.groups)||!Array.isArray(m.relations))throw Error('Mappa non compatibile');const ids=new Set();for(const n of m.groups){if(!n||typeof n.id!=='string'||ids.has(n.id)||typeof n.name!=='string'||!Object.hasOwn(lenses,n.lens)||!Array.isArray(n.code_refs||[]))throw Error('Nodo non valido');ids.add(n.id)}for(const n of m.groups){const seen=new Set([n.id]);let p=n.parent;while(p){if(!ids.has(p)||seen.has(p))throw Error('Gerarchia non valida');seen.add(p);p=m.groups.find(x=>x.id===p).parent}}for(const r of m.relations)if(!ids.has(r.from)||!ids.has(r.to))throw Error('Relazione non valida')}
 function save(){try{localStorage.setItem(storageKey,JSON.stringify(map));status('Modifiche salvate in questo browser per questo percorso. Esporta per una copia portabile.')}catch(e){status('Salvataggio locale non disponibile: esporta la mappa per conservarla.',true)}}
-function load(r){if(!r.atlas||!r.overlay)throw Error('Report senza mappa funzionale');validate(r.overlay);report=r;storageKey='codeatlas-v2:'+r.project_key;map=structuredClone(r.overlay);let restored=false;try{const old=JSON.parse(localStorage.getItem(storageKey));if(old){validate(old);const current=new Set(map.groups.map(n=>n.id));for(const n of old.groups){const fresh=map.groups.find(x=>x.id===n.id);if(n.source==='manual'){if(fresh){const refs=fresh.code_refs;Object.assign(fresh,n);fresh.code_refs=refs;}else map.groups.push(n)}}const edited=new Set(old.groups.filter(n=>n.source==='manual').map(n=>n.id));map.relations=map.relations.filter(e=>!edited.has(e.from));map.relations.push(...old.relations.filter(e=>edited.has(e.from)&&map.groups.some(n=>n.id===e.from)&&map.groups.some(n=>n.id===e.to)));validate(map);restored=true}}catch(e){status('Copia locale non leggibile: uso la scansione corrente.',true)}selected=null;expanded.clear();zoom=1;pan={x:0,y:0};$('project').textContent=r.atlas.project;$('empty').hidden=map.groups.length>0;if(!map.groups.length){$('empty').replaceChildren(el('h2','Nessuna responsabilità rilevata'),el('p','Nessun file supportato: puoi creare i nodi manualmente con + Nodo.'))}draw();inspect();status(`${map.groups.filter(n=>!n.parent).length} nodi principali · ${r.atlas.nodes.filter(n=>n.kind==='file').length} file di evidenza · ${r.atlas.errors.length} errori di scansione${restored?' · correzioni locali ripristinate':''}. Proposte da confermare.`)}
+function load(r){if(!r.atlas||!r.overlay)throw Error('Report senza mappa funzionale');validate(r.overlay);report=r;storageKey='codeatlas-v2:'+r.project_key;map=structuredClone(r.overlay);let restored=false;try{const old=JSON.parse(localStorage.getItem(storageKey));if(old){validate(old);const current=new Set(map.groups.map(n=>n.id));for(const n of old.groups){const fresh=map.groups.find(x=>x.id===n.id);if(n.source==='manual'){if(fresh){const refs=fresh.code_refs;Object.assign(fresh,n);fresh.code_refs=refs;}else map.groups.push(n)}}const edited=new Set(old.groups.filter(n=>n.source==='manual').map(n=>n.id));map.relations=map.relations.filter(e=>!edited.has(e.from));map.relations.push(...old.relations.filter(e=>edited.has(e.from)&&map.groups.some(n=>n.id===e.from)&&map.groups.some(n=>n.id===e.to)));validate(map);restored=true}}catch(e){map=structuredClone(r.overlay);status('Copia locale non leggibile: uso la scansione corrente.',true)}$('search').value='';selected=null;expanded.clear();zoom=1;pan={x:0,y:0};$('project').textContent=r.atlas.project;$('empty').hidden=map.groups.length>0;if(!map.groups.length){$('empty').replaceChildren(el('h2','Nessuna responsabilità rilevata'),el('p','Nessun file supportato: puoi creare i nodi manualmente con + Nodo.'))}draw();inspect();status(`${map.groups.filter(n=>!n.parent).length} nodi principali · ${r.atlas.nodes.filter(n=>n.kind==='file').length} file di evidenza · ${r.atlas.errors.length} errori di scansione${restored?' · correzioni locali ripristinate':''}. Proposte da confermare.`)}
 function visible(){const q=$('search').value.trim().toLowerCase(),ids=new Set();if(q){for(const n of map.groups)if((n.name+' '+(n.description||'')).toLowerCase().includes(q)){let cur=n;while(cur&&!ids.has(cur.id)){ids.add(cur.id);cur=map.groups.find(p=>p.id===cur.parent)}}return map.groups.filter(n=>ids.has(n.id))}return map.groups.filter(n=>{let p=n.parent;while(p){if(!expanded.has(p))return false;p=map.groups.find(x=>x.id===p)?.parent}return true})}
-function choose(n){selected=n.id;if(map.groups.some(x=>x.parent===n.id)){if(expanded.has(n.id))expanded.delete(n.id);else expanded.add(n.id)}draw();inspect()}
-function draw(){const host=$('graph'),text=$('textView');host.replaceChildren();text.replaceChildren();if(!map)return;const nodes=visible();host.hidden=mode!=='graph';text.hidden=mode!=='text';for(const n of nodes){const b=el('button',`${n.parent?'↳ ':''}${n.name} · ${lenses[n.lens]}${map.groups.some(x=>x.parent===n.id)?' · '+(expanded.has(n.id)?'−':'+'):''}`);b.onclick=()=>choose(n);b.classList.toggle('active',n.id===selected);text.append(b)}if(!nodes.length){text.append(el('p','Nessun nodo corrispondente.'));host.append(el('p','Nessun nodo corrispondente.'));return}
-const ns='http://www.w3.org/2000/svg',s=(tag,attrs)=>{const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);return e},svg=s('svg',{viewBox:'0 0 1000 760',role:'group','aria-label':'Costellazione funzionale interattiva'});const layer=s('g',{transform:`translate(${pan.x} ${pan.y}) translate(500 380) scale(${zoom}) translate(-500 -380)`});svg.append(layer);const positions=new Map(),top=nodes.filter(n=>!n.parent),levels={roots:600,trunk:370,branches:160,unassigned:290};for(const lens of Object.keys(lenses)){const row=top.filter(n=>n.lens===lens);row.forEach((n,i)=>positions.set(n.id,{x:100+(i+1)*800/(row.length+1),y:levels[lens]+(i%2)*42}))}let pending=nodes.filter(n=>n.parent);for(let pass=0;pending.length&&pass<nodes.length;pass++){pending=pending.filter(n=>{const p=positions.get(n.parent);if(!p)return true;const siblings=nodes.filter(x=>x.parent===n.parent),i=siblings.indexOf(n),a=(i/Math.max(1,siblings.length))*Math.PI*2;positions.set(n.id,{x:p.x+Math.cos(a)*100,y:p.y+Math.sin(a)*80});return false})}
-// Deterministic collision relaxation. Keep hierarchy anchors while separating labels.
-for(let pass=0;pass<45;pass++){for(let i=0;i<nodes.length;i++){const a=positions.get(nodes[i].id);if(!a)continue;for(let j=i+1;j<nodes.length;j++){const b=positions.get(nodes[j].id);if(!b)continue;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d<105){if(d<.01){dx=1;dy=1;d=1}const f=(105-d)*.12;a.x-=dx/d*f;a.y-=dy/d*f;b.x+=dx/d*f;b.y+=dy/d*f}}a.x=Math.max(75,Math.min(925,a.x));a.y=Math.max(55,Math.min(700,a.y))}}
-const line=(a,b,c,dash)=>{if(!a||!b)return;layer.append(s('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:c,'stroke-width':1.2,'stroke-dasharray':dash||'','class':'edge'}))};for(const n of nodes)if(n.parent)line(positions.get(n.parent),positions.get(n.id),colors[n.lens]);for(const r of map.relations)line(positions.get(r.from),positions.get(r.to),colors[map.groups.find(n=>n.id===r.to)?.lens]||'#c5d8ef','4 5');
-for(const n of nodes){const p=positions.get(n.id);if(!p)continue;const g=s('g',{class:'node',tabindex:0,role:'button','aria-label':n.name,'aria-expanded':expanded.has(n.id),transform:`translate(${p.x} ${p.y})`});g.append(s('circle',{r:n.id===selected?22:16,fill:colors[n.lens],opacity:.09}),s('circle',{r:n.parent?4:6,fill:colors[n.lens],stroke:n.id===selected?'white':colors[n.lens],'stroke-width':2}));const label=s('text',{y:28,'text-anchor':'middle'});label.textContent=n.name.length>30?n.name.slice(0,29)+'…':n.name;const title=s('title',{});title.textContent=n.name+' · '+lenses[n.lens];g.append(label,title);if(map.groups.some(x=>x.parent===n.id)){const count=s('text',{x:13,y:-11});count.textContent=expanded.has(n.id)?'−':'+';g.append(count)}g.onclick=()=>choose(n);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(n)}};layer.append(g)}
-svg.onwheel=e=>{e.preventDefault();zoom=Math.max(.35,Math.min(4,zoom*(e.deltaY<0?1.12:.89)));draw()};svg.onpointerdown=e=>{if(e.target.closest('.node'))return;drag={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};svg.setPointerCapture(e.pointerId)};svg.onpointermove=e=>{if(!drag)return;const b=svg.getBoundingClientRect();pan={x:drag.px+(e.clientX-drag.x)*1000/b.width,y:drag.py+(e.clientY-drag.y)*760/b.height};layer.setAttribute('transform',`translate(${pan.x} ${pan.y}) translate(500 380) scale(${zoom}) translate(-500 -380)`)};svg.onpointerup=()=>{drag=null};host.append(svg)}
-function inspect(){const host=$('inspector');host.replaceChildren(el('span','DETTAGLIO DEL NODO'));const n=map?.groups.find(x=>x.id===selected);if(!n){host.append(el('h2','Esplora le connessioni'),el('p','Seleziona un punto. Un clic mostra la scheda ed espande o richiude i suoi sottopunti.'),el('h3','Provenienza e limiti'),el('p','Le proposte derivano da nomi, percorsi e import statici. Non provano comportamento, correttezza o intenzioni. Scopo e futuro richiedono conferma umana.'));return}const badge=el('span',lenses[n.lens]+' · '+(n.source==='manual'?'corretto dall’utente':'proposta da confermare'));badge.className='badge';host.append(el('h2',n.name),badge);function block(title,body){host.append(el('h3',title),el('p',body))}block('Cosa fa',n.description||'Descrizione da compilare.');block('Scopo',n.purpose||'Non deducibile con certezza dal codice. Da definire.');block('Evoluzione futura',n.future||(n.goals||[]).map(x=>x.text).join('\n')||'Nessun obiettivo dichiarato.');block('Problemi',(n.issues||[]).map(x=>x.text).join('\n')||'Nessun problema annotato. Non equivale a una verifica positiva.');const deps=map.relations.filter(r=>r.from===n.id);block('Dipendenze',deps.map(r=>(map.groups.find(x=>x.id===r.to)?.name||r.to)+' · '+r.kind).join('\n')||'Nessuna dipendenza nota; gli import dinamici possono mancare.');
+function choose(n){selected=n.id;zoom=1;pan={x:0,y:0};if(map.groups.some(x=>x.parent===n.id)){if(expanded.has(n.id))expanded.delete(n.id);else expanded.add(n.id)}draw();inspect()}
+// Each expanded subtree owns its space. The world grows instead of squeezing
+// more nodes into a fixed rectangle; zoom reveals labels without collisions.
+let graphFrame = null;
+function constellationLayout(nodes) {
+  const children = new Map(), positions = new Map();
+  for (const n of nodes) {
+    if (!children.has(n.parent)) children.set(n.parent, []);
+    children.get(n.parent).push(n);
+  }
+  function subtree(n) {
+    const items = (children.get(n.id) || []).map(subtree);
+    if (!items.length) return {node:n, width:250, height:100, items:[]};
+    const columns = Math.ceil(Math.sqrt(items.length));
+    const widths = Array(columns).fill(0), heights = [];
+    items.forEach((c,i) => {
+      widths[i%columns] = Math.max(widths[i%columns], c.width);
+      const row = Math.floor(i/columns);
+      heights[row] = Math.max(heights[row]||0, c.height);
+    });
+    let y=160;
+    for (let row=0;row<heights.length;row++) {
+      let x=0;
+      for (let col=0;col<columns;col++) {
+        const c=items[row*columns+col];
+        if (c) {c.x=x+(widths[col]-c.width)/2;c.y=y;}
+        x+=widths[col]+48;
+      }
+      y+=heights[row]+50;
+    }
+    return {node:n, items, width:widths.reduce((a,b)=>a+b,0)+(columns-1)*48, height:y-50};
+  }
+  function place(tree,x,y) {
+    positions.set(tree.node.id,{x:x+tree.width/2,y:y+28});
+    for (const child of tree.items) place(child,x+child.x,y+child.y);
+  }
+  const bands=[];
+  for (const lens of ['branches','unassigned','trunk','roots']) {
+    const roots=nodes.filter(n=>!n.parent&&n.lens===lens).map(subtree);
+    for(let i=0;i<roots.length;i+=4) bands.push({lens,trees:roots.slice(i,i+4)});
+  }
+  const maxWidth=Math.max(800,...bands.map(b=>b.trees.reduce((w,t)=>w+t.width,0)+(b.trees.length-1)*110));
+  let y=20;
+  for(const band of bands) {
+    const width=band.trees.reduce((w,t)=>w+t.width,0)+(band.trees.length-1)*110;
+    let x=(maxWidth-width)/2;
+    band.y=y;
+    band.trees.forEach((tree,i)=>{place(tree,x,y+(i%2)*35);x+=tree.width+110;});
+    y+=Math.max(...band.trees.map(t=>t.height))+145;
+  }
+  return {positions,children,width:maxWidth,height:Math.max(350,y-100),bands};
+}
+function fitGraph() {zoom=1;pan={x:0,y:0};draw();}
+function draw() {
+  const host=$('graph'),text=$('textView');host.replaceChildren();text.replaceChildren();
+  if(!map)return;
+  const nodes=visible(), byId=new Map(map.groups.map(n=>[n.id,n]));
+  host.hidden=mode!=='graph';text.hidden=mode!=='text';
+  const layout=constellationLayout(nodes), {positions,children}=layout;
+  for(const n of nodes) {
+    const b=el('button',`${n.parent?'↳ ':''}${n.name} · ${lenses[n.lens]}${map.groups.some(x=>x.parent===n.id)?' · '+(expanded.has(n.id)?'−':'+'):''}`);
+    b.onclick=()=>choose(n);b.classList.toggle('active',n.id===selected);text.append(b);
+  }
+  if(!nodes.length) {
+    if(map.groups.length){text.append(el('p','Nessun nodo corrispondente.'));host.append(el('p','Nessun nodo corrispondente.'));}
+    return;
+  }
+  const W=Math.max(host.clientWidth,320),H=Math.max(host.clientHeight,280),
+    base=Math.min((W-100)/layout.width,(H-100)/layout.height),k=base*zoom,
+    tx=(W-layout.width*k)/2+pan.x,ty=(H-layout.height*k)/2+pan.y;
+  const ns='http://www.w3.org/2000/svg',s=(tag,attrs={})=>{
+    const e=document.createElementNS(ns,tag);
+    for(const [key,value] of Object.entries(attrs))e.setAttribute(key,value);
+    return e;
+  };
+  const svg=s('svg',{viewBox:`0 0 ${W} ${H}`,role:'group','aria-label':'Costellazione funzionale interattiva'});
+  const layer=s('g',{transform:`translate(${tx} ${ty}) scale(${k})`});
+  graphFrame={k,tx,ty,svg,layer};
+  svg.append(layer);
+  const related=new Set([selected]);
+  if(selected){
+    for(const r of map.relations){if(r.from===selected)related.add(r.to);if(r.to===selected)related.add(r.from);}
+    for(const n of nodes)if(n.parent===selected||n.id===byId.get(selected)?.parent)related.add(n.id);
+  }
+  // Band labels describe the classification; they do not add graph connections.
+  if(zoom===1&&!selected) for(const band of layout.bands) {
+    const label=s('text',{x:22,y:ty+band.y*k+26,class:'band-label'});
+    label.textContent=lenses[band.lens].toUpperCase();svg.append(label);
+  }
+  const edge=(a,b,color,hierarchy,active)=>{
+    if(!a||!b)return;
+    const dx=b.x-a.x,dy=b.y-a.y;
+    const curve=hierarchy?`M ${a.x} ${a.y} C ${a.x} ${a.y+dy*.5}, ${b.x} ${b.y-dy*.5}, ${b.x} ${b.y}`:
+      `M ${a.x} ${a.y} Q ${(a.x+b.x)/2+dy*.1} ${(a.y+b.y)/2-dx*.1}, ${b.x} ${b.y}`;
+    const path=s('path',{d:curve,fill:'none',stroke:color,'stroke-width':active?1.8:1,
+      'vector-effect':'non-scaling-stroke',opacity:selected?(active?.85:.07):(hierarchy?.32:.28),
+      class:hierarchy?'edge hierarchy':'edge dependency'});
+    if(!hierarchy)path.setAttribute('stroke-dasharray','3 6');
+    layer.append(path);
+  };
+  for(const n of nodes)if(n.parent)edge(positions.get(n.parent),positions.get(n.id),colors[n.lens],true,related.has(n.id)&&related.has(n.parent));
+  for(const r of map.relations)edge(positions.get(r.from),positions.get(r.to),colors[byId.get(r.to)?.lens]||'#9fb2ca',false,r.from===selected||r.to===selected);
+  const measure=document.createElement('canvas').getContext('2d');
+  measure.font='500 13px system-ui';
+  function wrap(name) {
+    const words=name.replace(/\//g,'/ ').split(/\s+/),lines=[];let line='';
+    for(const word of words){
+      if(measure.measureText((line+' '+word).trim()).width>190&&line){lines.push(line);line=word;}
+      else line=(line+' '+word).trim();
+    }
+    if(line)lines.push(line);
+    if(lines.length>2)lines.splice(1,lines.length-1,lines.slice(1).join(' '));
+    return lines.map(line=>{while(measure.measureText(line).width>190)line=line.slice(0,-2)+'…';return line;});
+  }
+  const labelBoxes=[];
+  const ordered=[...nodes].sort((a,b)=>(b.id===selected)-(a.id===selected)||Number(!!a.parent)-Number(!!b.parent)||Number(related.has(b.id))-Number(related.has(a.id)));
+  const labels=new Map();
+  for(const n of ordered) {
+    const p=positions.get(n.id),x=p.x*k+tx,y=p.y*k+ty;
+    if(x<0||x>W||y<-30||y>H)continue;
+    if(n.parent&&k<.55&&n.id!==selected&&!related.has(n.id))continue;
+    const lines=wrap(n.name),width=Math.max(...lines.map(l=>measure.measureText(l).width))+14,
+      box={left:x-width/2,right:x+width/2,top:y+18,bottom:y+18+lines.length*17+18};
+    if(n.id!==selected&&labelBoxes.some(b=>box.left<b.right&&box.right>b.left&&box.top<b.bottom&&box.bottom>b.top))continue;
+    if(box.left<4||box.right>W-4||box.bottom>H-4)continue;
+    labelBoxes.push(box);labels.set(n.id,lines);
+  }
+  for(const n of nodes) {
+    const p=positions.get(n.id),root=!n.parent,active=n.id===selected,color=colors[n.lens],r=(root?7:4)/Math.max(k,.55),
+      g=s('g',{class:'node'+(active?' selected':''),tabindex:0,role:'button','aria-label':n.name,
+        transform:`translate(${p.x} ${p.y})`,'data-id':n.id});
+    const expandable=map.groups.some(x=>x.parent===n.id);
+    if(expandable)g.setAttribute('aria-expanded',expanded.has(n.id));
+    g.style.opacity=selected&&!related.has(n.id)?.32:1;
+    g.append(s('circle',{r:Math.max(r,17/k),fill:'transparent',class:'node-hit'}));
+    if(root||active) {
+      g.append(s('circle',{r:r*3.7,fill:color,opacity:.045}),s('circle',{r:r*2.2,fill:color,opacity:.10}),
+        s('circle',{r:r*1.6,fill:'none',stroke:color,'stroke-opacity':active?.8:.3,'stroke-width':.8/k}));
+    }
+    g.append(s('circle',{r,fill:color,stroke:active?'#fff':color,'stroke-width':1/k}));
+    if(expandable&&labels.has(n.id)){
+      const mark=s('text',{x:14/k,y:-12/k,'font-size':11/k,fill:color,class:'expand-mark'});
+      mark.textContent=expanded.has(n.id)?'−':'+';g.append(mark);
+    }
+    const title=s('title');title.textContent=n.name+' · '+lenses[n.lens];g.append(title);
+    if(labels.has(n.id)) {
+      const label=s('text',{y:27/k,'text-anchor':'middle',class:'node-label','font-size':13/k});
+      labels.get(n.id).forEach((line,i)=>{const t=s('tspan',{x:0,dy:i?17/k:0});t.textContent=line;label.append(t);});g.append(label);
+      if(root){const count=s('text',{y:(45+(labels.get(n.id).length-1)*17)/k,'text-anchor':'middle',class:'node-meta','font-size':10/k});
+        count.textContent=`${n.code_refs?.length||0} ${n.code_refs?.length===1?'riferimento':'riferimenti'}${expandable?' · '+(expanded.has(n.id)?'richiudi':'esplora'):''}`;g.append(count);}
+    }
+    g.onclick=()=>choose(n);
+    g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(n);$('graph').querySelector(`[data-id="${CSS.escape(n.id)}"]`)?.focus();}};
+    layer.append(g);
+  }
+  function changeZoom(factor) {
+    zoom=Math.max(.4,Math.min(30,zoom*factor));draw();
+  }
+  svg.addEventListener('wheel',e=>{e.preventDefault();changeZoom(e.deltaY<0?1.15:1/1.15);},{passive:false});
+  svg.onpointerdown=e=>{if(e.target.closest('.node'))return;drag={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};svg.setPointerCapture(e.pointerId);svg.classList.add('dragging');};
+  svg.onpointermove=e=>{if(!drag)return;pan={x:drag.px+e.clientX-drag.x,y:drag.py+e.clientY-drag.y};layer.setAttribute('transform',`translate(${tx+pan.x-drag.px} ${ty+pan.y-drag.py}) scale(${k})`);};
+  const endDrag=()=>{if(!drag)return;drag=null;draw();};
+  svg.onpointerup=endDrag;svg.onpointercancel=endDrag;
+  host.append(svg);
+  $('zoomLevel').textContent=Math.round(zoom*100)+'%';
+  $('mapStats').textContent=`${nodes.length} visibili / ${map.groups.length} nodi`;
+}
+
+function inspect(){const host=$('inspector');host.replaceChildren(el('span','DETTAGLIO DEL NODO'));const n=map?.groups.find(x=>x.id===selected);if(!n){host.append(el('h2',report?'Il progetto, a colpo d’occhio.':'Ogni programma ha una forma.'),el('p',report?'Parti dalle responsabilità principali. Apri un punto per scoprire i file e poi le singole dichiarazioni.':'Apri una cartella e scopri come si collegano le parti del tuo progetto. Tutto resta sul tuo computer.'));
+if(report){const stats=el('div');stats.className='scan-summary';for(const [value,label]of [[report.atlas.nodes.filter(n=>n.kind==='file').length,'file rilevati'],[map.groups.filter(n=>!n.parent).length,'aree proposte']]){const cell=el('div');cell.append(el('strong',value),el('span',label));stats.append(cell)}host.append(stats)}
+const steps=el('div');steps.className='welcome-steps';for(const [number,caption]of [['01','Seleziona un punto, esplora i suoi file.'],['02','Segui i collegamenti e le dipendenze.'],['03','Dai un nome alle tue idee, salva la mappa.']]){const item=el('div');item.className='welcome-step';item.append(el('b',number),el('span',caption));steps.append(item)}host.append(steps,el('h3','Una mappa da interpretare'),el('p','Le aree sono proposte basate sui sorgenti. I colori distinguono le categorie; non certificano il funzionamento. Puoi correggere ogni scheda.'));return}const badge=el('span',lenses[n.lens]+' · '+(n.source==='manual'?'corretto dall’utente':'proposta da confermare'));badge.className='badge';host.append(el('h2',n.name),badge);function block(title,body){host.append(el('h3',title),el('p',body))}block('Cosa fa',n.description||'Descrizione da compilare.');block('Scopo',n.purpose||'Non deducibile con certezza dal codice. Da definire.');block('Evoluzione futura',n.future||(n.goals||[]).map(x=>x.text).join('\n')||'Nessun obiettivo dichiarato.');block('Problemi',(n.issues||[]).map(x=>x.text).join('\n')||'Nessun problema annotato. Non equivale a una verifica positiva.');const deps=map.relations.filter(r=>r.from===n.id);block('Dipendenze',deps.map(r=>(map.groups.find(x=>x.id===r.to)?.name||r.to)+' · '+r.kind).join('\n')||'Nessuna dipendenza nota; gli import dinamici possono mancare.');
 const children=map.groups.filter(x=>x.parent===n.id);if(children.length){host.append(el('h3','Sottopunti · '+children.length));for(const c of children){const b=el('button',c.name);b.onclick=()=>{expanded.add(n.id);selected=c.id;draw();inspect()};host.append(b)}}
 host.append(el('h3','Timeline individuale'));const paths=new Set((n.code_refs||[]).map(id=>report.atlas.nodes.find(x=>x.id===id)?.path).filter(Boolean));const history=(report.intelligence?.history||[]).filter(c=>c.files.some(f=>paths.has(f)));for(const c of history.slice(0,8)){const item=el('div');item.className='timeline';item.append(el('small',c.date.slice(0,10)+' · '+c.sha.slice(0,7)),el('div',c.message));host.append(item)}if(!history.length)host.append(el('p','Nessun commit pertinente nei commit recenti disponibili.'));for(const c of (n.timeline||[]).slice(-5).reverse()){const item=el('div',c.date.slice(0,10)+' · '+c.text);item.className='timeline';host.append(item)}host.append(el('small','Resoconti dei commit sui riferimenti associati, non ricostruzioni del comportamento passato.'));
 const edit=el('details');edit.append(el('summary','Modifica classificazione e scheda'));function field(label,value,apply,multi=false){const l=el('label',label),input=el(multi?'textarea':'input');input.value=value||'';l.append(input);edit.append(l);input.oninput=()=>{apply(input.value);n.source='manual';save()};input.onchange=()=>{apply(input.value);n.source='manual';n.timeline??=[];n.timeline.push({date:new Date().toISOString(),text:'Aggiornato: '+label});save();draw()}}function choice(label,value,options,apply){const l=el('label',label),input=el('select');for(const [v,t]of options){const o=el('option',t);o.value=v;input.append(o)}input.value=value||'';l.append(input);edit.append(l);input.onchange=()=>{apply(input.value);n.source='manual';save();draw()}}field('Nome',n.name,v=>n.name=v);choice('Classificazione',n.lens,Object.entries(lenses),v=>n.lens=v);const descendants=new Set([n.id]);let changed=true;while(changed){changed=false;for(const g of map.groups)if(descendants.has(g.parent)&&!descendants.has(g.id)){descendants.add(g.id);changed=true}}choice('Nodo superiore',n.parent,[['','Principale'],...map.groups.filter(g=>!descendants.has(g.id)).map(g=>[g.id,g.name])],v=>n.parent=v||null);field('Cosa fa',n.description,v=>n.description=v,true);field('Scopo',n.purpose,v=>n.purpose=v,true);field('Evoluzione futura',n.future,v=>n.future=v,true);field('Problemi (uno per riga)',(n.issues||[]).map(x=>x.text).join('\n'),v=>n.issues=v.split('\n').filter(Boolean).map(text=>({text,source:'manual'})),true);field('Dipendenze (ID separati da virgola)',deps.map(r=>r.to).join(', '),v=>{const ids=v.split(',').map(s=>s.trim()).filter(Boolean);if(ids.some(id=>id===n.id||!map.groups.some(g=>g.id===id))){status('Dipendenza non valida: usa gli ID indicati nelle evidenze dei nodi.',true);return}map.relations=map.relations.filter(r=>r.from!==n.id);for(const id of ids)map.relations.push({from:n.id,to:id,kind:'depends_on',source:'manual'})});const applyButton=el('button','Aggiorna scheda');applyButton.onclick=()=>{save();draw();inspect()};edit.append(applyButton);host.append(edit);
 const evidence=el('details');evidence.append(el('summary','Evidenze tecniche e limiti'));evidence.append(el('p','ID: '+n.id),el('p','Origine: '+(n.source||'manual')+' · '+(n.confidence||'dichiarazione utente')),el('p',n.reason||'Informazioni inserite dall’utente.'));const tech=el('div');tech.id='technical';tech.textContent=[...(n.code_refs||[]),...report.atlas.errors.filter(e=>paths.has(e.file)).map(e=>'Errore: '+e.file+' '+e.message)].join('\n')||'Nessun riferimento tecnico associato.';evidence.append(tech,el('p',(map.limitations||[]).join('\n')),el('p','Test individuati: '+(report.intelligence?.tests?.test_files?.length||0)+'. Non eseguiti da CodeAtlas.'));host.append(evidence)}
 $('openForm').onsubmit=async e=>{e.preventDefault();const b=$('openProject');b.disabled=true;status('Scansione locale in corso…');try{if(!token)throw Error('Avvia CodeAtlas con il launcher desktop per scegliere una cartella.');const res=await fetch('/api/open',{method:'POST',headers:{'Content-Type':'application/json','X-Atlas-Token':token},body:JSON.stringify({path:$('projectPath').value})});const r=await res.json();if(!res.ok)throw Error(r.error);load(r)}catch(e){status(e.message,true)}finally{b.disabled=false}};
-$('modeGraph').onclick=()=>{mode='graph';$('modeGraph').classList.add('active');$('modeText').classList.remove('active');draw()};$('modeText').onclick=()=>{mode='text';$('modeText').classList.add('active');$('modeGraph').classList.remove('active');draw()};$('search').oninput=draw;$('fit').onclick=()=>{zoom=1;pan={x:0,y:0};draw()};$('add').onclick=()=>{if(!map)return status('Apri prima un progetto.',true);const n={id:'manual:'+crypto.randomUUID(),name:'Nuova responsabilità',lens:'unassigned',parent:selected,code_refs:[],source:'manual',description:'',issues:[]};map.groups.push(n);if(selected)expanded.add(selected);selected=n.id;$('empty').hidden=true;save();draw();inspect();$('inspector details').open=true};$('export').onclick=()=>{if(!map)return;const url=URL.createObjectURL(new Blob([JSON.stringify(map,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download='codeatlas-map.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('import').onchange=async e=>{try{if(!report)throw Error('Apri prima un progetto.');const m=JSON.parse(await e.target.files[0].text());validate(m);map=m;selected=null;expanded.clear();save();draw();inspect()}catch(e){status(e.message,true)}};
+$('modeGraph').onclick=()=>{mode='graph';$('modeGraph').classList.add('active');$('modeText').classList.remove('active');draw()};$('modeText').onclick=()=>{mode='text';$('modeText').classList.add('active');$('modeGraph').classList.remove('active');draw()};$('search').oninput=()=>{zoom=1;pan={x:0,y:0};draw()};$('fit').onclick=fitGraph;$('zoomIn').onclick=()=>{zoom=Math.min(30,zoom*1.3);draw()};$('zoomOut').onclick=()=>{zoom=Math.max(.4,zoom/1.3);draw()};$('collapse').onclick=()=>{expanded.clear();selected=null;fitGraph();inspect()};$('add').onclick=()=>{if(!map)return status('Apri prima un progetto.',true);const n={id:'manual:'+crypto.randomUUID(),name:'Nuova responsabilità',lens:'unassigned',parent:selected,code_refs:[],source:'manual',description:'',issues:[]};map.groups.push(n);if(selected)expanded.add(selected);selected=n.id;$('empty').hidden=true;save();draw();inspect();$('inspector').querySelector('details').open=true};$('export').onclick=()=>{if(!map)return;const url=URL.createObjectURL(new Blob([JSON.stringify(map,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download='codeatlas-map.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('import').onchange=async e=>{try{if(!report)throw Error('Apri prima un progetto.');const m=JSON.parse(await e.target.files[0].text());validate(m);map=m;selected=null;expanded.clear();$('empty').hidden=map.groups.length>0;fitGraph();save();inspect()}catch(e){status(e.message,true)}finally{e.target.value=''}};
+new ResizeObserver(()=>{if(map&&mode==='graph')draw()}).observe($('graph'));
+inspect();
 (async()=>{try{const s=await fetch('/api/session');if(s.ok)token=(await s.json()).token}catch(e){}try{const r=await fetch('/report.json');if(r.ok)load(await r.json())}catch(e){status('Impossibile caricare il report: '+e.message,true)}})();
 </script></body></html>
