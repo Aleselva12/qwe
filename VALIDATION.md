@@ -197,3 +197,15 @@ sul commit pubblicato e non è implicato dagli esiti locali riportati qui.
 - Fixture XML ed esempio profilo sono didattici; non rappresentano un progetto realmente verificato.
 - Resta non effettuata la verifica visiva tramite browser grafico. jsdom verifica comportamento/DOM, non geometria, colori o rendering mobile.
 - Limiti: nessuna esecuzione dei test del progetto, autenticazione CI, import coverage o plugin eseguibili. Associazioni esplicite/percorso, non deduzione semantica della copertura. Persistenza soggetta alla quota del browser; le applicazioni che eccedono la quota non sostituiscono la mappa corrente. Primi 200 casi elencati per report; tutti conteggiati e conservati. Nessun benchmark su monorepo molto grandi.
+
+
+## Ricontrollo Windows del main integrato — 3 novembre 2026
+
+Versione controllata: `85c35d0`, che include il redesign `b8deb32` e gli aggiornamenti successivi. Non sono stati sovrascritti i profili, le sei viste o la Direzione progetto.
+
+- Python 3.13 / Windows: **31 test Python superati** e compilazione superata.
+- `npm ci --ignore-scripts` e `npm test`: **18 test Node/DOM superati**. L'ambiente aveva Node 22.15, inferiore al requisito dichiarato (24.15); npm ha segnalato tale incompatibilità. Per lo sviluppo usare la versione dichiarata nel package.json. Nessuna dipendenza installata globalmente.
+- Browser reale sulla versione corrente: avvio del modulo desktop, apertura qwe tramite percorso senza JSON, mappa iniziale con capacità/processi/basi, espansione Avvio e orchestrazione, scheda fissa destra con docstring ed evidenze, passaggio alla vista testuale e ritorno all'albero. Anteprima salvata localmente.
+- Il precedente collaudo del redesign aveva verificato anche modifica della classificazione/scopo e ripristino dopo ricaricamento. Questi passaggi non sono stati ripetuti manualmente su ogni nuova vista; i test DOM aggiornati coprono persistenza e configurazione.
+- Non collaudati qui il doppio clic fisico, tutte le interazioni della Direzione progetto, tutte le sei viste nel browser grafico o i grandi monorepo. Nessuna certificazione implicita della CI remota.
+- Serveria non è stato modificato né eseguito.
