@@ -3,6 +3,7 @@ const {JSDOM}=require('jsdom');
 const root=path.join(__dirname,'..');
 function setup(){
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),dom=new JSDOM(html,{runScripts:'outside-only',url:'http://localhost:8765'}),w=dom.window,context=dom.getInternalVMContext();
+ w.ResizeObserver=class{observe(){}};w.HTMLCanvasElement.prototype.getContext=()=>({font:'',measureText:t=>({width:t.length*7})});
  w.structuredClone=structuredClone;w.fetch=async()=>({ok:false});w.TextEncoder=TextEncoder;Object.defineProperty(w.crypto,'subtle',{value:require('node:crypto').webcrypto.subtle});w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false};
  for(const file of ['views.js','profiles.js','evidence.js','workbench.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);
  vm.runInContext(html.split('<script>')[1].split('</script>')[0],context);
@@ -25,7 +26,7 @@ test('JUnit imports, explicit mapping, stale version, duplicate rejection and pe
  w.document.querySelector('.testCase select').value='core';button(w,'Associa').onclick();w.load(report);w.choose(vm.runInContext('map.groups[0]',context));assert.match(w.document.querySelector('#inspector').textContent,/1 falliti/);assert.match(w.document.querySelector('#inspector').textContent,/Associazione dichiarata/);
  w.stageRun(run);button(w,'Importa risultato').onclick();assert.match(w.document.querySelector('#panelBody').textContent,/già importato/);assert.equal(vm.runInContext('map.verification_runs.length',context),1);
  await assert.rejects(()=>w.parseJUnit({name:'bad.xml',size:9,text:async()=>'<garbage/>'}));
- for(const mode of ['graph','network','layers','matrix','files','text']){w.setMode(mode);assert.ok(w.document.querySelector(['files','text','matrix'].includes(mode)?'#textView':'#graph').children.length)}
+ for(const mode of ['graph','network','layers','matrix','files','flow','text']){w.setMode(mode);assert.ok(w.document.querySelector(['text','matrix'].includes(mode)?'#textView':'#graph').children.length)}
  }finally{dom.window.close()}
 });
 test('Corrupt persisted map falls back to clean scan and imported custom maps validate independently of current profile',()=>{

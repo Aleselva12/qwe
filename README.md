@@ -1,6 +1,6 @@
 # CodeAtlas
 
-Mappa locale dei componenti di un programma: costellazione 2D nera, classificazione semiautomatica in **radici, tronco e rami**, sottopunti espandibili e scheda individuale a destra. CodeAtlas è indipendente da Serveria e non modifica né esegue il progetto analizzato.
+Mappa locale del programma: **capacità utili verso l’utente, processi che le realizzano e requisiti alla base**. Sei schemi navigabili, dettagli espandibili e schede modificabili. CodeAtlas è indipendente da Serveria e non modifica né esegue il progetto analizzato.
 
 ## Avvio
 
@@ -23,8 +23,10 @@ Il server ascolta solo su `127.0.0.1:8765`. Chiudi la sua finestra o premi Ctrl+
 
 ## Esplorazione
 
-- All'inizio compaiono solo i componenti principali. Clic o Invio su un nodo apre la scheda ed espande/richiude i sottopunti. La ricerca rende visibili anche i risultati nascosti con i loro antenati.
-- Layout automatico deterministico con separazione delle posizioni; rotella per zoom, trascinamento dello sfondo e **Centra**. Nessun limite arbitrario che nasconda parte dei nodi.
+- All'inizio è aperta la capacità complessiva proposta, con i processi principali e le basi. Clic o Invio su un nodo apre la scheda ed espande/richiude i sottopunti. La ricerca rende visibili anche i risultati nascosti con i loro antenati.
+- L’albero si legge dall’alto: **capacità utile → processi → requisiti**. I file e le dichiarazioni si esplorano come dettagli della realizzazione. Una calcolatrice rimane una capacità complessiva anche quando implementa quattro operazioni aritmetiche.
+- La proposta iniziale contiene una capacità con il nome del progetto, ricavato dal README o dalla cartella. Non deduce automaticamente gli obiettivi degli utenti. Puoi rinominarla, separare altre capacità e modificare ruoli e associazioni nelle schede. L’hardware si inserisce manualmente: non viene indovinato.
+- Layout deterministico, collegamenti curvi, evidenza del nodo selezionato; rotella o **+ / −** per zoom, trascinamento dello sfondo e **Centra**. **Panoramica** richiude i dettagli. Le etichette si adattano allo spazio per non accavallarsi: avvicinati con lo zoom o usa ricerca/vista testuale per leggere i dettagli. Nessun limite al numero dei nodi visibili imposto dal layout.
 - Colori per classificazione, mai per certificare test passati. Linee continue per gerarchia; tratteggiate per dipendenze statiche/proposte o dichiarate. Non vengono inventate connessioni per riempire il disegno.
 - La scheda contiene cosa fa, scopo, futuro, problemi, dipendenze, sottopunti e timeline individuale. Le note iniziali derivano da docstring quando disponibili, altrimenti sono proposte esplicitamente incerte.
 - **Modifica classificazione e scheda** permette di cambiare nome, categoria, genitore, descrizioni, problemi e dipendenze. **Aggiorna scheda** aggiorna il dettaglio visibile. Per dipendenze usa gli ID dei nodi mostrati nelle evidenze. **+ Nodo** crea anche radici manuali per hardware, modelli e servizi non rilevati.
@@ -34,22 +36,26 @@ Le correzioni vengono conservate nel localStorage del browser, separatamente per
 
 ## Punti di vista sul progetto
 
-Il selettore **Punto di vista** affianca all’**Albero principale**, sempre iniziale, quattro rappresentazioni classiche. La vista testuale rimane disponibile.
+Il selettore **Schema** offre **sei rappresentazioni: Albero funzionale più cinque alternative**. La vista testuale rimane disponibile.
 
 | Vista | Domanda a cui risponde |
 | --- | --- |
+| Albero funzionale | Come si appoggia l’utilità del programma su processi e requisiti? |
 | Grafo delle dipendenze | Quali componenti dipendono da quali altri, anche fra rami diversi? |
 | Dipendenze a livelli | Quali catene di dipendenze e quali cicli collegano i componenti? |
 | Matrice delle dipendenze (DSM) | Quali coppie di componenti sono accoppiate? Riga = origine, colonna = destinazione. |
-| Struttura dei file | Dove sono cartelle, file e dichiarazioni rilevate? A quali responsabilità sono associati? |
+| Struttura dei file | Dove sono cartelle, file e dichiarazioni rilevate? A quali elementi della mappa sono associati? |
+| Flusso di supporto | Come si collegano basi, realizzazione e utilità, da sinistra a destra? |
 
 Grafo, livelli e matrice proiettano la stessa mappa editabile, con gli stessi filtri, nodi selezionati, schede e sottopunti espandibili. Usano solo relazioni `depends_on`: una relazione generica `related_to` o `supports` non diventa una dipendenza. Le frecce vanno dal componente dipendente alla dipendenza. Il clic su una linea o una cella mostra le relazioni originali e la provenienza.
 
 Chiudendo un ramo, le dipendenze verso altri rami vengono aggregate sul primo antenato visibile; quelle interamente interne al ramo chiuso non vengono mostrate. Il numero in una cella conta le relazioni della mappa, non le chiamate a runtime. Espandi i sottopunti per analizzare i dettagli. La ricerca può nascondere gli estremi di una relazione: non è una prova di indipendenza. Nessun nodo corrispondente viene troncato deliberatamente.
 
-La vista a livelli raggruppa i cicli prima di calcolare i livelli; i nodi coinvolti sono marcati **Ciclo**. La struttura fisica ha una propria espansione e permette di tornare all’albero dalle responsabilità associate al file o simbolo. Questa vista è un inventario dei soli file supportati.
+La vista a livelli raggruppa i cicli prima di calcolare i livelli; il dettaglio dei nodi coinvolti riporta **Ciclo**. La struttura fisica ha una propria espansione e permette di tornare all’albero dalle responsabilità associate al file o simbolo. Questa vista è un inventario dei soli file supportati.
 
-Le viste grafiche alternative si scorrono; **Centra** adatta il disegno alla finestra. Albero e vista testuale mantengono il comportamento precedente. L’esportazione salva il modello comune, senza duplicarlo per ogni vista.
+Albero, grafo, livelli e flusso condividono zoom, trascinamento, evidenza della selezione e stile scuro a punti luminosi. **Centra** ripristina l’inquadratura; **Panoramica** richiude i dettagli mantenendo aperta la capacità complessiva. La struttura fisica è un albero grafico con espansione indipendente e scorrimento; la matrice si scorre come tabella. L’esportazione salva il modello comune, senza duplicarlo per ogni vista.
+
+Nel **Flusso di supporto** le frecce delle dipendenze sono lette nel verso opposto: dal requisito verso il componente che se ne serve. Le associazioni gerarchiche arrivano alla capacità. Nel grafo e nei livelli le frecce mantengono invece il verso `dipendente → dipendenza`. Il dettaglio di un collegamento conserva sempre le evidenze originali; la gerarchia prova soltanto l’appartenenza proposta o dichiarata, non l’esecuzione di un percorso.
 
 **Limite deliberato:** non sono diagrammi di sequenza, flowchart del controllo o diagrammi entità-relazioni. Per questi servono dati su chiamate, condizioni, eventi e schema del database che l’analizzatore attuale non ricostruisce. Le dipendenze statiche non dimostrano l’ordine di esecuzione.
 
@@ -75,7 +81,7 @@ La CLI `--junit risultati.xml` produce risultati dello stesso formato, visibili 
 
 ## Provenienza e limiti
 
-La classificazione usa regole trasparenti su nomi, percorsi e dichiarazioni: non comprende semanticamente ogni progetto. Le aree sconosciute restano **da classificare**, senza inventare funzioni. Gli scopi e gli obiettivi futuri restano da definire dall'utente. Le docstring sono dichiarazioni dell'autore, non prove di comportamento. Una modifica manuale viene indicata come tale.
+La classificazione usa regole trasparenti su nomi, percorsi e dichiarazioni: non comprende semanticamente ogni progetto. Le aree sconosciute restano **da collocare**, senza inventare funzioni. Gli scopi e gli obiettivi futuri restano da definire dall'utente. Le docstring sono dichiarazioni dell'autore, non prove di comportamento. Una modifica manuale viene indicata come tale.
 
 Python usa AST per dichiarazioni e import; JavaScript/TypeScript usa euristiche conservative, non un compilatore completo. Manifest infrastrutturali sono inventariati, hardware/versioni runtime/modelli installati non vengono verificati. Import relativi/dinamici possono rimanere irrisolti. Go, Rust, Java, C#, C/C++, Ruby, PHP, Swift, Kotlin, SQL, HTML/CSS, Vue e Svelte sono inventariati a livello file, senza parser semantico dedicato. I sottopunti generati dai nomi delle dichiarazioni richiedono revisione umana e possono essere riorganizzati.
 
@@ -91,6 +97,10 @@ python -m compileall -q codeatlas tests
 npm ci --ignore-scripts
 npm test
 ```
+
+Il collaudo browser opzionale è riproducibile con `python tests/browser_smoke.py` dopo aver installato Playwright e Chromium (istruzioni nello script). Non sono dipendenze del programma. La CI conserva screenshot e risultati come artifact.
+
+Per distribuire una prova, includi anche [LEGGIMI - Per iniziare.txt](LEGGIMI%20-%20Per%20iniziare.txt).
 
 Vedi [VALIDATION.md](VALIDATION.md) per esiti effettivi, prove browser e lavoro ancora da fare. Nessuna dichiarazione di affidabilità su grandi monorepo senza un benchmark separato.
 

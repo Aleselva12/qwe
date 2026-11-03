@@ -24,6 +24,8 @@ def validate(overlay: dict) -> dict:
         if item["id"] in known:
             raise ValueError("Duplicate group id")
         known.add(item["id"])
+        if "role" in item and item["role"] not in {"capability", "process", "foundation"}:
+            raise ValueError("Unknown functional role")
         if item.get("lens", "unassigned") not in lenses:
             raise ValueError("Unknown lens")
         if item.get("status", "unknown") not in STATES:

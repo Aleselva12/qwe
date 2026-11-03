@@ -33,7 +33,9 @@ class FunctionalMapTests(unittest.TestCase):
             self.assertEqual(a['overlay'], b['overlay'])
             groups = a['overlay']['groups']
             calendar = next(n for n in groups if n['id']=='concept:calendar')
-            self.assertEqual(calendar['lens'], 'branches')
+            self.assertEqual(calendar['lens'], 'trunk')
+            self.assertEqual(calendar['role'], 'process')
+            self.assertEqual(calendar['parent'], 'concept:capability:project')
             self.assertTrue(any(n.get('parent') == calendar['id'] for n in groups))
             self.assertTrue(any(n['lens']=='roots' for n in groups))
             self.assertTrue(all(n['source']=='heuristic' and not n['purpose'] for n in groups))

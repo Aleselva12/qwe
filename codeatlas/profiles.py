@@ -1,7 +1,7 @@
 """Validation of portable profile data; no executable hooks are supported."""
 import re
 
-VIEWS = {'graph', 'text', 'network', 'layers', 'matrix', 'files'}
+VIEWS = {'graph', 'text', 'network', 'layers', 'matrix', 'files', 'flow'}
 STATES = {'idea', 'planned', 'in_progress', 'implemented', 'verified', 'blocked', 'unknown'}
 
 def validate_profile(profile):
@@ -25,6 +25,8 @@ def validate_profile(profile):
     for node in profile.get('nodes', []):
         if not isinstance(node, dict) or not isinstance(node.get('id'), str) or not node['id'] or node['id'] in seen or not isinstance(node.get('name'), str) or not node['name'] or node.get('source') not in {'manual', 'ai_suggestion'} or node.get('status') not in STATES:
             raise ValueError('Invalid profile node')
+        if 'role' in node and node['role'] not in {'capability', 'process', 'foundation'}:
+            raise ValueError('Invalid functional role')
         seen.add(node['id'])
     for rule in profile.get('rules', []):
         if not isinstance(rule, dict) or not isinstance(rule.get('path_glob'), str) or not 1 <= len(rule['path_glob']) <= 300 or not isinstance(rule.get('group_id'), str):

@@ -1,29 +1,183 @@
-# Verifica del redesign — 3 novembre 2026
+# Albero funzionale e sei viste — 3 novembre 2026
 
-## Risultati eseguiti
+## Integrazione
 
-- Recuperati codice e storia della repository `Aleselva12/qwe`, branch `main`.
-- Prima delle modifiche: 18 test esistenti superati.
-- Dopo le modifiche: 22 test superati su Windows / Python 3.13. Compilazione Python superata.
-- Nuovi test: classificazione deterministica compatibile con schema, sottopunti e runtime, nessuna intenzione inventata, cartelle vuote/sconosciute, import relativi Python e sottopunti TypeScript, nessuna scrittura nella cartella analizzata, flusso HTTP desktop con token/origine, apertura, GET successivo, percorso errato senza perdere il report precedente.
-- Browser reale, server `python -m codeatlas.desktop`: apertura di qwe dal campo percorso senza JSON; costellazione iniziale; espansione Analisi e classificazione; scheda destra con dipendenze e commit pertinenti; modifica della categoria a Tronco; vista testuale; ricaricamento con correzione preservata; modifica dello scopo e verifica dopo un ulteriore ricaricamento.
-- Il collaudo ha trovato e corretto due difetti: report desktop perso tra richieste, e SVG che nascondeva i pulsanti all'accessibilità. Corretto anche il salvataggio dei campi durante l'editing e l'altezza della mappa nelle finestre strette.
+Questa versione integra il branch `improve/constellation-preview` (`aaa34d1`)
+e le quattro prospettive di `codex/project-perspectives` (`7da540c`), poi aggiornata
+con `main` (`65d6a05`): profili portabili, evidenze e inventario esteso sono conservati.
+L’albero cambia significato: capacità complessiva proposta in alto, realizzazione
+intermedia, requisiti in basso. Dichiarazioni e file sono dettagli della realizzazione.
+Non sono state aggiunte funzioni di pianificazione, account o stato multiutente.
+I launcher conservano la distribuzione di tutti gli asset delle viste, dei profili e delle verifiche.
+Categorie/colori dei profili e posizione funzionale dei nodi sono indipendenti.
+La vista `flow` è valida anche come scelta iniziale portabile del profilo.
 
-## Limiti residui
+## Verifiche eseguite
 
-- La classificazione è una proposta basata su convenzioni e nomi, non ricostruzione semantica dell'architettura. Le aree generiche devono essere rinominate e riorganizzate.
-- Scopo, evoluzione e problemi non possono essere ricostruiti attendibilmente senza dichiarazioni umane. Il programma li rende editabili e li mantiene distinti dalle evidenze.
-- Sottopunti da dichiarazioni, non ancora una classificazione semantica autonoma delle sottofunzioni.
-- Cronologia limitata ai commit recenti associati ai riferimenti; nessun confronto semantico fra revisioni.
-- Nessun adapter Graphify, parser completo JS/TS, tracciamento runtime o rilevamento hardware.
-- Persistenza locale al browser e al percorso, esportazione manuale per backup; nessun database multiutente.
-- Avvio mediante launcher richiede Python; non è un eseguibile installabile autonomo. Collaudato il modulo chiamato dal launcher, non un doppio clic fisico sul file batch.
-- Il collaudo browser è manuale assistito, non una suite browser automatizzata in CI. Non certificati i tre benchmark Click/full-stack/Dify né macOS/Linux.
-- Il repository analizzato durante il collaudo è qwe. Serveria non è stato aperto, eseguito o modificato.
+Linux / Python 3.12 / Chromium reale headless, con Playwright.
 
-La suite CI esistente continua a eseguire i test unitari e la compilazione. L'esito remoto va controllato sul commit pubblicato; non è sostituibile con l'esito locale.
+- 31 test Python superati e 17 test JavaScript superati; compilazione Python e
+  controllo degli spazi superati.
+- Caso Calcolatrice: aggiungendo sottrazione, moltiplicazione e divisione alla
+  sola addizione, rimane una capacità complessiva; le quattro operazioni
+  restano dettagli interni. Nessun hardware dedotto o inventato.
+- Test dei ruoli, compatibilità con overlay precedenti, direzione delle
+  dipendenze e del supporto, evidenze originali, cicli, basi espanse e coordinate finite.
+- Browser sui quattro progetti sotto: passaggio fra tutte e sei le viste,
+  modello invariato durante il cambio, matrice, albero fisico con espansione
+  separata, selezione ed espansione, ricerca, tastiera, rotella, pulsanti zoom,
+  trascinamento, vista testuale, modifica e ricaricamento, import/export ripetuti,
+  cartelle errate e vuote, nuovo nodo manuale.
+- Screenshot e geometria controllati a 1440 × 900, 1024 × 768, 768 × 900 e
+  390 × 844. Nei casi controllati, zero sovrapposizioni fra etichette mostrate,
+  zero punti fuori dall’inquadratura iniziale, nessuno scorrimento orizzontale
+  della pagina. Le viste fisica e matrice hanno il proprio scorrimento.
+- Le etichette di dettaglio restano progressive con lo zoom. In espansione
+  completa tutti i punti sono presenti, mentre molti nomi richiedono zoom,
+  ricerca o vista testuale.
 
-## Viste complementari — 3 novembre 2026
+| Progetto | Punti nella panoramica | Nodi espansi | Etichette visibili nella panoramica | Errori scansione |
+| --- | ---: | ---: | ---: | ---: |
+| CodeAtlas modificato | 12 | 146 | 12 | 0 |
+| Click | 8 | 1.134 | 8 | 0 |
+| Full Stack FastAPI Template | 15 | 953 | 15 | 1 |
+| Flask | 11 | 795 | 11 | 0 |
+
+Le copie e revisioni dei benchmark sono le stesse documentate nel collaudo
+precedente sotto. Il file `backend/app/api/deps.py` del template usa sintassi
+non supportata da Python 3.12: errore segnalato, scansione di quel file parziale.
+Le quantità di CodeAtlas possono cambiare aggiungendo i file di collaudo.
+
+## Sei schemi
+
+1. Albero funzionale: utilità sopra, processi nel mezzo, requisiti alla base.
+2. Grafo delle dipendenze: dipendente → dipendenza.
+3. Dipendenze a livelli: livelli statici con cicli conservati.
+4. Matrice delle dipendenze: origine per riga e destinazione per colonna.
+5. Struttura dei file: albero fisico grafico di cartelle, sorgenti e dichiarazioni.
+6. Flusso di supporto: basi → processi → capacità utili.
+
+La vista testuale è un ausilio aggiuntivo, non conta tra i sei schemi.
+I collegamenti di appartenenza restano distinti dalle dipendenze e non dimostrano
+l’ordine di esecuzione. La capacità iniziale è una proposta dal titolo del progetto,
+non un’interpretazione semantica certificata. Può essere corretta e separata.
+
+## Riproduzione e limiti
+
+```sh
+python -m unittest discover -s tests -v
+npm ci --ignore-scripts
+npm test
+python -m compileall -q codeatlas tests
+python tests/browser_smoke.py --chromium /usr/bin/chromium --output /tmp/codeatlas-six
+```
+
+Il browser test richiede Playwright; il programma resta senza dipendenze Python
+aggiuntive. Ripetere `--benchmark /percorso/progetto` per le copie esterne.
+Screenshot e risultati vengono salvati nella cartella indicata; la CI li carica
+come artifact. L’esito remoto deve essere controllato sul commit pubblicato.
+Windows/macOS e browser diversi da Chromium non collaudati in questa sessione.
+Linguaggi supportati, import dinamici, cronologia limitata e persistenza browser
+mantengono i limiti dichiarati nel README.
+
+---
+
+## Collaudo precedente (versione della costellazione)
+
+# Collaudo della costellazione — 3 novembre 2026
+
+## Ambiente e risultato
+
+Collaudo effettivo in Linux, Python 3.12 e Chromium headless tramite Playwright.
+Base analizzata: `b8deb32185209ede3ca7b07103be826b3c5e54a5`.
+
+- Prima: 22 test Python superati. La vista completamente espansa sovrapponeva
+  le etichette: 4 coppie su qwe, 8.673 su Click, 2.853 sul template full stack,
+  2.600 su Flask, a 1440 × 900. Misura degli ingombri effettivi SVG nel browser.
+- Dopo: 24 test Python superati; compilazione e `git diff --check` superati.
+- Suite browser completata senza errori JavaScript sui quattro progetti.
+- Controllati apertura dal percorso, responsabilità → file → dichiarazioni,
+  selezione, ricerca, tastiera, zoom con rotella/pulsanti, trascinamento,
+  ripristino dell'inquadratura, vista testuale, salvataggio e ricaricamento,
+  esportazione e importazione ripetuta, cartella inesistente, cartella vuota,
+  importazione su cartella vuota e creazione di un nodo manuale.
+- Screenshot controllati nella panoramica, nell'esplorazione, nel dettaglio e
+  nell'espansione completa. Dimensioni verificate: 1440 × 900, 1024 × 768,
+  768 × 900 e 390 × 844. Nessuna sovrapposizione fra etichette visualizzate nei
+  controlli geometrici e nessuno scorrimento orizzontale della pagina.
+- Tutti i punti sono presenti nell'espansione completa e nella vista testuale.
+  Le etichette sono progressive: a basso zoom se ne mostrano solo alcune,
+  scelte in base allo spazio; zoom e ricerca rendono leggibili i dettagli.
+  Zero sovrapposizioni non significa che migliaia di nomi siano leggibili
+  contemporaneamente su uno schermo.
+
+| Progetto | File rilevati | Nodi completamente espansi | Ridisegno misurato* | Errori scansione |
+| --- | ---: | ---: | ---: | ---: |
+| qwe modificato | 22 | 66 | 10 ms | 0 |
+| Click | 102 | 1.059 | 113 ms | 0 |
+| Full Stack FastAPI Template | 159 | 811 | 54 ms | 1 |
+| Flask | 89 | 680 | 47 ms | 0 |
+
+*Singola misura nella macchina di collaudo, inclusa lettura della geometria;
+non un benchmark statistico né una garanzia sulle macchine degli utenti.
+Non sono stati eseguiti i programmi o le suite dei progetti analizzati.
+Le tre copie di benchmark risultano senza modifiche dopo la scansione.
+
+## Revisioni dei progetti esterni
+
+- `pallets/click`: `2247b35ea1c47c727d7a06e51fa280e12a863ff6`
+- `fastapi/full-stack-fastapi-template`: `f4bcfaba7c85be3c6332cc74a20819f586dcdbc6`
+- `pallets/flask`: `49943b5a94413a530761350f04e896f76e8d620e`
+
+Il file `backend/app/api/deps.py` del template usa una sintassi `except`
+più recente di quella accettata dal Python 3.12 usato per il collaudo.
+Il programma segnala l'errore e continua la mappa; le dichiarazioni di quel
+file non sono state estratte. Non è corretto considerarla una scansione completa.
+
+## Correzioni verificate
+
+- Gerarchia responsabilità → file → dichiarazioni, con identità indipendenti
+  dalla riga e senza fondere funzioni omonime appartenenti a file diversi.
+- Sottogruppi con spazio dedicato; mondo espandibile invece del vecchio recinto
+  fisso, curve, alone e selezione delle dipendenze, etichette senza accavallamenti.
+- Pulsanti zoom e Panoramica; barra laterale e prima apertura più curate.
+- Dipendenze tra file conservate come evidenza, oltre a quelle tra responsabilità.
+- Import JS/TS con `../` normalizzati correttamente.
+- Importazione ripetuta dello stesso file e importazione su un progetto vuoto.
+- Creazione del nodo manuale senza errore JavaScript.
+- Ricerca azzerata quando cambia progetto; fallback alla mappa fresca se la
+  copia locale non è valida.
+
+## Riproduzione
+
+```sh
+python -m unittest discover -s tests -v
+python -m compileall -q codeatlas tests
+python -m pip install playwright==1.56.0
+python -m playwright install chromium
+python tests/browser_smoke.py --output /tmp/codeatlas-qa
+```
+
+Aggiungere `--chromium /percorso/chromium` per usare il browser di sistema,
+oppure `--benchmark /percorso/progetto` (ripetibile) per analizzare altre copie.
+La suite browser salva screenshot e `results.json`. La CI è configurata per
+eseguire il collaudo e caricare gli artifact; l'esito remoto va controllato
+sul commit pubblicato e non è implicato dagli esiti locali riportati qui.
+
+## Limiti della prova da condividere
+
+- Windows, macOS, Safari e Firefox non collaudati in questa sessione.
+  Il doppio clic sul launcher Windows non è stato provato fisicamente.
+- Serve Python 3.10+; nessun installer autonomo o eseguibile incluso.
+- Supporto Python e JS/TS con i limiti descritti nel README. Nessuna promessa
+  di funzionamento su linguaggi non supportati, grandi monorepo o sintassi
+  più recenti del Python installato.
+- Classificazione euristica: la forma non certifica l'architettura reale.
+  Collegamenti dinamici e alias di compilazione possono mancare.
+- Annotazioni nel browser ed esportazione manuale: nessun database condiviso.
+- La nuova gerarchia cambia gli ID delle dichiarazioni rispetto alla prima
+  versione; annotazioni vecchie possono restare come nodi manuali separati.
+- Nessun adapter Graphify, analisi semantica completa o tracciamento runtime.
 
 - Albero principale predefinito preservato; aggiunti grafo orientato, livelli di dipendenza con cicli, matrice DSM e struttura fisica con ritorno alle responsabilità.
 - 23 test Python superati su Linux, inclusa distribuzione HTTP di `views.js` dal launcher desktop; compilazione Python superata.
