@@ -1,0 +1,39 @@
+CodeAtlas — anteprima da provare
+
+1. Estrai tutta la cartella ZIP. Non avviare il programma dentro lo ZIP.
+2. Serve Python 3.10 o successivo, scaricabile da https://www.python.org/downloads/
+   Su Windows, durante l'installazione, abilita "Add Python to PATH".
+3. Windows: doppio clic su "Avvia CodeAtlas.bat".
+   macOS / Linux: apri un terminale nella cartella e scrivi:
+   python3 -m codeatlas.desktop
+4. Si apre il browser. Inserisci il percorso completo della cartella del tuo
+   programma e premi "Apri progetto" (non il percorso di un singolo file).
+
+PARTI DA QUI
+In cima trovi la capacità complessiva proposta (per esempio Calcolatrice).
+Scendi nei processi, apri i dettagli fino ai sorgenti; le basi rimangono in basso.
+Le singole operazioni del codice non diventano automaticamente capacità autonome.
+Con il selettore Schema puoi scegliere sei rappresentazioni: Albero funzionale,
+Grafo delle dipendenze, Dipendenze a livelli, Matrice delle dipendenze, Struttura
+dei file e Flusso di supporto. La vista testuale resta disponibile a parte.
+Le linee continue mostrano la gerarchia; quelle tratteggiate le dipendenze note.
+La rotella o i pulsanti + e − cambiano lo zoom. Trascina lo sfondo per spostarti.
+"Centra" inquadra la mappa; "Panoramica" torna ai processi principali. La matrice e i file si scorrono.
+Con molti nodi, avvicinati con lo zoom per vedere più nomi, oppure usa la ricerca
+ e la vista testuale. Le etichette si adattano allo spazio disponibile.
+
+Le aree sono proposte, non una lettura infallibile dell'architettura.
+Python e JavaScript/TypeScript sono supportati con i limiti descritti nel README.
+Gli altri linguaggi supportati sono inventariati a livello file, senza analisi
+semantica dedicata (vedi README).
+Una sintassi Python più recente del Python installato può produrre un errore
+segnalato nella scansione: il resto della mappa rimane disponibile.
+
+Tutto resta locale. CodeAtlas legge i sorgenti senza eseguire il tuo programma.
+Le tue note vengono salvate in questo browser. Usa "Esporta mappa" per conservarne
+una copia: cancellare i dati del browser elimina le annotazioni locali.
+Per chiudere il server, torna nella sua finestra e premi Ctrl+C.
+Git è facoltativo: serve soltanto per visualizzare la cronologia.
+
+Se qualcosa non convince, annota sistema operativo, versione Python, linguaggio
+ del programma, azione eseguita e, se possibile, uno screenshot della mappa.

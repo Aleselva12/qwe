@@ -25,3 +25,9 @@ test('Exact explicit links are separate from AI proposals and test-file matches'
 test('Comparisons identify changed results by stable test ID; unknown/new cases are not passes',()=>{
  const old=run(),current=run();current.test_cases[0].result='fail';current.test_cases.push({id:'new',name:'new',result:'skip'});assert.deepEqual(E.changes(old,current),[{name:'save',before:'pass',after:'fail'}]);assert.deepEqual(E.summary(current.test_cases),{pass:0,fail:1,skip:1});assert.throws(()=>E.validate({...old,test_cases:[...old.test_cases,...old.test_cases]}));
 });
+
+test('Functional roles remain independent of custom categories and flow is a portable default view',()=>{
+ const profile={...P.base,default_view:'flow',categories:[{id:'customers',label:'Clienti',color:'#abcdef'}],nodes:[{id:'crm',name:'Gestione clienti',role:'capability',lens:'customers',source:'manual',status:'unknown'}]};
+ const next=P.apply(base,profile,{nodes:[]});assert.equal(next.profile.default_view,'flow');assert.equal(next.groups.find(n=>n.id==='crm').role,'capability');
+ assert.throws(()=>P.validate({...profile,nodes:[{...profile.nodes[0],role:'invented'}]}));
+});

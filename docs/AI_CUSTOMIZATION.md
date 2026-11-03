@@ -40,3 +40,17 @@ La corrispondenza fra `testcase.file` e un riferimento del nodo identifica il fi
 - Nessuna migrazione silenziosa di schemi sconosciuti. Aggiungere test per compatibilità dei vecchi export, import non validi, ripristino e separazione fra evidenze e proposte.
 
 Il sistema non contiene ancora plugin eseguibili, esecuzione automatica dei test, import di coverage o sincronizzazione diretta con CI.
+
+## Posizione funzionale e sei schemi
+
+Il campo opzionale `role` di un nodo distingue `capability` (capacità utile),
+`process` (realizzazione) e `foundation` (base/requisito). È indipendente da
+`lens`, che continua a scegliere la categoria e il colore del profilo. Un nome
+di funzione del sorgente non equivale a una capacità utile: una calcolatrice
+può avere una capacità complessiva e quattro operazioni interne. L'assenza
+di `role` mantiene la compatibilità con le mappe precedenti.
+
+`default_view` accetta anche `flow`: mostra basi → processi → capacità.
+Gli altri schemi sono `graph`, `network`, `layers`, `matrix`, `files`; `text`
+resta un ausilio aggiuntivo. Le frecce di `flow` leggono le dipendenze nel verso
+del supporto; evidenze originali e associazioni di appartenenza restano distinte.

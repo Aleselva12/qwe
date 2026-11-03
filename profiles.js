@@ -2,15 +2,15 @@
 (function(root){
 'use strict';
 const base={schema_version:1,name:'Albero CodeAtlas',default_view:'graph',categories:[
-{id:'roots',label:'Radici',color:'#b495ff'},{id:'trunk',label:'Tronco',color:'#63b4ff'},
-{id:'branches',label:'Rami',color:'#63e1bf'},{id:'unassigned',label:'Da classificare',color:'#e6bd72'}],fields:[],nodes:[],rules:[],test_links:[]};
-const views=['graph','text','network','layers','matrix','files'];
+{id:'roots',label:'Basi e requisiti',color:'#b495ff'},{id:'trunk',label:'Processi',color:'#63b4ff'},
+{id:'branches',label:'Capacità utili',color:'#63e1bf'},{id:'unassigned',label:'Da collocare',color:'#e6bd72'}],fields:[],nodes:[],rules:[],test_links:[]};
+const views=['graph','text','network','layers','matrix','files','flow'];
 const safe=id=>typeof id==='string'&&/^[a-z][a-z0-9_-]{0,63}$/.test(id)&&!['constructor','prototype','__proto__'].includes(id);
 function validate(p){
  if(!p||p.schema_version!==1||typeof p.name!=='string'||!p.name.trim()||!views.includes(p.default_view||'graph'))throw Error('Profilo: versione, nome o vista non validi.');
  for(const key of ['categories','fields','nodes','rules','test_links'])if(p[key]!==undefined&&!Array.isArray(p[key]))throw Error('Profilo: '+key+' deve essere una lista.');
  for(const key of ['categories','fields']){const seen=new Set();for(const x of p[key]||[]){if(!x||!safe(x.id)||seen.has(x.id)||typeof x.label!=='string'||!x.label.trim())throw Error('Campo/categoria non valido o duplicato.');if(key==='categories'&&!/^#[0-9a-f]{6}$/i.test(x.color))throw Error('Colore non valido: usa #RRGGBB.');seen.add(x.id)}}
- const ids=new Set();for(const n of p.nodes||[]){if(!n||typeof n.id!=='string'||!n.id||ids.has(n.id)||typeof n.name!=='string'||!n.name||!['manual','ai_suggestion'].includes(n.source)||!['idea','planned','in_progress','implemented','verified','blocked','unknown'].includes(n.status))throw Error('Nodo profilo: ID, nome, provenienza e stato obbligatori.');ids.add(n.id)}
+ const ids=new Set();for(const n of p.nodes||[]){if(!n||typeof n.id!=='string'||!n.id||ids.has(n.id)||typeof n.name!=='string'||!n.name||!['manual','ai_suggestion'].includes(n.source)||!['idea','planned','in_progress','implemented','verified','blocked','unknown'].includes(n.status))throw Error('Nodo profilo: ID, nome, provenienza e stato obbligatori.');if(n.role!==undefined&&!['capability','process','foundation'].includes(n.role))throw Error('Posizione funzionale non valida.');ids.add(n.id)}
  for(const r of p.rules||[])if(!r||typeof r.path_glob!=='string'||!r.path_glob||r.path_glob.length>300||typeof r.group_id!=='string')throw Error('Regola di raggruppamento non valida.');
  for(const l of p.test_links||[])if(!l||typeof l.group_id!=='string'||!['manual','ai_suggestion'].includes(l.source)||!['name','classname','file'].some(k=>typeof l[k]==='string'&&l[k])||['name','classname','file'].some(k=>l[k]!==undefined&&typeof l[k]!=='string'))throw Error('Associazione test non valida: serve almeno un selettore esatto e la provenienza.');
  return p;

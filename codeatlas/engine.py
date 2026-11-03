@@ -5,6 +5,7 @@ the Python AST is the only detailed symbol extractor in this release.
 """
 import ast
 import json
+import posixpath
 import re
 from pathlib import Path
 
@@ -100,7 +101,7 @@ def inventory(root: Path) -> dict:
         elif target.startswith("."):
             base=Path(e["from"][5:]).parent
             for candidate in (base / target,base / (target+".ts"),base / (target+".tsx"),base / (target+".js"),base / (target+".jsx"),base / target / "index.ts",base / target / "index.js"):
-                normalized=candidate.as_posix()
+                normalized=posixpath.normpath(candidate.as_posix())
                 if normalized.startswith("./"):normalized=normalized[2:]
                 if any(n["id"]=="file:"+normalized for n in nodes):
                     e["to"]="file:"+normalized;e["resolution"]="local-exact";break
