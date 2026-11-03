@@ -12,13 +12,22 @@ from functools import partial
 
 from .engine import inventory, compare, impact
 from .overlay import load
-from .intelligence import enrich
+from .intelligence import enrich, _git
 from .concepts import suggest
 from .snapshots import diff_snapshots, read_snapshot, read_junit
 
 def build_report(root: Path, overlay_path=None, changed=None, previous=None, junit=None):
     atlas = inventory(root)
     report = {"atlas": atlas, "intelligence": enrich(root)}
+    commit = _git(root, "rev-parse", "HEAD").strip()
+    # Exit status must distinguish a clean workspace from failure to read Git status.
+    import subprocess
+    try:
+        result = subprocess.run(["git", "-C", str(root), "status", "--porcelain"], capture_output=True, text=True, timeout=12)
+        dirty = bool(result.stdout.strip()) if result.returncode == 0 else None
+    except (OSError, subprocess.TimeoutExpired):
+        dirty = None
+    report["version"] = {"commit":commit, "dirty":dirty}
     report['project_key'] = str(root.resolve())
     report['overlay'] = suggest(atlas, report['intelligence'])
     if overlay_path:
@@ -53,6 +62,8 @@ def main():
     with tempfile.TemporaryDirectory(prefix="codeatlas-") as temporary:
         directory=Path(temporary)
         (directory/"index.html").write_bytes(index.read_bytes())
+        for asset in ("views.js", "profiles.js", "evidence.js", "workbench.js"):
+            (directory/asset).write_bytes((index.parent/asset).read_bytes())
         (directory/"report.json").write_text(json.dumps(report,ensure_ascii=False),encoding="utf-8")
         if (index.parent/"examples"/"conceptual-map.json").is_file():
             (directory/"examples").mkdir()

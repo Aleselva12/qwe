@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Illustrative fixture" timestamp="2026-11-03T10:00:00Z">
+  <properties><property name="environment" value="ESEMPIO DIDATTICO, non risultato di un progetto reale"/></properties>
+  <testcase classname="CustomerTests" name="test_create_customer" file="tests/test_customers.py"/>
+  <testcase classname="CustomerTests" name="test_duplicate_customer" file="tests/test_customers.py"><failure message="Esempio di verifica fallita"/></testcase>
+  <testcase classname="CustomerTests" name="test_notification" file="tests/test_customers.py"><skipped/></testcase>
+</testsuite>

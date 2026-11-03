@@ -1,5 +1,6 @@
 """Human-authored conceptual classification layered over a code-derived map."""
 import json
+from .profiles import validate_profile
 from pathlib import Path
 
 LENSES = {"roots", "trunk", "branches", "unassigned"}
@@ -12,6 +13,10 @@ def validate(overlay: dict) -> dict:
     groups = overlay.get("groups", [])
     if not isinstance(groups, list):
         raise ValueError("groups must be a list")
+    profile = overlay.get("profile")
+    if profile is not None:
+        validate_profile(profile)
+    lenses = LENSES | {c["id"] for c in (profile or {}).get("categories", [])}
     known = set()
     for item in groups:
         if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
@@ -19,7 +24,7 @@ def validate(overlay: dict) -> dict:
         if item["id"] in known:
             raise ValueError("Duplicate group id")
         known.add(item["id"])
-        if item.get("lens", "unassigned") not in LENSES:
+        if item.get("lens", "unassigned") not in lenses:
             raise ValueError("Unknown lens")
         if item.get("status", "unknown") not in STATES:
             raise ValueError("Unknown status")
@@ -55,6 +60,9 @@ def validate(overlay: dict) -> dict:
     for edge in overlay.get("relations", []):
         if not isinstance(edge, dict) or edge.get("kind") not in RELATIONS or edge.get("from") not in known or edge.get("to") not in known:
             raise ValueError("Invalid conceptual relation")
+    for link in (profile or {}).get("test_links", []):
+        if link["group_id"] not in known:
+            raise ValueError("Test association references an unknown node")
     return overlay
 
 def load(path: str | Path) -> dict:

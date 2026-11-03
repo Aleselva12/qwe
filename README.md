@@ -32,21 +32,64 @@ Il server ascolta solo su `127.0.0.1:8765`. Chiudi la sua finestra o premi Ctrl+
 
 Le correzioni vengono conservate nel localStorage del browser, separatamente per percorso assoluto. Ricaricare la pagina conserva anche il progetto selezionato finché il server rimane acceso. Riscansionare rigenera le proposte e mantiene le correzioni manuali, aggiornando i riferimenti dei nodi ancora rilevati. **Esporta mappa** crea una copia portabile; **Importa** la ripristina dopo aver aperto il progetto. Il salvataggio nel browser non è un database condiviso e cancellare i dati del browser lo elimina. Cambiare porta/browser richiede reimportare la copia.
 
+## Punti di vista sul progetto
+
+Il selettore **Punto di vista** affianca all’**Albero principale**, sempre iniziale, quattro rappresentazioni classiche. La vista testuale rimane disponibile.
+
+| Vista | Domanda a cui risponde |
+| --- | --- |
+| Grafo delle dipendenze | Quali componenti dipendono da quali altri, anche fra rami diversi? |
+| Dipendenze a livelli | Quali catene di dipendenze e quali cicli collegano i componenti? |
+| Matrice delle dipendenze (DSM) | Quali coppie di componenti sono accoppiate? Riga = origine, colonna = destinazione. |
+| Struttura dei file | Dove sono cartelle, file e dichiarazioni rilevate? A quali responsabilità sono associati? |
+
+Grafo, livelli e matrice proiettano la stessa mappa editabile, con gli stessi filtri, nodi selezionati, schede e sottopunti espandibili. Usano solo relazioni `depends_on`: una relazione generica `related_to` o `supports` non diventa una dipendenza. Le frecce vanno dal componente dipendente alla dipendenza. Il clic su una linea o una cella mostra le relazioni originali e la provenienza.
+
+Chiudendo un ramo, le dipendenze verso altri rami vengono aggregate sul primo antenato visibile; quelle interamente interne al ramo chiuso non vengono mostrate. Il numero in una cella conta le relazioni della mappa, non le chiamate a runtime. Espandi i sottopunti per analizzare i dettagli. La ricerca può nascondere gli estremi di una relazione: non è una prova di indipendenza. Nessun nodo corrispondente viene troncato deliberatamente.
+
+La vista a livelli raggruppa i cicli prima di calcolare i livelli; i nodi coinvolti sono marcati **Ciclo**. La struttura fisica ha una propria espansione e permette di tornare all’albero dalle responsabilità associate al file o simbolo. Questa vista è un inventario dei soli file supportati.
+
+Le viste grafiche alternative si scorrono; **Centra** adatta il disegno alla finestra. Albero e vista testuale mantengono il comportamento precedente. L’esportazione salva il modello comune, senza duplicarlo per ogni vista.
+
+**Limite deliberato:** non sono diagrammi di sequenza, flowchart del controllo o diagrammi entità-relazioni. Per questi servono dati su chiamate, condizioni, eventi e schema del database che l’analizzatore attuale non ricostruisce. Le dipendenze statiche non dimostrano l’ordine di esecuzione.
+
+## Personalizzare per altri progetti
+
+**Profili** permette di cambiare nome del profilo, vista iniziale, etichette e colori delle categorie e campi delle schede. Le categorie di base possono essere rinominate; categorie aggiuntive sono ammesse. I campi sono testo libero (es. responsabile, priorità). Nell’area avanzata si definiscono nodi/obiettivi, regole sui percorsi e associazioni test. **Importa profilo** accetta configurazioni preparate da un assistente IA. Ogni applicazione presenta un’anteprima e conserva la mappa precedente per il ripristino. Nessuna configurazione esegue comandi.
+
+Le proposte IA, le euristiche e le dichiarazioni dell’utente restano distinte. Lo stato del nodo è dichiarato, non certificato dai test. **Esporta mappa** include personalizzazioni, profilo e storico delle verifiche; **Esporta profilo** salva la sola configurazione riutilizzabile. Il salvataggio è locale al browser/percorso; esportare per condividere e prima di cancellare i dati del browser.
+
+Esempio: [profilo team](examples/team-profile.json). Guida e contratto per Claude/altri assistenti: [AI_CUSTOMIZATION.md](docs/AI_CUSTOMIZATION.md).
+
+## Test collegati alla mappa
+
+**Verifiche** elenca file di test e configurazioni individuate e importa JUnit XML o un report JSON CodeAtlas esportato. Il risultato può essere scaricato da una CI; CodeAtlas non si collega autonomamente alla CI e non autentica i report. Si possono dichiarare commit, ambiente, data di esecuzione e assenza di modifiche locali. Se mancano o non coincidono, l’incertezza è esplicita.
+
+Ogni caso mostra esito, messaggio e nodi associati. **Associa** collega un test a un nodo; i selettori del profilo permettono associazioni ripetibili, manuali o proposte IA. La scheda del nodo mostra i risultati collegati, mantenendo separate le esecuzioni storiche. Una corrispondenza per percorso è un legame al file del test, non una misura di copertura. Nessun nodo diventa automaticamente “verificato”.
+
+Sono conservati fino a 20 report distinti, con esportazione/rimozione e confronto degli esiti dei casi comuni fra report dello stesso nome e ambiente. Lo storico è ordinato per importazione. I primi 200 casi di ogni report sono elencati nel pannello per limitarne il peso; tutti sono conservati e conteggiati. Per casi successivi usare i selettori nel profilo. Limite import file: 10 MB; lo spazio effettivo del browser può essere inferiore. Un errore di salvataggio durante l’applicazione mantiene la mappa corrente.
+
+La CLI `--junit risultati.xml` produce risultati dello stesso formato, visibili anche nella UI. Il file [test-run.xml](examples/test-run.xml) è soltanto una fixture didattica.
+
+**Nessuna esecuzione dei test del progetto:** CodeAtlas resta in sola lettura. Node/npm sono richiesti solo per sviluppare e verificare CodeAtlas, non per avviarlo con Python.
+
 ## Provenienza e limiti
 
 La classificazione usa regole trasparenti su nomi, percorsi e dichiarazioni: non comprende semanticamente ogni progetto. Le aree sconosciute restano **da classificare**, senza inventare funzioni. Gli scopi e gli obiettivi futuri restano da definire dall'utente. Le docstring sono dichiarazioni dell'autore, non prove di comportamento. Una modifica manuale viene indicata come tale.
 
-Python usa AST per dichiarazioni e import; JavaScript/TypeScript usa euristiche conservative, non un compilatore completo. Manifest infrastrutturali sono inventariati, hardware/versioni runtime/modelli installati non vengono verificati. Import relativi/dinamici possono rimanere irrisolti. HTML/CSS e altri linguaggi non sono ancora inventariati. I sottopunti generati dai nomi delle dichiarazioni richiedono revisione umana e possono essere riorganizzati.
+Python usa AST per dichiarazioni e import; JavaScript/TypeScript usa euristiche conservative, non un compilatore completo. Manifest infrastrutturali sono inventariati, hardware/versioni runtime/modelli installati non vengono verificati. Import relativi/dinamici possono rimanere irrisolti. Go, Rust, Java, C#, C/C++, Ruby, PHP, Swift, Kotlin, SQL, HTML/CSS, Vue e Svelte sono inventariati a livello file, senza parser semantico dedicato. I sottopunti generati dai nomi delle dichiarazioni richiedono revisione umana e possono essere riorganizzati.
 
 La timeline mostra al massimo otto commit pertinenti fra gli ultimi quindici letti, più le modifiche annotate alla scheda. Riporta messaggi dei commit, non sintesi semantiche di versioni precedenti. Non è un confronto storico completo. I test trovati nel progetto non vengono eseguiti e non provano che funzioni. Nessun LLM o integrazione Graphify/Backstage/LikeC4 è incluso.
 
-L'API Python e le opzioni CLI per overlay, impatto, snapshot e JUnit rimangono disponibili (`python -m codeatlas.app --help`). Le vecchie viste frammentate di import, confronto e ricerca tecnica sono state sostituite dalla mappa; questi risultati avanzati non hanno ancora un pannello dedicato nella nuova UI.
+L'API Python e le opzioni CLI per overlay, impatto, snapshot e JUnit rimangono disponibili (`python -m codeatlas.app --help`). Le vecchie viste frammentate di import, confronto e ricerca tecnica sono state sostituite dalla mappa; confronto e impatto avanzati restano nella CLI; i risultati JUnit hanno ora un pannello Verifiche e collegamenti alle schede.
 
 ## Verifica
 
 ```sh
 python -m unittest discover -s tests -v
 python -m compileall -q codeatlas tests
+npm ci --ignore-scripts
+npm test
 ```
 
 Vedi [VALIDATION.md](VALIDATION.md) per esiti effettivi, prove browser e lavoro ancora da fare. Nessuna dichiarazione di affidabilità su grandi monorepo senza un benchmark separato.

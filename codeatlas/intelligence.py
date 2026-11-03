@@ -66,12 +66,16 @@ def infrastructure(root:Path):
 def test_evidence(root:Path):
     # Discovery is NOT execution. Never paint a node green based on name matching.
     files=[]
+    configurations=[]
     for p in sorted(root.rglob("*")):
         if not p.is_file() or any(x in {"node_modules",".git",".venv"} for x in p.relative_to(root).parts):continue
-        if p.name.startswith("test_") and p.suffix==".py" or any(x in p.name for x in (".test.",".spec.")):
+        rel = p.relative_to(root).as_posix()
+        if p.name in {"pytest.ini", "tox.ini", "pyproject.toml", "package.json", "pom.xml", "build.gradle", "Cargo.toml", "go.mod", ".gitlab-ci.yml"} or p.name.startswith(("jest.config.", "vitest.config.", "playwright.config.")) or rel.startswith(".github/workflows/"):
+            configurations.append(rel)
+        if (p.name.startswith("test_") and p.suffix in {".py", ".cjs", ".js"}) or any(x in p.name for x in (".test.", ".spec.")) or p.name.endswith(("_test.go", "Test.java", "Tests.cs")):
             files.append(p.relative_to(root).as_posix())
         if len(files)>=1000:break
-    return {"test_files":files,"executed":False,"status":"unknown","note":"Discovered tests do not demonstrate passing tests."}
+    return {"test_files":files,"configurations":configurations,"executed":False,"status":"unknown","note":"Discovered tests do not demonstrate passing tests."}
 
 def enrich(root:Path):
     return {"history":history(root),"documentation":documentation(root),"infrastructure":infrastructure(root),"tests":test_evidence(root),"status_policy":{"green":"explicit passing evidence","red":"explicit failing evidence","yellow":"partial/degraded or warning","gray":"unknown/not verified"}}
