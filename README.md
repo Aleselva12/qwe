@@ -1,6 +1,6 @@
 # CodeAtlas
 
-**Branch Cora.** Per riprendere il progetto da un’altra conversazione, leggere [Memoria e decisioni Cora](docs/MEMORIA_CORA.md) e la [pianta parziale](cora-plan.json).
+**Branch Cora — schema V2 completo (3 novembre 2026).** Per riprendere il lavoro o integrarlo in Serveria, leggere in ordine: [Mappa completa con tutte le stelle, pianeti e lune](docs/CORA_MAPPA_V2_COMPLETA.md), [Consegna operativa a Work](docs/CORA_WORK_HANDOFF.md), [Memoria dell'altra conversazione](docs/MEMORIA_CORA.md) e [pianta dati unica](cora-plan.json). La mappa è concettuale: **non** certifica il funzionamento di Cora sul Debian. Work dovrà conservare gli ID precedenti e le personalizzazioni del browser.
 
 Mappa locale del programma: **capacità utili verso l’utente, processi che le realizzano e requisiti alla base**. Sei schemi navigabili, dettagli espandibili e schede modificabili. CodeAtlas è indipendente da Serveria e non modifica né esegue il progetto analizzato.
 
