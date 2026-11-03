@@ -39,7 +39,7 @@ function commit(next){
 }
 function action(text,fn){const b=element('button',text);b.onclick=()=>{try{fn()}catch(e){$('message').textContent=e.message}};return b}
 function badge(value){const b=element('span',labels[value]);b.className='badge '+value;return b}
-function role(path){if(path.length===1)return path[0].role;return (path[0].role==='radici'?['','', 'area','stella','pianeta','luna']:['','stella','pianeta','luna'])[path.length]||'componente'}
+function role(path){if(path.length===1)return path[0].role;return (path[0].role==='radici'?['','', 'area','stella','pianeta','luna']:['','','stella','pianeta','luna'])[path.length]||'componente'}
 function edit(id,parent,top=false){
   const n=plan.nodes.find(n=>n.id===id);const form=element('dialog');document.body.append(form);
   const title=element('input'),note=element('textarea'),priority=element('select'),position=element('select'),links=element('select');links.multiple=true;
