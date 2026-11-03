@@ -112,3 +112,9 @@ Vedi [VALIDATION.md](VALIDATION.md) per esiti effettivi, prove browser e lavoro 
 - Immagini CORA fornite nella conversazione: riferimento visivo per sfondo scuro, punti e collegamenti. Nessuna immagine di riferimento è redistribuita.
 
 Nessuna licenza concessa al momento: definirla prima di distribuire codice di terzi o invitare al riuso pubblico.
+
+### Direzione progetto
+
+Apri una cartella e scegli **Direzione progetto**. La pianta iniziale contiene radici e tronco. Aggiungi rami per gli obiettivi e suddividili in stelle, pianeti e lune. Puoi includere obiettivi privi di codice, spostare interi sottoalberi e collegare un punto a specifici componenti del tronco. Le proposte dalla scansione entrano nella pianta quando le confermi. Una nuova scansione lascia intatte le decisioni salvate.
+
+Il colore esprime la priorità assegnata al singolo punto: verde per tutto ok, giallo per aggiornamento previsto, arancio per problema minore, rosso per problema. Grigio indica un punto da valutare. La pianta è salvata nel browser separatamente per percorso del progetto. Usa **Esporta pianta** per trasferirla o conservarla nella repository. L’importazione supporta anche le piante v1 del branch Cora.

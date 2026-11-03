@@ -62,7 +62,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="codeatlas-") as temporary:
         directory=Path(temporary)
         (directory/"index.html").write_bytes(index.read_bytes())
-        for asset in ("views.js", "profiles.js", "evidence.js", "workbench.js"):
+        for asset in ("direzione.html", "direzione.js", "views.js", "profiles.js", "evidence.js", "workbench.js"):
             (directory/asset).write_bytes((index.parent/asset).read_bytes())
         (directory/"report.json").write_text(json.dumps(report,ensure_ascii=False),encoding="utf-8")
         if (index.parent/"examples"/"conceptual-map.json").is_file():
