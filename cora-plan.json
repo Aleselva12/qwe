@@ -36,6 +36,32 @@
       "trunkLinks": [
         "T2",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Archivio fotografie già usato; agenti e aggiornamenti da completare",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "W2 integrazione aggiornamenti protetti",
+          "Connettore agentico lettura foto"
+        ]
+      },
+      "knownIssues": [
+        "Mancano connettore Cora e updater host dedicato"
+      ],
+      "roadmapRefs": [
+        "FILES-PHOTOS"
+      ],
+      "observations": [
+        {
+          "text": "Funzionamento Immich confermato dall'utente; non certifica l'integrazione con gli agenti.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
       ]
     },
     {
@@ -51,6 +77,24 @@
       "trunkLinks": [
         "T2",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Cloud condiviso presente; collegamento File e aggiornamenti da perfezionare",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "W2 integrazione aggiornamenti protetti",
+          "Connettere client e pagina File con agenti"
+        ]
+      },
+      "knownIssues": [
+        "Mancano integrazioni complete e updater host dedicato"
+      ],
+      "roadmapRefs": [
+        "FILES-PHOTOS"
       ]
     },
     {
@@ -66,6 +110,21 @@
       "trunkLinks": [
         "T2",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "App esterna con bridge Cora e import da verificare",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Verifica dati importati e bridge con Cora"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "WORK-APPS"
       ]
     },
     {
@@ -93,6 +152,24 @@
         "T8",
         "T9",
         "T10"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Una stella per lavorare con più GPU; inferenza provata, routing da attestare",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Verificare macchina e modello effettivi; routing",
+          "Scheduler e failover controllati"
+        ]
+      },
+      "knownIssues": [
+        "Worker risponde a inferenza non significa scelta corretta dell'agente"
+      ],
+      "roadmapRefs": [
+        "MODELS-WORKER"
       ]
     },
     {
@@ -177,7 +254,26 @@
       "status": "partial",
       "classification": "star",
       "code": "T1",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Supervisor LangGraph e router shadow; collaudo causale Debian aperto",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "W1 collaudo reale end-to-end su Debian",
+          "Router shadow da validare prima di affidargli decisioni",
+          "Evoluzioni progressive senza autonomia non autorizzata"
+        ]
+      },
+      "knownIssues": [
+        "Base V1 nel codice; serve prova su server Debian, router specializzato resta shadow"
+      ],
+      "roadmapRefs": [
+        "ARCH-ORCHESTRATOR"
+      ]
     },
     {
       "id": "T2",
@@ -189,7 +285,20 @@
       "status": "partial",
       "classification": "star",
       "code": "T2",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Unico registro delle capacità e contratti di tool",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Associazione affidabile tra richiesta, tool e capability autorizzata"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "T3",
@@ -201,7 +310,20 @@
       "status": "partial",
       "classification": "star",
       "code": "T3",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Coordinamento proprietà e stato dei componenti oggi read-only",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Coordinator leggibile e coerente anche con più nodi"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "T4",
@@ -213,7 +335,20 @@
       "status": "partial",
       "classification": "star",
       "code": "T4",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Esecuzioni stati transizioni e controllo degli effetti",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Operazioni idempotenti, retry e recupero errori"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "T5",
@@ -225,7 +360,20 @@
       "status": "partial",
       "classification": "star",
       "code": "T5",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Messaggi eventi e collegamenti tipizzati nel processo",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Futuro Event Bus distribuito tra nodi"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "T6",
@@ -237,7 +385,24 @@
       "status": "partial",
       "classification": "star",
       "code": "T6",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Contratti ContextRequest ContextPacket; retrieval progressivo non completo",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Context Manager progressivo e differenza letterale/rielaborato"
+        ]
+      },
+      "knownIssues": [
+        "Contratti ContextRequest/ContextPacket presenti, Context Manager progressivo mancante"
+      ],
+      "roadmapRefs": [
+        "ARCH-ORCHESTRATOR"
+      ]
     },
     {
       "id": "T7",
@@ -249,7 +414,25 @@
       "status": "partial",
       "classification": "star",
       "code": "T7",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Quattro livelli e revisioni ancora da collaudare nell’uso",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Consolidamento governato; Mente saggia/Custode solo idea"
+        ]
+      },
+      "knownIssues": [
+        "Memoria non ancora collaudata completamente nell'uso reale dopo i cambiamenti"
+      ],
+      "roadmapRefs": [
+        "RUNTIME-MEMORY",
+        "CONTEXT-REGISTRY"
+      ]
     },
     {
       "id": "T8",
@@ -261,7 +444,24 @@
       "status": "partial",
       "classification": "star",
       "code": "T8",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Ruoli strumenti modelli e configurazione agenti",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Identità del modello effettivamente utilizzato in ogni agente"
+        ]
+      },
+      "knownIssues": [
+        "Possibile divergenza tra modello selezionato nella UI e modello usato dall'agente"
+      ],
+      "roadmapRefs": [
+        "MODELS-WORKER"
+      ]
     },
     {
       "id": "T9",
@@ -273,7 +473,24 @@
       "status": "planned",
       "classification": "star",
       "code": "T9",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Plan multi step code persistenti scheduler failover fase 2",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Plan multi-step persistente, code e scheduler multi-worker"
+        ]
+      },
+      "knownIssues": [
+        "Code persistenti e scheduling multi-worker general-purpose non implementati"
+      ],
+      "roadmapRefs": [
+        "ARCH-ORCHESTRATOR"
+      ]
     },
     {
       "id": "T10",
@@ -285,7 +502,25 @@
       "status": "partial",
       "classification": "star",
       "code": "T10",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Attività trace decisioni e diagnosi causale da collaudare",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Tracciare hop e causa di guasti introdotti da modifiche in altri componenti"
+        ]
+      },
+      "knownIssues": [
+        "Serve identificare da quale passaggio nasce una regressione fra agenti e programmi"
+      ],
+      "roadmapRefs": [
+        "ARCH-ORCHESTRATOR",
+        "AUTO-QUALITY"
+      ]
     },
     {
       "id": "T11",
@@ -297,7 +532,24 @@
       "status": "partial",
       "classification": "star",
       "code": "T11",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Catalogo e cicli periodici nel codice; non tutto E2E collaudato",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Collegare CI/updater a commit installato e collaudi E2E reali senza doppioni"
+        ]
+      },
+      "knownIssues": [
+        "Test tecnici non equivalgono a E2E, import CI/updater nel registro non completo"
+      ],
+      "roadmapRefs": [
+        "AUTO-QUALITY"
+      ]
     },
     {
       "id": "T12",
@@ -309,7 +561,20 @@
       "status": "partial",
       "classification": "star",
       "code": "T12",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Home navigazione Impostazioni Architettura Attività e PWA",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "PWA, Home e accesso ad Atlas"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "T13",
@@ -321,7 +586,22 @@
       "status": "partial",
       "classification": "star",
       "code": "T13",
-      "sourceType": "architecture-v2"
+      "sourceType": "architecture-v2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Editor e validazione; esecutore generico da realizzare",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Esecuzione reale del workflow dopo editor/validazione"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "AUTO-EXEC"
+      ]
     },
     {
       "id": "A",
@@ -389,6 +669,23 @@
         "T2",
         "T8",
         "T10"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Ingresso utente e risposta Cora con strumenti e deleghe",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Verifica reale richiesta Chat → Supervisor → specialista → risposta"
+        ]
+      },
+      "knownIssues": [
+        "Regressioni possibili Chat → supervisor → agente → risposta"
+      ],
+      "roadmapRefs": [
+        "RUNTIME-MEMORY"
       ]
     },
     {
@@ -406,7 +703,20 @@
         "T6",
         "T7",
         "T12"
-      ]
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Cronologia thread transcript e continuità",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Persistenza chat e recupero durante i riavvii"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "B1",
@@ -423,6 +733,21 @@
         "T2",
         "T11",
         "T12"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "File server e NAS consultabili modificabili con permessi",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Accesso controllato ai file del Debian e al futuro NAS"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "FILES-PHOTOS"
       ]
     },
     {
@@ -440,6 +765,21 @@
         "T6",
         "T7",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Copie IA recupero fonti e lettura documenti",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Sincronizzazione sicura copie IA e migliore valutazione fonti"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "FILES-ADVANCED"
       ]
     },
     {
@@ -456,6 +796,23 @@
       "trunkLinks": [
         "T2",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Word PDF e OCR futuro",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "OCR PDF scansionati e prove reali su copie Word"
+        ]
+      },
+      "knownIssues": [
+        "Scrittura Word su documento di prova autentico ancora da collaudare"
+      ],
+      "roadmapRefs": [
+        "DOCUMENTS-OCR"
       ]
     },
     {
@@ -474,6 +831,33 @@
         "T8",
         "T11",
         "T12"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Caso guida: dichiarare appuntamento vederlo una sola volta e ricevere notifica telefonica",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Collaudo evento creato una sola volta e notifica consegnata",
+          "Idea futura: organizzazione settimana con IA",
+          "Idea futura: calendario digitale in camera via API"
+        ]
+      },
+      "knownIssues": [
+        "Rischio duplicazione appuntamenti da sync/audio e retry"
+      ],
+      "roadmapRefs": [
+        "CALENDAR-MAIL"
+      ],
+      "observations": [
+        {
+          "text": "Calendario manuale e notifiche riferiti funzionanti; percorso agentico da provare.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
       ]
     },
     {
@@ -491,6 +875,23 @@
         "T2",
         "T8",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Gmail strumenti ricerca lettura bozze presenti; flusso reale non provato",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Verificare Gmail reale e azioni con approvazione"
+        ]
+      },
+      "knownIssues": [
+        "Gmail: esistono tool ma integrazione account e flussi non collaudati"
+      ],
+      "roadmapRefs": [
+        "CALENDAR-MAIL"
       ]
     },
     {
@@ -509,6 +910,32 @@
         "T6",
         "T8",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Caricamento e trascrizione riferiti funzionanti; Word reale da collaudare",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Collaudare scrittura Word dopo trascrizione e approvazione",
+          "Futuro aggiornamento scheda cliente"
+        ]
+      },
+      "knownIssues": [
+        "Pubblicazione Word approvata non ancora collaudata end-to-end"
+      ],
+      "roadmapRefs": [
+        "AUDIO-WORD"
+      ],
+      "observations": [
+        {
+          "text": "Trascrizione Audio riferita funzionante; Word finale non verificato.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
       ]
     },
     {
@@ -526,6 +953,23 @@
         "T2",
         "T6",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "M3: database unico e schede clienti collegando SQL aziendale e Word",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "M3 schede cliente strutturate, database aziendale fonte autorevole da verificare"
+        ]
+      },
+      "knownIssues": [
+        "Database SQL aziendale non censito come fonte autorevole, rischio duplicati"
+      ],
+      "roadmapRefs": [
+        "CUSTOMER-REGISTRY"
       ]
     },
     {
@@ -544,6 +988,21 @@
         "T2",
         "T9",
         "T13"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "M4: workflow email preventivi cliente con autorizzazioni",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "M4 richiesta email → preventivo → PDF → approvazione"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "AUTO-QUOTES"
       ]
     },
     {
@@ -563,6 +1022,24 @@
         "T9",
         "T10",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Programmatore con tool e workflow controllati; lavoro W3 dopo aggiornamenti",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "W3 ripresa agente programmatore dopo aggiornamenti e hardware",
+          "Possibile futuro collegamento ad Atlas"
+        ]
+      },
+      "knownIssues": [
+        "Verifica su modello potente e tool reali rinviata alla ripresa W3"
+      ],
+      "roadmapRefs": [
+        "PROGRAMMER"
       ]
     },
     {
@@ -579,6 +1056,21 @@
       "trunkLinks": [
         "T2",
         "T11"
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Programma esterno per preventivi PDF collegamento Cora ancora incompleto",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Controllo PDF e interazione con database clienti"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "WORK-APPS"
       ]
     },
     {
@@ -596,7 +1088,23 @@
         "T10",
         "T11",
         "T12"
-      ]
+      ],
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Programma indipendente per vedere struttura codice e direzione Cora",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Integrazione in Home Cora e mappa 2D della Direzione",
+          "Associazione semiautomatica test/commit per stella"
+        ]
+      },
+      "knownIssues": [
+        "Direzione Cora ancora prevalentemente vista testuale; mappa 2D e provenienza per stella da integrare"
+      ],
+      "roadmapRefs": []
     },
     {
       "id": "C1a",
@@ -654,7 +1162,22 @@
       "classification": "star",
       "code": "R1.1",
       "sourceType": "architecture-v2",
-      "parent": "R1"
+      "parent": "R1",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Nodo centrale operativo per Cora e servizi; GPU locale futura",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Upgrade hardware per modelli locali più grandi"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "ARCH-HW"
+      ]
     },
     {
       "id": "R1.1.p1",
@@ -755,7 +1278,28 @@
       "classification": "star",
       "code": "R1.2",
       "sourceType": "architecture-v2",
-      "parent": "R1"
+      "parent": "R1",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "RX 6800 con inferenza GPU riportata dall’utente; modello effettivo non sempre attestato",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": []
+      },
+      "knownIssues": [
+        "Inferenza GPU riferita riuscita, ma modello effettivo e routing da certificare"
+      ],
+      "roadmapRefs": [],
+      "observations": [
+        {
+          "text": "Inferenza GPU sul desktop confermata dall'utente, senza misurazione automatica del commit corrente.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
+      ]
     },
     {
       "id": "R1.2.p1",
@@ -847,7 +1391,28 @@
       "classification": "star",
       "code": "R1.3",
       "sourceType": "architecture-v2",
-      "parent": "R1"
+      "parent": "R1",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Worker GPU già provato; futuro dispositivo per agente locale",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": []
+      },
+      "knownIssues": [
+        "Inferenza GPU riferita riuscita, ma modello effettivo e routing da certificare"
+      ],
+      "roadmapRefs": [],
+      "observations": [
+        {
+          "text": "Inferenza GPU sul laptop confermata dall'utente, senza misurazione automatica del commit corrente.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
+      ]
     },
     {
       "id": "R1.3.p1",
@@ -939,7 +1504,23 @@
       "classification": "star",
       "code": "R1.4",
       "sourceType": "architecture-v2",
-      "parent": "R1"
+      "parent": "R1",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Nodo futuro per foto file cloud e backup; non tutti i database per forza sul NAS",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Realizzare NAS dedicato senza migrare automaticamente ogni database"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "ARCH-HW",
+        "BACKUP-UPDATE"
+      ]
     },
     {
       "id": "R1.4.p1",
@@ -1031,7 +1612,25 @@
       "classification": "star",
       "code": "R2.1",
       "sourceType": "architecture-v2",
-      "parent": "R2"
+      "parent": "R2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "PostgreSQL pgvector e SQL aziendali; collocazione Debian NAS da decidere",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Scegliere quali DB restano sul Debian e quali dati sul NAS"
+        ]
+      },
+      "knownIssues": [
+        "Collocazione database sul NAS non decisa; non creare duplicazioni anagrafiche"
+      ],
+      "roadmapRefs": [
+        "ARCH-SW",
+        "CUSTOMER-REGISTRY"
+      ]
     },
     {
       "id": "R2.1.p1",
@@ -1123,7 +1722,20 @@
       "classification": "star",
       "code": "R2.2",
       "sourceType": "architecture-v2",
-      "parent": "R2"
+      "parent": "R2",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Filesystem Debian Libreria IA e futuro NAS",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Gestire originale/copia IA, mount e conflitti"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R2.2.p1",
@@ -1215,7 +1827,18 @@
       "classification": "star",
       "code": "R3.1",
       "sourceType": "architecture-v2",
-      "parent": "R3"
+      "parent": "R3",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Ollama motori audio ed embeddings locali o remoti",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": []
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R3.1.p1",
@@ -1307,7 +1930,22 @@
       "classification": "star",
       "code": "R3.2",
       "sourceType": "architecture-v2",
-      "parent": "R3"
+      "parent": "R3",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Modelli installati requisiti hardware e valutazione nuovi modelli",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Benchmark ripetibili e valutazione Colibrì o alternative"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": [
+        "ARCH-MODELS"
+      ]
     },
     {
       "id": "R3.2.p1",
@@ -1399,7 +2037,18 @@
       "classification": "star",
       "code": "R4.1",
       "sourceType": "architecture-v2",
-      "parent": "R4"
+      "parent": "R4",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Debian processi servizi amministrativi e systemd",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": []
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R4.1.p1",
@@ -1491,7 +2140,18 @@
       "classification": "star",
       "code": "R4.2",
       "sourceType": "architecture-v2",
-      "parent": "R4"
+      "parent": "R4",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Docker Compose Python FastAPI React Vite",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": []
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R4.2.p1",
@@ -1583,7 +2243,24 @@
       "classification": "star",
       "code": "R5.1",
       "sourceType": "architecture-v2",
-      "parent": "R5"
+      "parent": "R5",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Copie e procedure presenti o previste; restore completo da provare",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Ripristino su ambiente vuoto e verifica copie"
+        ]
+      },
+      "knownIssues": [
+        "Non risulta un restore complessivo collaudato sul Debian"
+      ],
+      "roadmapRefs": [
+        "BACKUP-UPDATE"
+      ]
     },
     {
       "id": "R5.1.p1",
@@ -1675,7 +2352,32 @@
       "classification": "star",
       "code": "R5.2",
       "sourceType": "architecture-v2",
-      "parent": "R5"
+      "parent": "R5",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Updater Cora presente; aggiornamenti Immich Nextcloud lavoro W2",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "W2 aggiornamenti Immich/Nextcloud con backup e post-test"
+        ]
+      },
+      "knownIssues": [
+        "L'updater host non gestisce ancora Immich/Nextcloud"
+      ],
+      "roadmapRefs": [
+        "BACKUP-UPDATE"
+      ],
+      "observations": [
+        {
+          "text": "Aggiornamenti di Cora riferiti funzionanti; aggiornamenti app esterne non inclusi.",
+          "type": "owner_report",
+          "commit": null,
+          "observedAt": null
+        }
+      ]
     },
     {
       "id": "R5.2.p1",
@@ -1767,7 +2469,20 @@
       "classification": "star",
       "code": "R6.1",
       "sourceType": "architecture-v2",
-      "parent": "R6"
+      "parent": "R6",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Tailscale e accessi privati non equivalgono ai permessi dell’applicazione",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Identità verificata per agenti installati su nuovi nodi"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R6.1.p1",
@@ -1859,7 +2574,20 @@
       "classification": "star",
       "code": "R6.2",
       "sourceType": "architecture-v2",
-      "parent": "R6"
+      "parent": "R6",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "Permission Engine indipendente dal modello e approvazioni esplicite",
+          "source": "architecture-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "Policy per agente remoto, minimo privilegio, revoca"
+        ]
+      },
+      "knownIssues": [],
+      "roadmapRefs": []
     },
     {
       "id": "R6.2.p1",
@@ -4630,7 +5358,25 @@
         "T8",
         "T10"
       ],
-      "parent": "macchine"
+      "parent": "macchine",
+      "timeline": {
+        "past": [],
+        "present": {
+          "statement": "M4: distribuzione di agenti capaci di usare strumenti locali con permessi minimi",
+          "source": "conceptual-v2",
+          "runtimeVerified": false
+        },
+        "future": [
+          "M4 installare agenti operativi sul laptop con permessi locali",
+          "Import SQL clienti read-only, staging e approvazione"
+        ]
+      },
+      "knownIssues": [
+        "Un agente operativo non deve avere controllo generale del laptop"
+      ],
+      "roadmapRefs": [
+        "REMOTE-AGENTS"
+      ]
     },
     {
       "id": "F2.p1",
@@ -5178,5 +5924,6 @@
     "planned": "Obiettivo scelto non implementato",
     "idea": "Possibilità da discutere",
     "unverified": "Da verificare"
-  }
+  },
+  "provenancePolicy": "Timeline past remains empty until real decisions/commits with sources are linked. A user report is kept separate from backend/CI evidence. No automatic severity propagation."
 }
