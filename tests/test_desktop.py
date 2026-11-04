@@ -21,7 +21,10 @@ class DesktopSmokeTests(unittest.TestCase):
             thread = threading.Thread(target=server.serve_forever, daemon=True)
             thread.start()
             try:
-                for asset in ('views.js', 'profiles.js', 'evidence.js', 'workbench.js'):
+                for path, filename in (('/', 'cora-direzione.html'), ('/cora-direzione.html', 'cora-direzione.html'), ('/direzione.html', 'direzione.html'), ('/index.html', 'index.html'), ('/cora-plan.json', 'cora-plan.json')):
+                    with urllib.request.urlopen(f'http://127.0.0.1:{server.server_port}{path}') as response:
+                        self.assertEqual(response.read(), (INDEX.parent / filename).read_bytes())
+                for asset in ('cora-direzione.js', 'direzione.js', 'views.js', 'profiles.js', 'evidence.js', 'workbench.js'):
                     with urllib.request.urlopen(f'http://127.0.0.1:{server.server_port}/{asset}') as response:
                         self.assertIn('javascript', response.headers['Content-Type'])
                         self.assertEqual(response.read(), (INDEX.parent / asset).read_bytes())

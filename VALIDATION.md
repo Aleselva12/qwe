@@ -198,6 +198,13 @@ sul commit pubblicato e non è implicato dagli esiti locali riportati qui.
 - Resta non effettuata la verifica visiva tramite browser grafico. jsdom verifica comportamento/DOM, non geometria, colori o rendering mobile.
 - Limiti: nessuna esecuzione dei test del progetto, autenticazione CI, import coverage o plugin eseguibili. Associazioni esplicite/percorso, non deduzione semantica della copertura. Persistenza soggetta alla quota del browser; le applicazioni che eccedono la quota non sostituiscono la mappa corrente. Primi 200 casi elencati per report; tutti conteggiati e conservati. Nessun benchmark su monorepo molto grandi.
 
+## Cora constellation — 2026-11-04
+
+- `python -m unittest discover -s tests -q`: 38 tests passed, including desktop `/` serving the conceptual view, technical `/index.html` and JSON/JS assets.
+- `npm test`: 24 tests passed. Added real Direzione DOM tests for 45-star overview, on-demand planets/moons, severity propagation, unchanged local maps and recoverable template replacement.
+- `tests/cora_browser_smoke.cjs`: passed with Chromium 153 and Playwright. Actual desktop HTTP handler, desktop/mobile viewport, star/planet/moon navigation, edit and reload persistence, search, no browser errors. Requires Playwright and an available Chromium executable; command documented at top of script.
+- Visually inspected desktop overview, calendar and calendar moons at 1600×1100; corrected root heading overlap and bottom clipping.
+- Conceptual nodes remain unverified runtime descriptions; no Serveria deployment or operational integration tests were performed. Tests do not certify calendar notification delivery, orchestrator, external services or Debian health.
 
 ## Ricontrollo Windows del main integrato — 3 novembre 2026
 
@@ -209,3 +216,7 @@ Versione controllata: `85c35d0`, che include il redesign `b8deb32` e gli aggiorn
 - Il precedente collaudo del redesign aveva verificato anche modifica della classificazione/scopo e ripristino dopo ricaricamento. Questi passaggi non sono stati ripetuti manualmente su ogni nuova vista; i test DOM aggiornati coprono persistenza e configurazione.
 - Non collaudati qui il doppio clic fisico, tutte le interazioni della Direzione progetto, tutte le sei viste nel browser grafico o i grandi monorepo. Nessuna certificazione implicita della CI remota.
 - Serveria non è stato modificato né eseguito.
+
+## Cora/main merge — 2026-11-04
+
+Main `9bddd41` integrated without replacing either direction view: generic `direzione.html/js` and Cora `cora-direzione.html/js`. Post-merge: 38 Python tests, 25 Node/DOM tests and the real Chromium Cora smoke check passed. The generic test confirms per-project plan persistence and unconfirmed-suggestion isolation; HTTP tests cover both pages and scripts. Cora still opens by default and preserves its local storage key.
