@@ -105,3 +105,15 @@ Le vecchie note non identiche alla nuova `note` sono conservate anche come `earl
 L'ordine della roadmap Cora rimane invariato: **W1 Orchestratore V1 e suo collaudo causale reale → W2 Aggiornamenti Immich/Nextcloud → W3 Programmatore**. Questo lavoro di mappa non implica che W1 sia concluso o che W2/W3 siano avviati.
 
 Non applicare merge su main e non fare deploy sul Debian per il solo fatto che la pianta V2 sia completa.
+
+## Aggiornamento operativo — 4 novembre 2026: costellazione navigabile
+
+Implementata su qwe/Cora la vista 2D in `direzione.html` / `direzione.js`, alimentata unicamente da `cora-plan.json`. Il launcher desktop apre questa vista direttamente anche su `/`; `/index.html` mantiene l'esploratore tecnico. Il comando specialistico `codeatlas.app PATH` continua ad aprire l'analisi del codice.
+
+- Panoramica delle 45 stelle in rami, tronco unico e aree delle radici. Pianeti/lune solo su selezione; ricerca, zoom, trascinamento, ricentratura e vista testuale disponibili.
+- Scheda fissa: scopo, stato separato dal colore, problemi, passato/presente/futuro, osservazioni con provenienza, riferimenti roadmap e collegamenti concettuali navigabili. Criteri di chiusura modificabili, inizialmente non compilati quando non concordati.
+- Decisione successiva alla lista delle questioni aperte sopra: problemi minori e maggiori dei discendenti incidono sul colore della loro stella. Si calcola il massimo tra priorità propria e arancione/rosso dei discendenti, conservando il valore originale e mostrando le cause. Nessun allarme derivato da `partial`, file, testo libero o assenza di test. Nessuna propagazione indiscriminata a tutti i rami.
+- Modifica/spostamento conserva ID, figli e metadati; la classificazione viene ricalcolata. Una destinazione troppo profonda viene rifiutata senza salvare modifiche.
+- Personalizzazioni locali conservate. Il cambio revisione richiede una scelta esplicita; prima di sostituire/importare si salva una copia locale esportabile da “Copie locali”. Non esiste ancora una fusione semantica di versioni divergenti.
+
+**Ancora parziale:** associazioni con prove reali/versioni Debian, editing strutturato di cronologia e problemi, riconciliazione collaborativa, aggiornamenti proposti da commit/MR, adattamento automatico del layout a un numero arbitrario di nuove stelle. Il layout iniziale è progettato sulla pianta Cora V2; il movimento e lo zoom permettono l'esplorazione, la vista testuale resta disponibile. Nessun deploy né verifica operativa di Serveria è implicato da questa consegna.

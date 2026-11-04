@@ -1,6 +1,6 @@
 # CodeAtlas
 
-**Branch Cora — schema V2 completo (3 novembre 2026).** Per riprendere il lavoro o integrarlo in Serveria, leggere in ordine: [Mappa completa con tutte le stelle, pianeti e lune](docs/CORA_MAPPA_V2_COMPLETA.md), [Consegna operativa a Work](docs/CORA_WORK_HANDOFF.md), [Memoria dell'altra conversazione](docs/MEMORIA_CORA.md) e [pianta dati unica](cora-plan.json). La mappa è concettuale: **non** certifica il funzionamento di Cora sul Debian. Work dovrà conservare gli ID precedenti e le personalizzazioni del browser.
+**Branch Cora — schema V2 completo (3 novembre 2026).** Per riprendere il lavoro o integrarlo in Serveria, leggere in ordine: [Mappa completa con tutte le stelle, pianeti e lune](docs/CORA_MAPPA_V2_COMPLETA.md), [Consegna operativa a Work](docs/CORA_WORK_HANDOFF.md), [Memoria dell'altra conversazione](docs/MEMORIA_CORA.md) e [pianta dati unica](cora-plan.json). La mappa è concettuale: **non** certifica il funzionamento di Cora sul Debian. La vista a costellazione conserva gli ID precedenti e protegge le personalizzazioni del browser durante il cambio di revisione.
 
 Mappa locale del programma: **capacità utili verso l’utente, processi che le realizzano e requisiti alla base**. Sei schemi navigabili, dettagli espandibili e schede modificabili. CodeAtlas è indipendente da Serveria e non modifica né esegue il progetto analizzato.
 
@@ -10,8 +10,13 @@ Richiede Python 3.10+ e Git solo per leggere la cronologia. Nessun pacchetto Pyt
 
 1. Scarica/clona questa repository.
 2. Su Windows fai doppio clic su **Avvia CodeAtlas.bat**.
-3. Nel browser inserisci il percorso completo della cartella e premi **Apri progetto**.
-4. Appare subito la mappa proposta; non occorre preparare o importare JSON.
+3. Si apre direttamente la **costellazione Cora**, con 45 stelle: nessun percorso da inserire.
+4. Seleziona una stella per aprire i pianeti e un pianeta per le lune. La scheda fissa a destra raccoglie scopo, stato, problemi, passato/presente/futuro e criteri di chiusura.
+5. Per analizzare una cartella, apri **Codice ↗**, inserisci il percorso e premi **Apri progetto**.
+
+Le priorità sono dichiarate, separate dallo stato: grigio da valutare, verde tutto ok, giallo aggiornamento, arancione problema minore, rosso problema. Un problema arancione/rosso nei discendenti segnala anche la stella, senza alterarne la priorità salvata. Le linee raggruppano punti: non attestano un ordine di esecuzione.
+
+Le modifiche restano nel browser e nella porta utilizzata: **Esporta** salva una copia trasportabile. Se esiste una vecchia revisione locale, il banner permette di esportarla o aprire quella aggiornata, conservando una copia recuperabile da **Copie locali**. Nessuna fusione automatica degli appunti.
 
 Il percorso è quello del computer che esegue CodeAtlas; il selettore è un campo testuale, non una finestra nativa. Su macOS/Linux: `python3 -m codeatlas.desktop`. Il file `.command` richiede il permesso di esecuzione su macOS.
 

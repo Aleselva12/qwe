@@ -1,3 +1,11 @@
+BRANCH CORA — COSTELLAZIONE
+Avvia CodeAtlas.bat (Windows) o python3 -m codeatlas.desktop.
+Si apre direttamente la pianta Cora: stella → pianeti → lune.
+Per la scansione di una cartella usa il collegamento Codice.
+Se appare il banner di una vecchia pianta locale, esportala oppure scegli Apri la pianta Cora aggiornata: la copia precedente rimane in Copie locali.
+Scarica/aggiorna prima il branch progetti/cora-serveria per ricevere questa versione.
+
+ISTRUZIONI GENERALI DELL’ESPLORATORE CODICE
 CodeAtlas — anteprima da provare
 
 1. Estrai tutta la cartella ZIP. Non avviare il programma dentro lo ZIP.

@@ -27,9 +27,9 @@ class AtlasHandler(BaseHTTPRequestHandler):
         self._respond(status, json.dumps(obj, ensure_ascii=False).encode("utf-8"))
     def do_GET(self):
         path = urlsplit(self.path).path
-        if path in ("/", "/index.html"):
+        if path == "/index.html":
             self._respond(200, INDEX.read_bytes(), "text/html; charset=utf-8")
-        elif path == "/direzione.html":
+        elif path in ("/", "/direzione.html"):
             self._respond(200, (INDEX.parent / "direzione.html").read_bytes(), "text/html; charset=utf-8")
         elif path == "/cora-plan.json":
             self._respond(200, (INDEX.parent / "cora-plan.json").read_bytes())
