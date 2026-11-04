@@ -7,11 +7,11 @@ const assert=require('node:assert/strict');
 const {test}=require('node:test');
 const root=path.resolve(__dirname,'..');
 const plan=JSON.parse(fs.readFileSync(path.join(root,'cora-plan.json'),'utf8'));
-const src=fs.readFileSync(path.join(root,'direzione.js'),'utf8');
+const src=fs.readFileSync(path.join(root,'cora-direzione.js'),'utf8');
 const entry="start().catch(e=>$('message').textContent=e.message);";
 assert.ok(src.includes(entry),'Direzione entry point not found');
 const ctx=vm.createContext({});
-vm.runInContext(src.replace(entry,'globalThis.directionTest={validate,role};'),ctx,{filename:'direzione.js'});
+vm.runInContext(src.replace(entry,'globalThis.directionTest={validate,role};'),ctx,{filename:'cora-direzione.js'});
 const {validate,role}=ctx.directionTest;
 const byId=new Map(plan.nodes.map(n=>[n.id,n]));
 function trail(id) {

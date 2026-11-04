@@ -117,3 +117,7 @@ Implementata su qwe/Cora la vista 2D in `direzione.html` / `direzione.js`, alime
 - Personalizzazioni locali conservate. Il cambio revisione richiede una scelta esplicita; prima di sostituire/importare si salva una copia locale esportabile da “Copie locali”. Non esiste ancora una fusione semantica di versioni divergenti.
 
 **Ancora parziale:** associazioni con prove reali/versioni Debian, editing strutturato di cronologia e problemi, riconciliazione collaborativa, aggiornamenti proposti da commit/MR, adattamento automatico del layout a un numero arbitrario di nuove stelle. Il layout iniziale è progettato sulla pianta Cora V2; il movimento e lo zoom permettono l'esplorazione, la vista testuale resta disponibile. Nessun deploy né verifica operativa di Serveria è implicato da questa consegna.
+
+### Allineamento con main — 4 novembre 2026
+
+Integrati i commit `85c35d0` e `9bddd41` tramite merge. La Direzione progetto generica di main rimane in `direzione.html/js`, con persistenza separata per progetto e proposte della scansione da confermare. La costellazione specifica è ora in `cora-direzione.html/js`, sempre aperta dal launcher e da `/`, con gli stessi dati e la stessa chiave di salvataggio Cora. L'esploratore offre entrambi i collegamenti. Questa separazione evita di sovrascrivere la funzione generica durante i prossimi aggiornamenti.

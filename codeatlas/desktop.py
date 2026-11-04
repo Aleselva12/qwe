@@ -29,11 +29,13 @@ class AtlasHandler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path == "/index.html":
             self._respond(200, INDEX.read_bytes(), "text/html; charset=utf-8")
-        elif path in ("/", "/direzione.html"):
+        elif path in ("/", "/cora-direzione.html"):
+            self._respond(200, (INDEX.parent / "cora-direzione.html").read_bytes(), "text/html; charset=utf-8")
+        elif path == "/direzione.html":
             self._respond(200, (INDEX.parent / "direzione.html").read_bytes(), "text/html; charset=utf-8")
         elif path == "/cora-plan.json":
             self._respond(200, (INDEX.parent / "cora-plan.json").read_bytes())
-        elif path in {"/direzione.js", "/views.js", "/profiles.js", "/evidence.js", "/workbench.js"}:
+        elif path in {"/cora-direzione.js", "/direzione.js", "/views.js", "/profiles.js", "/evidence.js", "/workbench.js"}:
             self._respond(200, (INDEX.parent / path[1:]).read_bytes(), "text/javascript; charset=utf-8")
         elif path == "/api/session":
             self._json(200, {"token": self.token, "loaded": getattr(self.server, 'report', None) is not None})

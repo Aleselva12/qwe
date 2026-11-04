@@ -205,3 +205,18 @@ sul commit pubblicato e non è implicato dagli esiti locali riportati qui.
 - `tests/cora_browser_smoke.cjs`: passed with Chromium 153 and Playwright. Actual desktop HTTP handler, desktop/mobile viewport, star/planet/moon navigation, edit and reload persistence, search, no browser errors. Requires Playwright and an available Chromium executable; command documented at top of script.
 - Visually inspected desktop overview, calendar and calendar moons at 1600×1100; corrected root heading overlap and bottom clipping.
 - Conceptual nodes remain unverified runtime descriptions; no Serveria deployment or operational integration tests were performed. Tests do not certify calendar notification delivery, orchestrator, external services or Debian health.
+
+## Ricontrollo Windows del main integrato — 3 novembre 2026
+
+Versione controllata: `85c35d0`, che include il redesign `b8deb32` e gli aggiornamenti successivi. Non sono stati sovrascritti i profili, le sei viste o la Direzione progetto.
+
+- Python 3.13 / Windows: **31 test Python superati** e compilazione superata.
+- `npm ci --ignore-scripts` e `npm test`: **18 test Node/DOM superati**. L'ambiente aveva Node 22.15, inferiore al requisito dichiarato (24.15); npm ha segnalato tale incompatibilità. Per lo sviluppo usare la versione dichiarata nel package.json. Nessuna dipendenza installata globalmente.
+- Browser reale sulla versione corrente: avvio del modulo desktop, apertura qwe tramite percorso senza JSON, mappa iniziale con capacità/processi/basi, espansione Avvio e orchestrazione, scheda fissa destra con docstring ed evidenze, passaggio alla vista testuale e ritorno all'albero. Anteprima salvata localmente.
+- Il precedente collaudo del redesign aveva verificato anche modifica della classificazione/scopo e ripristino dopo ricaricamento. Questi passaggi non sono stati ripetuti manualmente su ogni nuova vista; i test DOM aggiornati coprono persistenza e configurazione.
+- Non collaudati qui il doppio clic fisico, tutte le interazioni della Direzione progetto, tutte le sei viste nel browser grafico o i grandi monorepo. Nessuna certificazione implicita della CI remota.
+- Serveria non è stato modificato né eseguito.
+
+## Cora/main merge — 2026-11-04
+
+Main `9bddd41` integrated without replacing either direction view: generic `direzione.html/js` and Cora `cora-direzione.html/js`. Post-merge: 38 Python tests, 25 Node/DOM tests and the real Chromium Cora smoke check passed. The generic test confirms per-project plan persistence and unconfirmed-suggestion isolation; HTTP tests cover both pages and scripts. Cora still opens by default and preserves its local storage key.
